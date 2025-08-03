@@ -12,7 +12,7 @@ import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface ChatAreaProps {
   character: Character;

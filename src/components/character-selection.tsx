@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface CharacterSelectionProps {
   characters: Character[];

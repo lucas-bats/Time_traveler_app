@@ -4,7 +4,7 @@ import { getCharacterById } from "@/lib/characters";
 import { notFound } from "next/navigation";
 import { ChatArea } from "@/components/chat-area";
 import { SiteHeader } from "@/components/site-header";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface ChatPageProps {
   params: {

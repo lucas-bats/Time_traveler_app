@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { LocaleProvider } from "@/lib/locale";
+import { LocaleProvider } from "@/lib/locale.tsx";
 
 export const metadata: Metadata = {
   title: "Time Traveler Talks",

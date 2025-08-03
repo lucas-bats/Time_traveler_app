@@ -5,7 +5,7 @@ import type { Message } from "./chat-area";
 import { Button } from "./ui/button";
 import { Copy, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface MessageBubbleProps {
   message: Message;

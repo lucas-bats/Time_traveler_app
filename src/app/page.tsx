@@ -2,7 +2,7 @@
 
 import { CharacterSelection } from "@/components/character-selection";
 import { getCharacters } from "@/lib/characters";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 export default function Home() {
   const characters = getCharacters();

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import type { Character } from "@/lib/characters";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { useLocale } from "@/lib/locale";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface CharacterCardProps {
   character: Character;
