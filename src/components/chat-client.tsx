@@ -62,7 +62,9 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // Revert only the optimistic AI message addition, keep user's message.
+        // In case of an error, we now remove the user message that was optimistically added.
+        // This is a design choice. Another option is to keep it and show an error state.
+        setMessages((prevMessages) => prevMessages.slice(0, prevMessages.length - 1));
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -78,7 +80,9 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-       // In case of error, the user message is already in the list, so we do nothing to remove it.
+       // In case of error, the user message is already in the list.
+       // We'll remove it to prevent a hanging user message with no response.
+       setMessages((prevMessages) => prevMessages.slice(0, prevMessages.length - 1));
     } finally {
       setIsLoading(false);
     }
