@@ -35,11 +35,12 @@ export function ChatArea({ character }: ChatAreaProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTo({
-        top: scrollAreaRef.current.scrollHeight,
+    if (viewportRef.current) {
+      viewportRef.current.scrollTo({
+        top: viewportRef.current.scrollHeight,
         behavior: 'smooth'
       });
     }
@@ -54,31 +55,44 @@ export function ChatArea({ character }: ChatAreaProps) {
       role: "user",
       content: input.trim(),
     };
-    setMessages([...messages, userMessage]);
+    
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput("");
     setIsLoading(true);
 
-    const result = await getAiResponse({
-      historicalFigure: character.name,
-      userMessage: input.trim(),
-    });
-
-    setIsLoading(false);
-
-    if (result.error || !result.response) {
-      toast({
-        variant: "destructive",
-        title: t.error,
-        description: result.error || t.somethingWentWrong,
+    try {
+      const result = await getAiResponse({
+        historicalFigure: character.name,
+        userMessage: input.trim(),
       });
-      setMessages(messages);
-    } else {
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: result.response,
-      };
-      setMessages([...messages, userMessage, aiMessage]);
+
+      if (result.error || !result.response) {
+        toast({
+          variant: "destructive",
+          title: t.error,
+          description: result.error || t.somethingWentWrong,
+        });
+        // Revert to messages before user's message was added
+        setMessages(messages); 
+      } else {
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: result.response,
+        };
+        setMessages([...newMessages, aiMessage]);
+      }
+    } catch (error) {
+       toast({
+          variant: "destructive",
+          title: t.error,
+          description: t.somethingWentWrong,
+        });
+        // Revert to messages before user's message was added
+        setMessages(messages);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,7 +124,7 @@ export function ChatArea({ character }: ChatAreaProps) {
           </div>
         </div>
         
-        <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+        <ScrollArea className="flex-1 p-4" viewportRef={viewportRef}>
           <div className="space-y-4">
             {messages.map((message) => (
               <MessageBubble
