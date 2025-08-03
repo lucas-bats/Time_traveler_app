@@ -42,30 +42,30 @@ export function ChatArea({ character }: ChatAreaProps) {
     if (viewport) {
       viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
     }
-  }, [messages]);
+  }, [messages.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-  
+
     const userMessageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: userMessageContent,
     };
-  
-    // Add user message optimistically
+    
+    // Optimistic UI update
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
     setIsLoading(true);
-  
+
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
         userMessage: userMessageContent,
       });
-  
+
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
@@ -82,8 +82,7 @@ export function ChatArea({ character }: ChatAreaProps) {
           role: "assistant",
           content: result.response,
         };
-        // On success, replace the user message with a final list including the AI response.
-        // This is done by finding the user message and adding the AI message after it.
+        // On success, add the AI response
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
