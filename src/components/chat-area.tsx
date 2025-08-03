@@ -23,7 +23,7 @@ export interface Message {
 interface ChatAreaProps {
   character: Character;
   messages: Message[];
-  messageCount: number; // Add messageCount prop
+  messageCount: number; 
   input: string;
   isLoading: boolean;
   onInputChange: (input: string) => void;
@@ -34,7 +34,7 @@ interface ChatAreaProps {
 export function ChatArea({
   character,
   messages,
-  messageCount, // Use messageCount prop
+  messageCount,
   input,
   isLoading,
   onInputChange,
@@ -51,7 +51,7 @@ export function ChatArea({
         behavior: 'smooth',
       });
     }
-  }, [messageCount]); // Depend only on messageCount
+  }, [messageCount]);
   
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-4 md:p-6 h-[calc(100%-4rem)]">

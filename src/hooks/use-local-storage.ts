@@ -19,7 +19,7 @@ export default function useLocalStorage<T>(
     }
   }, [initialValue, key]);
 
-  const [storedValue, setStoredValue] = useState<T>(readValue);
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   const setValue = useCallback((value: T | ((val: T) => T)) => {
     if (typeof window === "undefined") {
@@ -42,7 +42,10 @@ export default function useLocalStorage<T>(
   }, [readValue]);
 
   useEffect(() => {
-    const handleStorageChange = () => {
+    const handleStorageChange = (event: StorageEvent | CustomEvent) => {
+      if ((event as StorageEvent).key && (event as StorageEvent).key !== key) {
+        return;
+      }
       setStoredValue(readValue());
     };
     window.addEventListener("storage", handleStorageChange);
@@ -51,7 +54,7 @@ export default function useLocalStorage<T>(
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("local-storage", handleStorageChange);
     };
-  }, [readValue]);
+  }, [key, readValue]);
 
   return [storedValue, setValue];
 }
