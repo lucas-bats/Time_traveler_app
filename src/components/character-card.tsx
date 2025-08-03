@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -22,7 +23,7 @@ export function CharacterCard({ character }: CharacterCardProps) {
             alt={`${t.portraitOf} ${character.name}`}
             width={400}
             height={400}
-            className="w-full h-64 object-cover object-top"
+            className="w-full h-64 object-contain bg-black/5"
             data-ai-hint={character.aiHint}
           />
         </Link>
