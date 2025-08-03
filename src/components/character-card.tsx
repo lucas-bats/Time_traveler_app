@@ -4,19 +4,22 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import type { Character } from "@/lib/characters";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useLocale } from "@/lib/locale";
 
 interface CharacterCardProps {
   character: Character;
 }
 
 export function CharacterCard({ character }: CharacterCardProps) {
+  const { t, locale } = useLocale();
+
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <CardHeader className="p-0">
-        <Link href={`/chat/${character.id}`} aria-label={`Chat with ${character.name}`}>
+        <Link href={`/chat/${character.id}`} aria-label={`${t.chatWith} ${character.name}`}>
           <Image
             src={character.image}
-            alt={`Portrait of ${character.name}`}
+            alt={`${t.portraitOf} ${character.name}`}
             width={400}
             height={400}
             className="w-full h-64 object-cover object-top"
@@ -29,11 +32,11 @@ export function CharacterCard({ character }: CharacterCardProps) {
           {character.name}
         </CardTitle>
         <CardDescription className="line-clamp-3 mb-4 text-muted-foreground h-[60px]">
-          {character.description}
+          {locale === 'pt' ? character.description_pt : character.description}
         </CardDescription>
         <Button asChild variant="link" className="p-0 h-auto">
           <Link href={`/chat/${character.id}`}>
-            Start Conversation <ArrowRight className="ml-2 h-4 w-4" />
+            {t.startConversation} <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
       </CardContent>

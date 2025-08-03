@@ -12,6 +12,7 @@ import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
+import { useLocale } from "@/lib/locale";
 
 interface ChatAreaProps {
   character: Character;
@@ -25,6 +26,7 @@ export interface Message {
 }
 
 export function ChatArea({ character }: ChatAreaProps) {
+  const { t } = useLocale();
   const [messages, setMessages] = useLocalStorage<Message[]>(
     `chat_history_${character.id}`,
     []
@@ -66,8 +68,8 @@ export function ChatArea({ character }: ChatAreaProps) {
     if (result.error || !result.response) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: result.error || "Something went wrong.",
+        title: t.error,
+        description: result.error || t.somethingWentWrong,
       });
       setMessages(messages);
     } else {
@@ -126,7 +128,7 @@ export function ChatArea({ character }: ChatAreaProps) {
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={`Ask ${character.name} a question...`}
+              placeholder={`${t.ask} ${character.name} ${t.aQuestion}`}
               className="flex-1 resize-none"
               rows={1}
               onKeyDown={(e) => {
@@ -146,7 +148,7 @@ export function ChatArea({ character }: ChatAreaProps) {
       
       <div className="hidden lg:flex flex-col bg-card rounded-lg border shadow-sm h-full">
         <div className="p-4 border-b">
-          <h3 className="font-headline text-lg text-primary">Favorite Messages</h3>
+          <h3 className="font-headline text-lg text-primary">{t.favoriteMessages}</h3>
         </div>
         <ScrollArea className="flex-1 p-4">
           {hasFavorites ? (
@@ -163,8 +165,8 @@ export function ChatArea({ character }: ChatAreaProps) {
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
               <Star className="w-10 h-10 mb-2" />
-              <p>Your favorite messages will appear here.</p>
-              <p className="text-xs">Click the star on a message to save it.</p>
+              <p>{t.yourFavoriteMessages}</p>
+              <p className="text-xs">{t.clickStarToSave}</p>
             </div>
           )}
         </ScrollArea>

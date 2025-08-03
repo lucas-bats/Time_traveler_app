@@ -5,6 +5,7 @@ import type { Message } from "./chat-area";
 import { Button } from "./ui/button";
 import { Copy, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLocale } from "@/lib/locale";
 
 interface MessageBubbleProps {
   message: Message;
@@ -12,14 +13,15 @@ interface MessageBubbleProps {
 }
 
 export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps) {
+  const { t } = useLocale();
   const { toast } = useToast();
   const isUser = message.role === "user";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content);
     toast({
-      title: "Copied to clipboard!",
-      description: "The message has been copied.",
+      title: t.copiedToClipboard,
+      description: t.messageCopied,
     });
   };
 

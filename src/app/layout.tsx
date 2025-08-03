@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { LocaleProvider } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Time Traveler Talks",
@@ -24,8 +25,10 @@ export default function RootLayout({
         />
       </head>
       <body className={cn("font-body antialiased min-h-screen")}>
-        {children}
-        <Toaster />
+        <LocaleProvider>
+          {children}
+          <Toaster />
+        </LocaleProvider>
       </body>
     </html>
   );

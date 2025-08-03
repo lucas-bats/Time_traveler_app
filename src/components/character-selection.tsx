@@ -11,12 +11,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { useLocale } from "@/lib/locale";
 
 interface CharacterSelectionProps {
   characters: Character[];
 }
 
 export function CharacterSelection({ characters }: CharacterSelectionProps) {
+  const { t } = useLocale();
   const [searchTerm, setSearchTerm] = useState("");
   const [era, setEra] = useState("all");
   const [field, setField] = useState("all");
@@ -39,7 +41,7 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
         <div className="mb-8 flex flex-col sm:flex-row gap-4">
           <Input
             type="search"
-            placeholder="Search for a figure..."
+            placeholder={t.searchPlaceholder}
             className="flex-1"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -47,21 +49,21 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
           <div className="flex gap-4">
             <Select value={era} onValueChange={setEra}>
               <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Filter by Era" />
+                <SelectValue placeholder={t.filterByEra} />
               </SelectTrigger>
               <SelectContent>
                 {eras.map((e) => (
-                  <SelectItem key={e} value={e} className="capitalize">{e}</SelectItem>
+                  <SelectItem key={e} value={e} className="capitalize">{e === 'all' ? t.allEras : e}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={field} onValueChange={setField}>
               <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Filter by Field" />
+                <SelectValue placeholder={t.filterByField} />
               </SelectTrigger>
               <SelectContent>
                 {fields.map((f) => (
-                  <SelectItem key={f} value={f} className="capitalize">{f}</SelectItem>
+                  <SelectItem key={f} value={f} className="capitalize">{f === 'all' ? t.allFields : f}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -76,8 +78,8 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
           </div>
         ) : (
           <div className="text-center py-16 text-muted-foreground">
-            <h3 className="text-2xl font-headline">No Figures Found</h3>
-            <p>Try adjusting your search or filters.</p>
+            <h3 className="text-2xl font-headline">{t.noFiguresFound}</h3>
+            <p>{t.adjustFilters}</p>
           </div>
         )}
       </div>

@@ -1,7 +1,10 @@
+"use client";
+
 import { getCharacterById } from "@/lib/characters";
 import { notFound } from "next/navigation";
 import { ChatArea } from "@/components/chat-area";
 import { SiteHeader } from "@/components/site-header";
+import { useLocale } from "@/lib/locale";
 
 interface ChatPageProps {
   params: {
@@ -10,6 +13,7 @@ interface ChatPageProps {
 }
 
 export default function ChatPage({ params }: ChatPageProps) {
+  useLocale(); // Initialize locale context
   const character = getCharacterById(params.figureId);
 
   if (!character) {
