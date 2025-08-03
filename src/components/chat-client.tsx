@@ -11,27 +11,30 @@ interface ChatClientProps {
 
 export function ChatClient({ figureId }: ChatClientProps) {
   const [character, setCharacter] = useState<Character | null>(null);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const foundCharacter = getCharacterById(figureId);
     if (foundCharacter) {
       setCharacter(foundCharacter);
     } else {
-      setError(true);
+      // If character not found, trigger a 404
+      notFound();
     }
+    setLoading(false);
   }, [figureId]);
 
-  if (error) {
-    notFound();
-  }
-
-  if (!character) {
+  if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <p>Loading...</p>
+        <p>Loading character...</p>
       </div>
     );
+  }
+  
+  // This should not be reached if character is not found due to notFound()
+  if (!character) {
+      return null;
   }
 
   return <ChatArea character={character} />;
