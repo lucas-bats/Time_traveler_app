@@ -113,6 +113,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
     <ChatArea
       character={character}
       messages={messages}
+      messageCount={messages.length}
       input={input}
       isLoading={isLoading}
       onInputChange={setInput}
