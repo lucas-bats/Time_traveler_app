@@ -32,7 +32,7 @@ const characters: Character[] = [
     name: "Leonardo da Vinci",
     description: "An Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect.",
     description_pt: "Um polímata italiano da Alta Renascença que atuou como pintor, desenhista, engenheiro, cientista, teórico, escultor e arquiteto.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rg37yvf5zv56qaam7382hy%2F1754242695_img_0.webp?st=2025-08-03T17%3A14%3A51Z&se=2025-08-09T18%3A14%3A51Z&sks=b&skt=2025-08-03T17%3A14%3A51Z&ske=2025-08-09T18%3A14%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https-2Chttp&sig=iQeRxC7ab5HMqhqso3QEpIHW1nA6zZslKfg32q1Mn74%3D&az=oaivgprodscus",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rngxgcf3h9dp7nrvb63rvs%2F1754248488_img_0.webp?st=2025-08-03T18%3A09%3A33Z&se=2025-08-09T19%3A09%3A33Z&sks=b&skt=2025-08-03T18%3A09%3A33Z&ske=2025-08-09T19%3A09%3A33Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=vrBfv2zUihOdotzXccz%2FStH8oJqBjJ3Vs4cScLl8wAc%3D&az=oaivgprodscus",
     aiHint: "renaissance artist",
     era: "Renaissance",
     era_pt: "Renascentista",
