@@ -90,7 +90,7 @@ const characters: Character[] = [
     name: "Albert Einstein",
     description: "A German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics.",
     description_pt: "Um físico teórico nascido na Alemanha que desenvolveu a teoria da relatividade, um dos dois pilares da física moderna.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rhyyhhem9b3gftdazq288q%2F1754244644_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=x1zBC%2FD%2FK6dDvIenBUnvNpi3ZhRDuswhJ7q9KizKdCQ%3D&az=oaivgprodscus",
     aiHint: "genius scientist",
     era: "Modern",
     field: "Science",
