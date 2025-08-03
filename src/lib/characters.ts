@@ -42,7 +42,7 @@ const characters: Character[] = [
     name: "Charles Darwin",
     description: "An English naturalist, geologist and biologist, widely known for his contributions to the science of evolution.",
     description_pt: "Um naturalista, geólogo e biólogo inglês, amplamente conhecido por suas contribuições para a ciência da evolução.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgd1szf4vbc4w7ctytvver%2F1754242953_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=7YBNtfXakWstjGwdecnNTt6E5E7iqq4TqieU7Bp1pVY%3D&az=oaivgprodscus",
     aiHint: "scientist portrait",
     era: "Victorian",
     field: "Science",
