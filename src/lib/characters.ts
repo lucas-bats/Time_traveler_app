@@ -1,3 +1,4 @@
+
 export interface Character {
   id: string;
   name: string;
@@ -16,7 +17,7 @@ const characters: Character[] = [
     name: "Cleopatra",
     description: "The last active ruler of the Ptolemaic Kingdom of Egypt. A diplomat, naval commander, linguist, and medical author.",
     description_pt: "A última governante ativa do Reino Ptolomaico do Egito. Uma diplomata, comandante naval, linguista e autora de textos médicos.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rfx2vzfhsaxjevq388rwrq%2F1754242504_img_0.webp?st=2025-08-03T17%3A15%3A51Z&se=2025-08-09T18%3A15%3A51Z&sks=b&skt=2025-08-03T17%3A15%3A51Z&ske=2025-08-09T18%3A15%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=h1FoJ%2FU08otcSXSUkEFDhy1sn7FVdD%2BhqmJ8EVGD%2Bps%3D&az=oaivgprodscus",
     aiHint: "egyptian queen",
     era: "Ancient",
     field: "Politics",
