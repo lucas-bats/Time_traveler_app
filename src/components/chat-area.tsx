@@ -23,7 +23,7 @@ export interface Message {
 interface ChatAreaProps {
   character: Character;
   messages: Message[];
-  messageCount: number; 
+  messageCount: number;
   input: string;
   isLoading: boolean;
   onInputChange: (input: string) => void;
