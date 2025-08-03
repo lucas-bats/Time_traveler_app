@@ -1,9 +1,8 @@
 
 "use client";
 
-import { useState, useRef, useEffect, type Dispatch, type SetStateAction } from "react";
+import { useRef, useEffect, type FormEvent } from "react";
 import type { Character } from "@/lib/characters";
-import { getAiResponse } from "@/app/actions";
 import { MessageBubble } from "./message-bubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,6 @@ import { Send } from "lucide-react";
 import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/lib/locale.tsx";
 import { FavoritesSidebar } from "./favorites-sidebar";
 
@@ -25,14 +23,23 @@ export interface Message {
 interface ChatAreaProps {
   character: Character;
   messages: Message[];
-  setMessages: Dispatch<SetStateAction<Message[]>>;
+  input: string;
+  isLoading: boolean;
+  onInputChange: (input: string) => void;
+  onFormSubmit: (e: FormEvent) => Promise<void>;
+  onToggleFavorite: (messageId: string) => void;
 }
 
-export function ChatArea({ character, messages, setMessages }: ChatAreaProps) {
+export function ChatArea({
+  character,
+  messages,
+  input,
+  isLoading,
+  onInputChange,
+  onFormSubmit,
+  onToggleFavorite,
+}: ChatAreaProps) {
   const { t } = useLocale();
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,68 +48,7 @@ export function ChatArea({ character, messages, setMessages }: ChatAreaProps) {
       viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
     }
   }, [messages.length]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const userMessageContent = input.trim();
-    const newUserMessage: Message = {
-      id: Date.now().toString(),
-      role: "user",
-      content: userMessageContent,
-    };
-
-    const updatedMessages = [...messages, newUserMessage];
-    setMessages(updatedMessages);
-    setInput("");
-    setIsLoading(true);
-
-    try {
-      const result = await getAiResponse({
-        historicalFigure: character.name,
-        userMessage: userMessageContent,
-      });
-
-      if (result.error || !result.response) {
-        toast({
-          variant: "destructive",
-          title: t.error,
-          description: result.error || t.somethingWentWrong,
-        });
-        setMessages((prevMessages) =>
-          prevMessages.filter((msg) => msg.id !== newUserMessage.id)
-        );
-      } else {
-        const aiMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: result.response,
-        };
-        setMessages((prevMessages) => [...prevMessages, aiMessage]);
-      }
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: t.error,
-        description: t.somethingWentWrong,
-      });
-       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== newUserMessage.id)
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleToggleFavorite = (messageId: string) => {
-    setMessages((prevMessages) =>
-      prevMessages.map((msg) =>
-        msg.id === messageId ? { ...msg, favorited: !msg.favorited } : msg
-      )
-    );
-  };
-
+  
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-4 md:p-6 h-[calc(100%-4rem)]">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm">
@@ -127,7 +73,7 @@ export function ChatArea({ character, messages, setMessages }: ChatAreaProps) {
               <MessageBubble
                 key={message.id}
                 message={message}
-                onToggleFavorite={handleToggleFavorite}
+                onToggleFavorite={onToggleFavorite}
               />
             ))}
             {isLoading && <QuillLoader />}
@@ -135,17 +81,17 @@ export function ChatArea({ character, messages, setMessages }: ChatAreaProps) {
         </ScrollArea>
         
         <div className="p-4 border-t">
-          <form onSubmit={handleSubmit} className="flex items-start gap-4">
+          <form onSubmit={onFormSubmit} className="flex items-start gap-4">
             <Textarea
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => onInputChange(e.target.value)}
               placeholder={`${t.ask} ${character.name} ${t.aQuestion}`}
               className="flex-1 resize-none"
               rows={1}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
-                  handleSubmit(e);
+                  onFormSubmit(e);
                 }
               }}
               disabled={isLoading}
