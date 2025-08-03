@@ -7,6 +7,7 @@ export interface Character {
   image: string;
   aiHint: string;
   era: string;
+  era_pt: string;
   field: string;
   field_pt: string;
   country: string;
@@ -21,6 +22,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rfx2vzfhsaxjevq388rwrq%2F1754242504_img_0.webp?st=2025-08-03T17%3A15%3A51Z&se=2025-08-09T18%3A15%3A51Z&sks=b&skt=2025-08-03T17%3A15%3A51Z&ske=2025-08-09T18%3A15%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=h1FoJ%2FU08otcSXSUkEFDhy1sn7FVdD%2BhqmJ8EVGD%2Bps%3D&az=oaivgprodscus",
     aiHint: "egyptian queen",
     era: "Ancient",
+    era_pt: "Antiguidade",
     field: "Politics",
     field_pt: "Política",
     country: "Egypt",
@@ -30,9 +32,10 @@ const characters: Character[] = [
     name: "Leonardo da Vinci",
     description: "An Italian polymath of the High Renaissance who was active as a painter, draughtsman, engineer, scientist, theorist, sculptor, and architect.",
     description_pt: "Um polímata italiano da Alta Renascença que atuou como pintor, desenhista, engenheiro, cientista, teórico, escultor e arquiteto.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rg37yvf5zv56qaam7382hy%2F1754242695_img_0.webp?st=2025-08-03T17%3A14%3A51Z&se=2025-08-09T18%3A14%3A51Z&sks=b&skt=2025-08-03T17%3A14%3A51Z&ske=2025-08-09T18%3A14%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=iQeRxC7ab5HMqhqso3QEpIHW1nA6zZslKfg32q1Mn74%3D&az=oaivgprodscus",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rg37yvf5zv56qaam7382hy%2F1754242695_img_0.webp?st=2025-08-03T17%3A14%3A51Z&se=2025-08-09T18%3A14%3A51Z&sks=b&skt=2025-08-03T17%3A14%3A51Z&ske=2025-08-09T18%3A14%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https-2Chttp&sig=iQeRxC7ab5HMqhqso3QEpIHW1nA6zZslKfg32q1Mn74%3D&az=oaivgprodscus",
     aiHint: "renaissance artist",
     era: "Renaissance",
+    era_pt: "Renascentista",
     field: "Art & Science",
     field_pt: "Arte & Ciência",
     country: "Italy",
@@ -45,6 +48,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgd1szf4vbc4w7ctytvver%2F1754242953_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=7YBNtfXakWstjGwdecnNTt6E5E7iqq4TqieU7Bp1pVY%3D&az=oaivgprodscus",
     aiHint: "scientist portrait",
     era: "Victorian",
+    era_pt: "Vitoriana",
     field: "Science",
     field_pt: "Ciência",
     country: "United Kingdom",
@@ -57,6 +61,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgg8e6fz6b7mk4534ng96e%2F1754243062_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=%2BPZHnGAzyRCxfWX8%2FQkS72DFIx4YuLYATI%2BkgFjvTOI%3D&az=oaivgprodscus",
     aiHint: "chinese philosopher",
     era: "Ancient",
+    era_pt: "Antiguidade",
     field: "Philosophy",
     field_pt: "Filosofia",
     country: "China",
@@ -69,6 +74,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgm511fkm8v6rrawqj897y%2F1754243252_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=CvJCK%2Bacw%2FCJ5k1LNrk7EFct78TJPex1RSy984b6Ahg%3D&az=oaivgprodscus",
     aiHint: "female scientist",
     era: "Modern",
+    era_pt: "Moderna",
     field: "Science",
     field_pt: "Ciência",
     country: "Poland/France",
@@ -81,6 +87,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgsd5xendsd6bxbrkn45x8%2F1754243488_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=9NI0lrLl04fRCPgk2NNCaENxAaOcz9m3yiFAVCyNKtE%3D&az=oaivgprodscus",
     aiHint: "playwright portrait",
     era: "Renaissance",
+    era_pt: "Renascentista",
     field: "Literature",
     field_pt: "Literatura",
     country: "United Kingdom",
@@ -93,6 +100,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rhyyhhem9b3gftdazq288q%2F1754244644_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=x1zBC%2FD%2FK6dDvIenBUnvNpi3ZhRDuswhJ7q9KizKdCQ%3D&az=oaivgprodscus",
     aiHint: "genius scientist",
     era: "Modern",
+    era_pt: "Moderna",
     field: "Science",
     field_pt: "Ciência",
     country: "Germany/USA",
@@ -105,6 +113,7 @@ const characters: Character[] = [
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rje5nrf74tyeq8gnf1mv6g%2F1754245090_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=I7vSn3b8teMs1QAjPCpgEwKeWZ2fGa1BFolnPAwDuZY%3D&az=oaivgprodscus",
     aiHint: "female warrior",
     era: "Medieval",
+    era_pt: "Medieval",
     field: "History",
     field_pt: "História",
     country: "France",

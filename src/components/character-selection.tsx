@@ -17,9 +17,15 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   const [era, setEra] = useState("all");
   const [field, setField] = useState("all");
 
-  const eras = useMemo(() => ["all", ...new Set(characters.map((c) => c.era))], [characters]);
+  const eras = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.era_pt : c.era)))], [characters, locale]);
   const fields = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.field_pt : c.field) ))], [characters, locale]);
   
+  const getOriginalEra = (translatedEra: string) => {
+    if (translatedEra === 'all') return 'all';
+    const character = characters.find(c => c.era_pt === translatedEra || c.era === translatedEra);
+    return character ? character.era : 'all';
+  }
+
   const getOriginalField = (translatedField: string) => {
     if (translatedField === 'all') return 'all';
     const character = characters.find(c => c.field_pt === translatedField || c.field === translatedField);
@@ -27,9 +33,10 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   }
 
   const filteredCharacters = useMemo(() => {
+    const originalEra = getOriginalEra(era);
     const originalField = getOriginalField(field);
     return characters.filter((character) => {
-      const matchesEra = era === "all" || character.era === era;
+      const matchesEra = originalEra === "all" || character.era === originalEra;
       const matchesField = originalField === "all" || character.field === originalField;
       return matchesEra && matchesField;
     });
