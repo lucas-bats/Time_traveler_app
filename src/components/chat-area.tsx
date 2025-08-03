@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -48,30 +49,31 @@ export function ChatArea({ character }: ChatAreaProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-  
+
+    const userMessageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: input.trim(),
+      content: userMessageContent,
     };
-    
-    const currentInput = input.trim();
+
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
     setIsLoading(true);
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
-  
+
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
-        userMessage: currentInput,
+        userMessage: userMessageContent,
       });
-  
+
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
+        // If there was an error, remove the user message that was optimistically added
         setMessages((prevMessages) =>
           prevMessages.filter((msg) => msg.id !== userMessage.id)
         );
@@ -84,14 +86,15 @@ export function ChatArea({ character }: ChatAreaProps) {
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
-       toast({
-          variant: "destructive",
-          title: t.error,
-          description: t.somethingWentWrong,
-        });
-        setMessages((prevMessages) =>
-          prevMessages.filter((msg) => msg.id !== userMessage.id)
-        );
+      toast({
+        variant: "destructive",
+        title: t.error,
+        description: t.somethingWentWrong,
+      });
+      // Also remove the user message on catastrophic error
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== userMessage.id)
+      );
     } finally {
       setIsLoading(false);
     }
