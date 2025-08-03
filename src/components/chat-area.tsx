@@ -34,7 +34,6 @@ export function ChatArea({ character }: ChatAreaProps) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,39 +48,40 @@ export function ChatArea({ character }: ChatAreaProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-
+  
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: input.trim(),
     };
     
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    // Add user message to state and start loading
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
     setIsLoading(true);
-
+  
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
         userMessage: input.trim(),
       });
-
+  
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // Revert to messages before user's message was added
-        setMessages(messages); 
+        // On error, remove the user message that was optimistically added
+        setMessages((prevMessages) => prevMessages.slice(0, -1));
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        setMessages([...newMessages, aiMessage]);
+        // On success, add the AI response
+        setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
        toast({
@@ -89,8 +89,8 @@ export function ChatArea({ character }: ChatAreaProps) {
           title: t.error,
           description: t.somethingWentWrong,
         });
-        // Revert to messages before user's message was added
-        setMessages(messages);
+        // On exception, remove the user message that was optimistically added
+        setMessages((prevMessages) => prevMessages.slice(0, -1));
     } finally {
       setIsLoading(false);
     }
