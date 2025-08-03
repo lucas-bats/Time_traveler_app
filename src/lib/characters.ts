@@ -680,7 +680,7 @@ const characters: Character[] = [
 ];
 
 export function getCharacters(): Character[] {
-  return characters;
+  return characters.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function getCharacterById(id: string): Character | undefined {
