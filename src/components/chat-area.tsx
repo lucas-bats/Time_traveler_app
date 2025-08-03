@@ -40,14 +40,16 @@ export function ChatArea({
   onToggleFavorite,
 }: ChatAreaProps) {
   const { t } = useLocale();
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollViewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const viewport = scrollAreaRef.current?.querySelector('div[data-radix-scroll-area-viewport]');
-    if (viewport) {
-      viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
+    if (scrollViewportRef.current) {
+      scrollViewportRef.current.scrollTo({
+        top: scrollViewportRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
     }
-  }, [messages.length]);
+  }, [messages]);
   
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-4 md:p-6 h-[calc(100%-4rem)]">
@@ -67,7 +69,7 @@ export function ChatArea({
           </div>
         </div>
         
-        <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+        <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
           <div className="space-y-4">
             {messages.map((message) => (
               <MessageBubble
