@@ -2,14 +2,40 @@
 
 import { CharacterSelection } from "@/components/character-selection";
 import { getCharacters } from "@/lib/characters";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Languages } from "lucide-react";
 
 export default function Home() {
   const characters = getCharacters();
-  const { t } = useLocale();
+  const { t, setLocale } = useLocale();
 
   return (
     <div className="flex flex-col min-h-screen">
+       <header className="absolute top-0 right-0 p-4 z-10">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Languages className="h-5 w-5" />
+              <span className="sr-only">Change language</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setLocale("en")}>
+              English
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLocale("pt")}>
+              Português
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
