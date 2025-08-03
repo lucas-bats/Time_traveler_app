@@ -46,7 +46,18 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
     outputSchema: ChatWithHistoricalFigureOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    while (attempts < maxAttempts) {
+      attempts++;
+      const { output } = await prompt(input);
+
+      if (output?.response) {
+        return output;
+      }
+    }
+
+    throw new Error('The AI was unable to generate a response. Please try rephrasing your question.');
   }
 );

@@ -20,8 +20,10 @@ export async function getAiResponse(input: ChatWithHistoricalFigureInput) {
   try {
     const result = await chatWithHistoricalFigure(parsedInput.data);
     return { response: result.response };
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
-    return { error: "An error occurred while communicating with the AI. Please try again." };
+    // Return the specific error message from the flow, or a generic one.
+    const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
+    return { error: errorMessage };
   }
 }
