@@ -78,7 +78,7 @@ const characters: Character[] = [
     name: "William Shakespeare",
     description: "An English playwright, poet and actor, widely regarded as the greatest writer in the English language and the world's pre-eminent dramatist.",
     description_pt: "Um dramaturgo, poeta e ator inglês, amplamente considerado o maior escritor da língua inglesa e o mais proeminente dramaturgo do mundo.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgsd5xendsd6bxbrkn45x8%2F1754243488_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=9NI0lrLl04fRCPgk2NNCaENxAaOcz9m3yiFAVCyNKtE%3D&az=oaivgprodscus",
     aiHint: "playwright portrait",
     era: "Renaissance",
     field: "Literature",
