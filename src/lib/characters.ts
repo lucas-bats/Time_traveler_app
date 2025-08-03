@@ -677,6 +677,162 @@ const characters: Character[] = [
     field_pt: "História",
     country: "USA",
   },
+  {
+    id: "julius-caesar",
+    name: "Júlio César",
+    description: "A Roman general and statesman who played a critical role in the events that led to the demise of the Roman Republic and the rise of the Roman Empire.",
+    description_pt: "Um general e estadista romano que desempenhou um papel crítico nos eventos que levaram ao fim da República Romana e à ascensão do Império Romano.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "roman emperor",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Politics",
+    field_pt: "Política",
+    country: "Rome"
+  },
+  {
+    id: "pericles",
+    name: "Péricles",
+    description: "A prominent and influential Greek statesman, orator and general of Athens during its golden age – specifically the time between the Persian and Peloponnesian wars.",
+    description_pt: "Um proeminente e influente estadista, orador e general grego de Atenas durante sua idade de ouro - especificamente o tempo entre as guerras persas e peloponesas.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek statesman",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Politics",
+    field_pt: "Política",
+    country: "Athens"
+  },
+  {
+    id: "archimedes",
+    name: "Arquimedes",
+    description: "A Greek mathematician, physicist, engineer, inventor, and astronomer. He is regarded as one of the leading scientists in classical antiquity.",
+    description_pt: "Um matemático, físico, engenheiro, inventor e astrônomo grego. Ele é considerado um dos principais cientistas da antiguidade clássica.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek scientist",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Art & Science",
+    field_pt: "Arte & Ciência",
+    country: "Greece"
+  },
+  {
+    id: "imhotep",
+    name: "Imhotep",
+    description: "An Egyptian chancellor to the pharaoh Djoser, probable architect of the step pyramid, and high priest of the sun god Ra at Heliopolis.",
+    description_pt: "Um chanceler egípcio do faraó Djoser, provável arquiteto da pirâmide de degraus e sumo sacerdote do deus sol Rá em Heliópolis.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "egyptian architect",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Art & Science",
+    field_pt: "Arte & Ciência",
+    country: "Egypt"
+  },
+  {
+    id: "hippocrates",
+    name: "Hipócrates",
+    description: "A Greek physician of the Age of Pericles, who is considered one of the most outstanding figures in the history of medicine. He is often referred to as the 'Father of Medicine'.",
+    description_pt: "Um médico grego da Idade de Péricles, considerado uma das figuras mais proeminentes da história da medicina. Ele é frequentemente referido como o 'Pai da Medicina'.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek physician",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Science",
+    field_pt: "Ciência",
+    country: "Greece"
+  },
+  {
+    id: "ptolemy",
+    name: "Ptolomeu",
+    description: "A Greco-Egyptian writer, known as a mathematician, astronomer, geographer, astrologer, and poet of a single epigram in the Greek Anthology.",
+    description_pt: "Um escritor greco-egípcio, conhecido como matemático, astrônomo, geógrafo, astrólogo e poeta de um único epigrama na Antologia Grega.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "egyptian astronomer",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Science",
+    field_pt: "Ciência",
+    country: "Egypt"
+  },
+  {
+    id: "socrates",
+    name: "Sócrates",
+    description: "A classical Greek philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher of the Western ethical tradition of thought.",
+    description_pt: "Um filósofo grego clássico creditado como um dos fundadores da filosofia ocidental e como sendo o primeiro filósofo moral da tradição ética ocidental de pensamento.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek philosopher",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Philosophy",
+    field_pt: "Filosofia",
+    country: "Greece"
+  },
+  {
+    id: "laozi",
+    name: "Laozi",
+    description: "An ancient Chinese philosopher and writer. He is the reputed author of the Tao Te Ching, the founder of philosophical Taoism, and a deity in religious Taoism.",
+    description_pt: "Um antigo filósofo e escritor chinês. Ele é o autor reputado do Tao Te Ching, o fundador do taoísmo filosófico e uma divindade no taoísmo religioso.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "chinese philosopher statue",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Philosophy",
+    field_pt: "Filosofia",
+    country: "China"
+  },
+  {
+    id: "homer",
+    name: "Homero",
+    description: "The presumed author of the Iliad and the Odyssey, two epic poems that are the foundational works of ancient Greek literature.",
+    description_pt: "O presumível autor da Ilíada e da Odisseia, dois poemas épicos que são as obras fundamentais da literatura grega antiga.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek poet bust",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Literature",
+    field_pt: "Literatura",
+    country: "Greece"
+  },
+  {
+    id: "virgil",
+    name: "Virgílio",
+    description: "An ancient Roman poet of the Augustan period. He wrote three of the most famous poems in Latin literature: the Eclogues, the Georgics, and the epic Aeneid.",
+    description_pt: "Um antigo poeta romano do período augustano. Ele escreveu três dos poemas mais famosos da literatura latina: as Éclogas, as Geórgicas e a épica Eneida.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "roman poet statue",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "Literature",
+    field_pt: "Literatura",
+    country: "Rome"
+  },
+  {
+    id: "herodotus",
+    name: "Heródoto",
+    description: "A Greek historian who was born in Halicarnassus in the Persian Empire. He is known for having written the book 'The Histories', a detailed account of the Greco-Persian Wars.",
+    description_pt: "Um historiador grego que nasceu em Halicarnasso, no Império Persa. Ele é conhecido por ter escrito o livro 'As Histórias', um relato detalhado das Guerras Greco-Persas.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "greek historian bust",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "History",
+    field_pt: "História",
+    country: "Greece"
+  },
+  {
+    id: "sima-qian",
+    name: "Sima Qian",
+    description: "A Chinese historian of the early Han dynasty. He is considered the father of Chinese historiography for his 'Records of the Grand Historian'.",
+    description_pt: "Um historiador chinês da dinastia Han. Ele é considerado o pai da historiografia chinesa por seus 'Registros do Grande Historiador'.",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "chinese historian statue",
+    era: "Ancient",
+    era_pt: "Antiguidade",
+    field: "History",
+    field_pt: "História",
+    country: "China"
+  }
 ];
 
 export function getCharacters(): Character[] {
@@ -686,3 +842,4 @@ export function getCharacters(): Character[] {
 export function getCharacterById(id: string): Character | undefined {
   return characters.find((character) => character.id === id);
 }
+
