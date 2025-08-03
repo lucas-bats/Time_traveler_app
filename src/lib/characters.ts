@@ -102,7 +102,7 @@ const characters: Character[] = [
     name: "Joan of Arc",
     description: "A peasant girl who, believing she was acting under divine guidance, led the French army in a momentous victory at Orléans that repulsed an English attempt to conquer France during the Hundred Years' War.",
     description_pt: "Uma camponesa que, acreditando estar agindo sob orientação divina, liderou o exército francês em uma vitória memorável em Orléans, que repeliu uma tentativa inglesa de conquistar a França durante a Guerra dos Cem Anos.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rje5nrf74tyeq8gnf1mv6g%2F1754245090_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=I7vSn3b8teMs1QAjPCpgEwKeWZ2fGa1BFolnPAwDuZY%3D&az=oaivgprodscus",
     aiHint: "female warrior",
     era: "Medieval",
     field: "History",
