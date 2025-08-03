@@ -2,11 +2,9 @@
 
 import { useParams } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
-import { useLocale } from "@/lib/locale.tsx";
 import { ChatClient } from "@/components/chat-client";
 
 export default function ChatPage() {
-  useLocale(); // Initialize locale context
   const params = useParams();
   const figureId = Array.isArray(params.figureId) ? params.figureId[0] : params.figureId;
 
