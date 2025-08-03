@@ -27,11 +27,14 @@ export function ChatClient({ figureId }: ChatClientProps) {
   const [messages, setMessages] = useLocalStorage<Message[]>(storageKey, []);
 
   useEffect(() => {
-    const foundCharacter = getCharacterById(figureId);
-    if (foundCharacter) {
-      setCharacter(foundCharacter);
+    async function loadCharacter() {
+      const foundCharacter = await getCharacterById(figureId);
+      if (foundCharacter) {
+        setCharacter(foundCharacter);
+      }
+      setLoadingCharacter(false);
     }
-    setLoadingCharacter(false);
+    loadCharacter();
   }, [figureId]);
 
   const handleSubmit = async (e: FormEvent) => {
