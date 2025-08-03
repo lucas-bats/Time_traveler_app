@@ -55,7 +55,6 @@ export function ChatArea({ character }: ChatAreaProps) {
       content: userMessageContent,
     };
     
-    // Optimistic UI update
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
     setIsLoading(true);
