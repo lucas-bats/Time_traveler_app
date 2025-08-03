@@ -39,14 +39,14 @@ export function ChatClient({ figureId }: ChatClientProps) {
     if (!input.trim() || isLoading) return;
 
     const userMessageContent = input.trim();
-    const newUserMessage: Message = {
+    const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: userMessageContent,
     };
 
-    // Add user message to the state immediately
-    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput("");
     setIsLoading(true);
 
@@ -63,15 +63,15 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // We no longer remove the user message here.
+        // On error, we don't modify messages, so user's message stays
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Add AI message to the state
-        setMessages((prevMessages) => [...prevMessages, aiMessage]);
+        // Add AI message to the state, based on the `newMessages` array
+        setMessages([...newMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -80,7 +80,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // We no longer remove the user message here.
+       // On error, we don't modify messages, so user's message stays
     } finally {
       setIsLoading(false);
     }
