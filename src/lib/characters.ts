@@ -274,6 +274,19 @@ const characters: Character[] = [
     field_pt: "História",
     country: "Tunisia",
   },
+  {
+    id: "nikola-tesla",
+    name: "Nikola Tesla",
+    description: "A Serbian-American inventor, electrical engineer, mechanical engineer, and futurist who is best known for his contributions to the design of the modern alternating current (AC) electrical system.",
+    description_pt: "Um inventor, engenheiro eletricista, engenheiro mecânico e futurista sérvio-americano, mais conhecido por suas contribuições para o projeto do moderno sistema elétrico de corrente alternada (CA).",
+    image: "https://placehold.co/400x400.png",
+    aiHint: "inventor portrait",
+    era: "Modern",
+    era_pt: "Moderna",
+    field: "Science",
+    field_pt: "Ciência",
+    country: "Serbia/USA",
+  },
 ];
 
 export function getCharacters(): Character[] {
