@@ -34,14 +34,14 @@ export function ChatArea({ character }: ChatAreaProps) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const viewportRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (viewportRef.current) {
-      viewportRef.current.scrollTo({
-        top: viewportRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
+    if (scrollAreaRef.current) {
+        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+        if (viewport) {
+            viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
+        }
     }
   }, [messages]);
 
@@ -55,15 +55,15 @@ export function ChatArea({ character }: ChatAreaProps) {
       content: input.trim(),
     };
     
-    // Add user message to state and start loading
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    const currentInput = input.trim();
     setInput("");
     setIsLoading(true);
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
   
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
-        userMessage: input.trim(),
+        userMessage: currentInput,
       });
   
       if (result.error || !result.response) {
@@ -72,15 +72,15 @@ export function ChatArea({ character }: ChatAreaProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, remove the user message that was optimistically added
-        setMessages((prevMessages) => prevMessages.slice(0, -1));
+        setMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg.id !== userMessage.id)
+        );
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // On success, add the AI response
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
@@ -89,8 +89,9 @@ export function ChatArea({ character }: ChatAreaProps) {
           title: t.error,
           description: t.somethingWentWrong,
         });
-        // On exception, remove the user message that was optimistically added
-        setMessages((prevMessages) => prevMessages.slice(0, -1));
+        setMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg.id !== userMessage.id)
+        );
     } finally {
       setIsLoading(false);
     }
@@ -124,7 +125,7 @@ export function ChatArea({ character }: ChatAreaProps) {
           </div>
         </div>
         
-        <ScrollArea className="flex-1 p-4" viewportRef={viewportRef}>
+        <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
           <div className="space-y-4">
             {messages.map((message) => (
               <MessageBubble
