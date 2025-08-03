@@ -35,7 +35,7 @@ export const charactersData: Character[] = [
     "name": "Confúcio",
     "description": "A Chinese philosopher and politician of the Spring and Autumn period who is traditionally considered the paragon of Chinese sages.",
     "description_pt": "Um filósofo e político chinês do período da Primavera e Outono que é tradicionalmente considerado o modelo dos sábios chineses.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250803_1444_Confucius_%20Renaissance%20Wisdom_simple_compose_01k1rgg9apf7tbrartgjkxgdmw.png?alt=media&token=0062e67f-7c02-482a-8b34-82d9c2a4d593",
     "aiHint": "confucius philosopher",
     "era": "Antiquity",
     "era_pt": "Antiguidade",
@@ -783,5 +783,44 @@ export const charactersData: Character[] = [
     "field": "History",
     "field_pt": "História",
     "country": "China"
+  },
+  {
+    "id": "marie-curie",
+    "name": "Marie Curie",
+    "description": "A Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize.",
+    "description_pt": "Uma física e química polonesa, naturalizada francesa, que conduziu pesquisas pioneiras sobre radioatividade. Foi a primeira mulher a ganhar um Prêmio Nobel.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250803_1447_Marie%20Curie%20Renaissance%20Portrait_simple_compose_01k1rgm5wkew0tsa9d6r90ptnq.png?alt=media&token=254e0601-6718-4fa2-ac5f-76c8d351c956",
+    "aiHint": "Marie Curie scientist",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Science",
+    "field_pt": "Ciência",
+    "country": "Poland/France"
+  },
+  {
+    "id": "william-shakespeare",
+    "name": "William Shakespeare",
+    "description": "An English playwright, poet, and actor, widely regarded as the greatest writer in the English language and the world's pre-eminent dramatist.",
+    "description_pt": "Um dramaturgo, poeta e ator inglês, amplamente considerado o maior escritor da língua inglesa e o mais importante dramaturgo do mundo.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250803_1451_Shakespeare%20in%20Renaissance%20Portrait_simple_compose_01k1rgsefrej2t9yqxgtbxx4mp.png?alt=media&token=9bf746e4-5212-467f-9b87-a7a103ee9a01",
+    "aiHint": "Shakespeare writer",
+    "era": "Renaissance",
+    "era_pt": "Renascentista",
+    "field": "Literature",
+    "field_pt": "Literatura",
+    "country": "England"
+  },
+  {
+    "id": "albert-einstein",
+    "name": "Albert Einstein",
+    "description": "A German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. His work is also known for its influence on the philosophy of science.",
+    "description_pt": "Um físico teórico nascido na Alemanha que desenvolveu a teoria da relatividade, um dos dois pilares da física moderna. Seu trabalho também é conhecido por sua influência na filosofia da ciência.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250803_1510_Renaissance%20Einstein%20Portrait_simple_compose_01k1rhyz8fepbafrps88cqkyem.png?alt=media&token=4d1ff2e3-912b-48b4-90bf-72ec2bfd01bd",
+    "aiHint": "Albert Einstein scientist",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Science",
+    "field_pt": "Ciência",
+    "country": "Germany/USA"
   }
 ]
