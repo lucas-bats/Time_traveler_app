@@ -38,42 +38,41 @@ export function ChatArea({ character }: ChatAreaProps) {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-        if (viewport) {
-            viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
-        }
+    const viewport = scrollAreaRef.current?.querySelector('div[data-radix-scroll-area-viewport]');
+    if (viewport) {
+      viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
     }
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-
+  
     const userMessageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: userMessageContent,
     };
-
+  
+    // Add user message optimistically
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
     setIsLoading(true);
-
+  
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
         userMessage: userMessageContent,
       });
-
+  
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // If there was an error, remove the user message that was optimistically added
+        // On error, remove the optimistically added user message
         setMessages((prevMessages) =>
           prevMessages.filter((msg) => msg.id !== userMessage.id)
         );
@@ -83,6 +82,8 @@ export function ChatArea({ character }: ChatAreaProps) {
           role: "assistant",
           content: result.response,
         };
+        // On success, replace the user message with a final list including the AI response.
+        // This is done by finding the user message and adding the AI message after it.
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
@@ -91,8 +92,8 @@ export function ChatArea({ character }: ChatAreaProps) {
         title: t.error,
         description: t.somethingWentWrong,
       });
-      // Also remove the user message on catastrophic error
-      setMessages((prevMessages) =>
+       // On catastrophic error, also remove the optimistically added user message
+       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== userMessage.id)
       );
     } finally {
