@@ -68,21 +68,35 @@ const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
   const [storedLocale, setStoredLocale] = useLocalStorage<Locale>('locale', 'en');
-  const [locale, setLocale] = useState<Locale>(storedLocale);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setLocale(storedLocale);
-  }, [storedLocale]);
+    setIsClient(true);
+  }, []);
+
+  const locale = isClient ? storedLocale : 'en';
   
   const handleSetLocale = (newLocale: Locale) => {
     setStoredLocale(newLocale);
-    setLocale(newLocale);
   };
   
   const t = translations[locale];
 
+  const value = { locale: storedLocale, setLocale: handleSetLocale, t };
+
+  if (!isClient) {
+    // Render a placeholder or nothing on the server to avoid mismatch
+    // Or render with default locale
+    const defaultT = translations['en'];
+    return (
+      <LocaleContext.Provider value={{ locale: 'en', setLocale: () => {}, t: defaultT }}>
+        {children}
+      </LocaleContext.Provider>
+    );
+  }
+
   return (
-    <LocaleContext.Provider value={{ locale, setLocale: handleSetLocale, t }}>
+    <LocaleContext.Provider value={value}>
       {children}
     </LocaleContext.Provider>
   );
