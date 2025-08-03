@@ -15,7 +15,7 @@ export interface Character {
 const characters: Character[] = [
   {
     id: "cleopatra",
-    name: "Cleopatra",
+    name: "Cleópatra",
     description: "The last active ruler of the Ptolemaic Kingdom of Egypt. A diplomat, naval commander, linguist, and medical author.",
     description_pt: "A última governante ativa do Reino Ptolomaico do Egito. Uma diplomata, comandante naval, linguista e autora de textos médicos.",
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rfx2vzfhsaxjevq388rwrq%2F1754242504_img_0.webp?st=2025-08-03T17%3A15%3A51Z&se=2025-08-09T18%3A15%3A51Z&sks=b&skt=2025-08-03T17%3A15%3A51Z&ske=2025-08-09T18%3A15%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=h1FoJ%2FU08otcSXSUkEFDhy1sn7FVdD%2BhqmJ8EVGD%2Bps%3D&az=oaivgprodscus",
@@ -51,7 +51,7 @@ const characters: Character[] = [
   },
   {
     id: "confucius",
-    name: "Confucius",
+    name: "Confúcio",
     description: "A Chinese philosopher and politician of the Spring and Autumn period who is traditionally considered the paragon of Chinese sages.",
     description_pt: "Um filósofo e político chinês do período das Primaveras e Outonos, tradicionalmente considerado o paradigma dos sábios chineses.",
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgg8e6fz6b7mk4534ng96e%2F1754243062_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=%2BPZHnGAzyRCxfWX8%2FQkS72DFIx4YuLYATI%2BkgFjvTOI%3D&az=oaivgprodscus",
@@ -99,7 +99,7 @@ const characters: Character[] = [
   },
   {
     id: "joan-of-arc",
-    name: "Joan of Arc",
+    name: "Joana d'Arc",
     description: "A peasant girl who, believing she was acting under divine guidance, led the French army in a momentous victory at Orléans that repulsed an English attempt to conquer France during the Hundred Years' War.",
     description_pt: "Uma camponesa que, acreditando estar agindo sob orientação divina, liderou o exército francês em uma vitória memorável em Orléans, que repeliu uma tentativa inglesa de conquistar a França durante a Guerra dos Cem Anos.",
     image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rje5nrf74tyeq8gnf1mv6g%2F1754245090_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=I7vSn3b8teMs1QAjPCpgEwKeWZ2fGa1BFolnPAwDuZY%3D&az=oaivgprodscus",
