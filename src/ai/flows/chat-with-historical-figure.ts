@@ -13,6 +13,7 @@ import {z} from 'genkit';
 const ChatWithHistoricalFigureInputSchema = z.object({
   historicalFigure: z.string().describe('The name of the historical figure to chat with.'),
   userMessage: z.string().describe('The message from the user to the historical figure.'),
+  language: z.string().describe('The language for the historical figure to respond in (e.g., "en", "pt").'),
 });
 export type ChatWithHistoricalFigureInput = z.infer<typeof ChatWithHistoricalFigureInputSchema>;
 
@@ -31,7 +32,11 @@ const prompt = ai.definePrompt({
   name: 'chatWithHistoricalFigurePrompt',
   input: {schema: ChatWithHistoricalFigureInputSchema},
   output: {schema: ChatWithHistoricalFigureOutputSchema},
-  prompt: `You are {{historicalFigure}}, a historical figure. Respond to the following message as if you were them, using their personality, vocabulary, and historical context.\n\nMessage: {{{userMessage}}}`,
+  prompt: `You are {{historicalFigure}}, a historical figure. Respond to the following message as if you were them, using their personality, vocabulary, and historical context.
+
+Respond in the following language: {{language}}.
+
+Message: {{{userMessage}}}`,
 });
 
 const chatWithHistoricalFigureFlow = ai.defineFlow(

@@ -7,7 +7,8 @@ import { getCharacterById, type Character } from "@/lib/characters";
 import { ChatArea, type Message } from "@/components/chat-area";
 import { getAiResponse } from "@/app/actions";
 import { useToast } from "@/hooks/use-toast";
-import { useLocale } from "@/lib/locale";
+import useLocalStorage from "@/hooks/use-local-storage";
+import { useLocale } from "@/lib/locale.tsx";
 
 interface ChatClientProps {
   figureId: string;
@@ -16,34 +17,22 @@ interface ChatClientProps {
 export function ChatClient({ figureId }: ChatClientProps) {
   const [character, setCharacter] = useState<Character | null>(null);
   const [loadingCharacter, setLoadingCharacter] = useState(true);
-
-  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
   const { toast } = useToast();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const storageKey = `chat_history_${figureId}`;
+  
+  const [messages, setMessages] = useLocalStorage<Message[]>(storageKey, []);
 
   useEffect(() => {
     const foundCharacter = getCharacterById(figureId);
     if (foundCharacter) {
       setCharacter(foundCharacter);
-      const storedMessages = localStorage.getItem(storageKey);
-      if (storedMessages) {
-        setMessages(JSON.parse(storedMessages));
-      } else {
-        setMessages([]);
-      }
     }
     setLoadingCharacter(false);
-  }, [figureId, storageKey]);
-
-  useEffect(() => {
-    if(character) {
-      localStorage.setItem(storageKey, JSON.stringify(messages));
-    }
-  }, [messages, character, storageKey]);
+  }, [figureId]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -65,6 +54,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
       const result = await getAiResponse({
         historicalFigure: character!.name,
         userMessage: userMessageContent,
+        language: locale,
       });
 
       if (result.error || !result.response) {
@@ -73,7 +63,6 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // Revert optimistic update
         setMessages((prevMessages) =>
           prevMessages.filter((msg) => msg.id !== newUserMessage.id)
         );
@@ -91,7 +80,6 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: t.somethingWentWrong,
       });
-      // Revert optimistic update
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== newUserMessage.id)
       );

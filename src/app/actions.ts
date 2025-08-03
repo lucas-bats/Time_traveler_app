@@ -9,6 +9,7 @@ import { z } from "zod";
 const actionSchema = z.object({
   historicalFigure: z.string(),
   userMessage: z.string(),
+  language: z.string(),
 });
 
 export async function getAiResponse(input: ChatWithHistoricalFigureInput) {
