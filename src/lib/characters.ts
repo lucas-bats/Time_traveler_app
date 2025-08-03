@@ -66,7 +66,7 @@ const characters: Character[] = [
     name: "Marie Curie",
     description: "A Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. The first woman to win a Nobel Prize.",
     description_pt: "Uma física e química polonesa e naturalizada francesa que conduziu pesquisas pioneiras sobre radioatividade. A primeira mulher a ganhar um Prêmio Nobel.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgm511fkm8v6rrawqj897y%2F1754243252_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=CvJCK%2Bacw%2FCJ5k1LNrk7EFct78TJPex1RSy984b6Ahg%3D&az=oaivgprodscus",
     aiHint: "female scientist",
     era: "Modern",
     field: "Science",
