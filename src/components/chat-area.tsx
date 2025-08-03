@@ -1,23 +1,19 @@
 
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type Dispatch, type SetStateAction } from "react";
 import type { Character } from "@/lib/characters";
 import { getAiResponse } from "@/app/actions";
-import useLocalStorage from "@/hooks/use-local-storage";
 import { MessageBubble } from "./message-bubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Send, Star } from "lucide-react";
+import { Send } from "lucide-react";
 import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/lib/locale.tsx";
-
-interface ChatAreaProps {
-  character: Character;
-}
+import { FavoritesSidebar } from "./favorites-sidebar";
 
 export interface Message {
   id: string;
@@ -26,23 +22,23 @@ export interface Message {
   favorited?: boolean;
 }
 
-export function ChatArea({ character }: ChatAreaProps) {
+interface ChatAreaProps {
+  character: Character;
+  messages: Message[];
+  setMessages: Dispatch<SetStateAction<Message[]>>;
+}
+
+export function ChatArea({ character, messages, setMessages }: ChatAreaProps) {
   const { t } = useLocale();
-  const [messages, setMessages] = useLocalStorage<Message[]>(
-    `chat_history_${character.id}`,
-    []
-  );
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-      if (viewport) {
-        viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
-      }
+    const viewport = scrollAreaRef.current?.querySelector('div[data-radix-scroll-area-viewport]');
+    if (viewport) {
+      viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
     }
   }, [messages.length]);
 
@@ -57,7 +53,8 @@ export function ChatArea({ character }: ChatAreaProps) {
       content: userMessageContent,
     };
 
-    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
+    const updatedMessages = [...messages, newUserMessage];
+    setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
 
@@ -73,7 +70,6 @@ export function ChatArea({ character }: ChatAreaProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, remove the optimistically added user message
         setMessages((prevMessages) =>
           prevMessages.filter((msg) => msg.id !== newUserMessage.id)
         );
@@ -83,7 +79,6 @@ export function ChatArea({ character }: ChatAreaProps) {
           role: "assistant",
           content: result.response,
         };
-        // On success, add the AI response
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
@@ -92,7 +87,6 @@ export function ChatArea({ character }: ChatAreaProps) {
         title: t.error,
         description: t.somethingWentWrong,
       });
-       // On catastrophic error, also remove the optimistically added user message
        setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== newUserMessage.id)
       );
@@ -102,14 +96,12 @@ export function ChatArea({ character }: ChatAreaProps) {
   };
 
   const handleToggleFavorite = (messageId: string) => {
-    setMessages(
-      messages.map((msg) =>
+    setMessages((prevMessages) =>
+      prevMessages.map((msg) =>
         msg.id === messageId ? { ...msg, favorited: !msg.favorited } : msg
       )
     );
   };
-
-  const hasFavorites = messages.some(msg => msg.favorited);
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-4 md:p-6 h-[calc(100%-4rem)]">
@@ -165,31 +157,7 @@ export function ChatArea({ character }: ChatAreaProps) {
         </div>
       </div>
       
-      <div className="hidden lg:flex flex-col bg-card rounded-lg border shadow-sm h-full">
-        <div className="p-4 border-b">
-          <h3 className="font-headline text-lg text-primary">{t.favoriteMessages}</h3>
-        </div>
-        <ScrollArea className="flex-1 p-4">
-          {hasFavorites ? (
-            <div className="space-y-4">
-              {messages.filter(msg => msg.favorited).map(msg => (
-                <div key={msg.id} className="text-sm p-3 rounded-md bg-background border">
-                  <p className="text-muted-foreground italic">"{msg.content}"</p>
-                  <div className="text-right mt-1">
-                    <span className="text-xs font-medium text-primary">- {character.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-              <Star className="w-10 h-10 mb-2" />
-              <p>{t.yourFavoriteMessages}</p>
-              <p className="text-xs">{t.clickStarToSave}</p>
-            </div>
-          )}
-        </ScrollArea>
-      </div>
+      <FavoritesSidebar messages={messages} characterName={character.name} />
     </div>
   );
 }
