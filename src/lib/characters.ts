@@ -54,7 +54,7 @@ const characters: Character[] = [
     name: "Confucius",
     description: "A Chinese philosopher and politician of the Spring and Autumn period who is traditionally considered the paragon of Chinese sages.",
     description_pt: "Um filósofo e político chinês do período das Primaveras e Outonos, tradicionalmente considerado o paradigma dos sábios chineses.",
-    image: "https://placehold.co/400x400.png",
+    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgg8e6fz6b7mk4534ng96e%2F1754243062_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=%2BPZHnGAzyRCxfWX8%2FQkS72DFIx4YuLYATI%2BkgFjvTOI%3D&az=oaivgprodscus",
     aiHint: "chinese philosopher",
     era: "Ancient",
     field: "Philosophy",
