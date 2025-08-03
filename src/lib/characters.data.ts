@@ -22,7 +22,7 @@ export const charactersData: Character[] = [
     "name": "Leonardo da Vinci",
     "description": "An Italian polymath of the High Renaissance who is widely considered one of the most diversely talented individuals ever to have lived.",
     "description_pt": "Um polímata italiano da Alta Renascença que é amplamente considerado um dos indivíduos mais talentosos e diversificados que já existiram.",
-    "image": "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rngxgcf3h9dp7nrvb63rvs%2F1754248488_img_0.webp?st=2025-08-03T18%3A09%3A33Z&se=2025-08-09T19%3A09%3A33Z&sks=b&skt=2025-08-03T18%3A09%3A33Z&ske=2025-08-09T19%3A09%3A33Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=vrBfv2zUihOdotzXccz%2FStH8oJqBjJ3Vs4cScLl8wAc%3D&az=oaivgprodscus",
+    "image": "https://placehold.co/400x400.png",
     "aiHint": "da vinci",
     "era": "Renaissance",
     "era_pt": "Renascentista",
@@ -444,6 +444,19 @@ export const charactersData: Character[] = [
     "era_pt": "Vitoriana",
     "field": "Literature",
     "field_pt": "Literatura",
+    "country": "England"
+  },
+  {
+    "id": "charles-darwin",
+    "name": "Charles Darwin",
+    "description": "An English naturalist, geologist and biologist, best known for his contributions to the science of evolution.",
+    "description_pt": "Um naturalista, geólogo e biólogo inglês, mais conhecido por suas contribuições para a ciência da evolução.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250803_1442_Renaissance%20Darwin%20Portrait_simple_compose_01k1rgd2d6eedv7yj72pw3f5x9.png?alt=media&token=f8f104cf-5c4c-44a2-abdd-c8e4cc857127",
+    "aiHint": "Charles Darwin evolution",
+    "era": "Victorian",
+    "era_pt": "Vitoriana",
+    "field": "Science",
+    "field_pt": "Ciência",
     "country": "England"
   },
   {
