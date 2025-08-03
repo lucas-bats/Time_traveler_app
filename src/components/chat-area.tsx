@@ -54,7 +54,7 @@ export function ChatArea({
   }, [messageCount]);
   
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-4 md:p-6 h-[calc(100%-4rem)]">
+    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm">
         <div className="flex items-center p-4 border-b">
           <Image
@@ -84,7 +84,7 @@ export function ChatArea({
           </div>
         </ScrollArea>
         
-        <div className="p-4 border-t">
+        <div className="p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <form onSubmit={onFormSubmit} className="flex items-start gap-4">
             <Textarea
               value={input}

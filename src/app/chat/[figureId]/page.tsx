@@ -10,7 +10,7 @@ export default function ChatPage() {
   const figureId = Array.isArray(params.figureId) ? params.figureId[0] : params.figureId;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen h-dvh">
       <SiteHeader />
       {figureId ? (
         <ChatClient figureId={figureId} />

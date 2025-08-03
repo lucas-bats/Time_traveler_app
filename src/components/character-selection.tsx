@@ -43,7 +43,7 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   }, [characters, era, field, locale]);
 
   return (
-    <section className="w-full py-12 md:py-16">
+    <section className="w-full py-8 md:py-16">
       <div className="container px-4 md:px-6">
         <div className="mb-8 flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3">

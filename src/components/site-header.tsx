@@ -18,17 +18,17 @@ export function SiteHeader() {
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="inline-block font-bold font-headline text-primary text-xl">
+            <span className="hidden sm:inline-block font-bold font-headline text-primary text-xl">
               {t.title}
             </span>
           </Link>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end space-x-1">
           <nav className="flex items-center space-x-1">
             <Button variant="ghost" asChild>
               <Link href="/">
-                <Home className="h-5 w-5 mr-2" />
-                {t.home}
+                <Home className="h-5 w-5 md:mr-2" />
+                <span className="hidden md:inline">{t.home}</span>
               </Link>
             </Button>
             <DropdownMenu>
