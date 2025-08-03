@@ -12,19 +12,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Languages } from "lucide-react";
-import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const characters = getCharacters();
   const { t, setLocale } = useLocale();
-
-  useEffect(() => {
-    async function loadCharacters() {
-      const fetchedCharacters = await getCharacters();
-      setCharacters(fetchedCharacters);
-    }
-    loadCharacters();
-  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">

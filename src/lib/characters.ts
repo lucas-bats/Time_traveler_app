@@ -1,6 +1,5 @@
 
-import { db } from "@/lib/firebase";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { charactersData } from "@/lib/characters.data";
 
 export interface Character {
   id: string;
@@ -16,32 +15,12 @@ export interface Character {
   country: string;
 }
 
-// This function now fetches characters from Firestore
-export async function getCharacters(): Promise<Character[]> {
-  try {
-    const charactersCol = collection(db, "characters");
-    const characterSnapshot = await getDocs(charactersCol);
-    const characterList = characterSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Character));
-    return characterList.sort((a, b) => a.name.localeCompare(b.name));
-  } catch (error) {
-    console.error("Error fetching characters:", error);
-    // Returning an empty array in case of an error
-    // In a real-world app, you might want to handle this more gracefully
-    return [];
-  }
+// This function now fetches characters from a local data file
+export function getCharacters(): Character[] {
+  return charactersData.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-// This function now fetches a single character from Firestore by ID
-export async function getCharacterById(id: string): Promise<Character | undefined> {
-  try {
-    const characterDocRef = doc(db, "characters", id);
-    const characterDoc = await getDoc(characterDocRef);
-    if (characterDoc.exists()) {
-      return { id: characterDoc.id, ...characterDoc.data() } as Character;
-    }
-    return undefined;
-  } catch (error) {
-    console.error(`Error fetching character with id ${id}:`, error);
-    return undefined;
-  }
+// This function now fetches a single character from a local data file by ID
+export function getCharacterById(id: string): Character | undefined {
+  return charactersData.find((character) => character.id === id);
 }

@@ -4,7 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-.yarn/install-state.gz
 
 # testing
 /coverage
@@ -28,7 +27,6 @@ pnpm-debug.log*
 
 # local env files
 .env*.local
-.env
 
 # vercel
 .vercel
@@ -40,6 +38,7 @@ next-env.d.ts
 # studio
 .firebase/
 firebase.json
+.firebaserc
 database.rules.json
 storage.rules
-.firebaserc
+.env
