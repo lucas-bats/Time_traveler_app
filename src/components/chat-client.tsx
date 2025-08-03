@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -18,7 +19,6 @@ export function ChatClient({ figureId }: ChatClientProps) {
     if (foundCharacter) {
       setCharacter(foundCharacter);
     } else {
-      // If character not found, trigger a 404
       notFound();
     }
     setLoading(false);
@@ -32,8 +32,9 @@ export function ChatClient({ figureId }: ChatClientProps) {
     );
   }
   
-  // This should not be reached if character is not found due to notFound()
   if (!character) {
+      // This case should ideally not be reached if notFound() is called correctly.
+      // It's here as a safeguard.
       return null;
   }
 

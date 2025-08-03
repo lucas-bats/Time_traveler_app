@@ -38,9 +38,11 @@ export function ChatArea({ character }: ChatAreaProps) {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const viewport = scrollAreaRef.current?.querySelector('div[data-radix-scroll-area-viewport]');
-    if (viewport) {
-      viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
+    if (scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+      if (viewport) {
+        viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
+      }
     }
   }, [messages.length]);
 
@@ -49,13 +51,13 @@ export function ChatArea({ character }: ChatAreaProps) {
     if (!input.trim() || isLoading) return;
 
     const userMessageContent = input.trim();
-    const userMessage: Message = {
+    const newUserMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: userMessageContent,
     };
-    
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
     setInput("");
     setIsLoading(true);
 
@@ -73,7 +75,7 @@ export function ChatArea({ character }: ChatAreaProps) {
         });
         // On error, remove the optimistically added user message
         setMessages((prevMessages) =>
-          prevMessages.filter((msg) => msg.id !== userMessage.id)
+          prevMessages.filter((msg) => msg.id !== newUserMessage.id)
         );
       } else {
         const aiMessage: Message = {
@@ -92,7 +94,7 @@ export function ChatArea({ character }: ChatAreaProps) {
       });
        // On catastrophic error, also remove the optimistically added user message
        setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== userMessage.id)
+        prevMessages.filter((msg) => msg.id !== newUserMessage.id)
       );
     } finally {
       setIsLoading(false);
