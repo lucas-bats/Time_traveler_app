@@ -19,7 +19,7 @@ const characters: Character[] = [
     name: "Cleópatra",
     description: "The last active ruler of the Ptolemaic Kingdom of Egypt. A diplomat, naval commander, linguist, and medical author.",
     description_pt: "A última governante ativa do Reino Ptolomaico do Egito. Uma diplomata, comandante naval, linguista e autora de textos médicos.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rfx2vzfhsaxjevq388rwrq%2F1754242504_img_0.webp?st=2025-08-03T17%3A15%3A51Z&se=2025-08-09T18%3A15%3A51Z&sks=b&skt=2025-08-03T17%3A15%3A51Z&ske=2025-08-09T18%3A15%3A51Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=h1FoJ%2FU08otcSXSUkEFDhy1sn7FVdD%2BhqmJ8EVGD%2Bps%3D&az=oaivgprodscus",
+    image: "https://placehold.co/400x400.png",
     aiHint: "egyptian queen",
     era: "Ancient",
     era_pt: "Antiguidade",
@@ -32,7 +32,7 @@ const characters: Character[] = [
     name: "Confúcio",
     description: "A Chinese philosopher and politician of the Spring and Autumn period who is traditionally considered the paragon of Chinese sages.",
     description_pt: "Um filósofo e político chinês do período das Primaveras e Outonos, tradicionalmente considerado o paradigma dos sábios chineses.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgg8e6fz6b7mk4534ng96e%2F1754243062_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=%2BPZHnGAzyRCxfWX8%2FQkS72DFIx4YuLYATI%2BkgFjvTOI%3D&az=oaivgprodscus",
+    image: "https://placehold.co/400x400.png",
     aiHint: "chinese philosopher",
     era: "Ancient",
     era_pt: "Antiguidade",
@@ -409,7 +409,7 @@ const characters: Character[] = [
     name: "Charles Darwin",
     description: "An English naturalist, geologist and biologist, widely known for his contributions to the science of evolution.",
     description_pt: "Um naturalista, geólogo e biólogo inglês, amplamente conhecido por suas contribuições para a ciência da evolução.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgd1szf4vbc4w7ctytvver%2F1754242953_img_1.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=7YBNtfXakWstjGwdecnNTt6E5E7iqq4TqieU7Bp1pVY%3D&az=oaivgprodscus",
+    image: "https://placehold.co/400x400.png",
     aiHint: "scientist portrait",
     era: "Victorian",
     era_pt: "Vitoriana",
@@ -526,7 +526,7 @@ const characters: Character[] = [
     name: "Marie Curie",
     description: "A Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. The first woman to win a Nobel Prize.",
     description_pt: "Uma física e química polonesa e naturalizada francesa que conduziu pesquisas pioneiras sobre radioatividade. A primeira mulher a ganhar um Prêmio Nobel.",
-    image: "https://videos.openai.com/vg-assets/assets%2Ftask_01k1rgm511fkm8v6rrawqj897y%2F1754243252_img_0.webp?st=2025-08-03T17%3A50%3A35Z&se=2025-08-09T18%3A50%3A35Z&sks=b&skt=2025-08-03T17%3A50%3A35Z&ske=2025-08-09T18%3A50%3A35Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=aa5ddad1-c91a-4f0a-9aca-e20682cc8969&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https-2Chttp&sig=CvJCK-2Bacw-2FCJ5k1LNrk7EFct78TJPex1RSy984b6Ahg-3D&az=oaivgprodscus",
+    image: "https://placehold.co/400x400.png",
     aiHint: "female scientist",
     era: "Modern",
     era_pt: "Moderna",
@@ -842,4 +842,3 @@ export function getCharacters(): Character[] {
 export function getCharacterById(id: string): Character | undefined {
   return characters.find((character) => character.id === id);
 }
-
