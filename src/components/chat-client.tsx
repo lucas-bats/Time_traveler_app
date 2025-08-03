@@ -45,8 +45,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
       content: userMessageContent,
     };
 
-    const updatedMessages = [...messages, newUserMessage];
-    setMessages(updatedMessages);
+    setMessages((prevMessages) => [...prevMessages, newUserMessage]);
     setInput("");
     setIsLoading(true);
 
@@ -63,9 +62,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        setMessages((prevMessages) =>
-          prevMessages.filter((msg) => msg.id !== newUserMessage.id)
-        );
+        // Revert only the optimistic AI message addition, keep user's message.
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -75,14 +72,13 @@ export function ChatClient({ figureId }: ChatClientProps) {
         setMessages((prevMessages) => [...prevMessages, aiMessage]);
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
       toast({
         variant: "destructive",
         title: t.error,
-        description: t.somethingWentWrong,
+        description: errorMessage,
       });
-      setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== newUserMessage.id)
-      );
+       // In case of error, the user message is already in the list, so we do nothing to remove it.
     } finally {
       setIsLoading(false);
     }
