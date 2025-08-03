@@ -8,6 +8,7 @@ export interface Character {
   aiHint: string;
   era: string;
   field: string;
+  field_pt: string;
   country: string;
 }
 
@@ -21,6 +22,7 @@ const characters: Character[] = [
     aiHint: "egyptian queen",
     era: "Ancient",
     field: "Politics",
+    field_pt: "Política",
     country: "Egypt",
   },
   {
@@ -32,6 +34,7 @@ const characters: Character[] = [
     aiHint: "renaissance artist",
     era: "Renaissance",
     field: "Art & Science",
+    field_pt: "Arte & Ciência",
     country: "Italy",
   },
   {
@@ -43,6 +46,7 @@ const characters: Character[] = [
     aiHint: "scientist portrait",
     era: "Victorian",
     field: "Science",
+    field_pt: "Ciência",
     country: "United Kingdom",
   },
   {
@@ -54,6 +58,7 @@ const characters: Character[] = [
     aiHint: "chinese philosopher",
     era: "Ancient",
     field: "Philosophy",
+    field_pt: "Filosofia",
     country: "China",
   },
   {
@@ -65,6 +70,7 @@ const characters: Character[] = [
     aiHint: "female scientist",
     era: "Modern",
     field: "Science",
+    field_pt: "Ciência",
     country: "Poland/France",
   },
   {
@@ -76,6 +82,7 @@ const characters: Character[] = [
     aiHint: "playwright portrait",
     era: "Renaissance",
     field: "Literature",
+    field_pt: "Literatura",
     country: "United Kingdom",
   },
   {
@@ -87,6 +94,7 @@ const characters: Character[] = [
     aiHint: "genius scientist",
     era: "Modern",
     field: "Science",
+    field_pt: "Ciência",
     country: "Germany/USA",
   },
   {
@@ -98,6 +106,7 @@ const characters: Character[] = [
     aiHint: "female warrior",
     era: "Medieval",
     field: "History",
+    field_pt: "História",
     country: "France",
   },
 ];

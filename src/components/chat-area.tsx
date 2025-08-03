@@ -41,7 +41,7 @@ export function ChatArea({
   onFormSubmit,
   onToggleFavorite,
 }: ChatAreaProps) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const scrollViewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export function ChatArea({
           />
           <div className="ml-4">
             <h2 className="font-headline text-xl text-primary">{character.name}</h2>
-            <p className="text-sm text-muted-foreground">{character.field}</p>
+            <p className="text-sm text-muted-foreground">{locale === 'pt' ? character.field_pt : character.field}</p>
           </div>
         </div>
         
