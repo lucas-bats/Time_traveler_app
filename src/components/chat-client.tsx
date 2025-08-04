@@ -45,8 +45,9 @@ export function ChatClient({ figureId }: ChatClientProps) {
       content: userMessageContent,
     };
   
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    // Add user message to state immediately
+    setMessages(prev => [...prev, userMessage]);
+    
     setInput("");
     setIsLoading(true);
   
@@ -63,15 +64,16 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, we don't want to add an empty AI message
-        setMessages(newMessages); 
+        // On error, remove the user message that was optimistically added
+        setMessages(prev => prev.slice(0, prev.length -1));
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        setMessages([...newMessages, aiMessage]);
+        // Add AI message to state
+        setMessages(prev => [...prev, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -80,8 +82,8 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // On error, we don't want to add an empty AI message
-      setMessages(newMessages);
+      // On error, remove the user message that was optimistically added
+      setMessages(prev => prev.slice(0, prev.length -1));
     } finally {
       setIsLoading(false);
     }
@@ -93,6 +95,10 @@ export function ChatClient({ figureId }: ChatClientProps) {
         msg.id === messageId ? { ...msg, favorited: !msg.favorited } : msg
       )
     );
+  };
+
+  const handleClearChat = () => {
+    setMessages([]);
   };
 
   if (loadingCharacter) {
@@ -119,6 +125,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
         onInputChange={setInput}
         onFormSubmit={handleSubmit}
         onToggleFavorite={handleToggleFavorite}
+        onClearChat={handleClearChat}
       />
     </div>
   );

@@ -32,6 +32,11 @@ const translations = {
     copiedToClipboard: 'Copied to clipboard!',
     messageCopied: 'The message has been copied.',
     thinking: 'Thinking...',
+    clearChat: 'Clear chat',
+    areYouSure: 'Are you sure?',
+    clearChatConfirmation: 'This will permanently delete the chat history. This action cannot be undone.',
+    cancel: 'Cancel',
+    clear: 'Clear',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -58,6 +63,11 @@ const translations = {
     copiedToClipboard: 'Copiado para a área de transferência!',
     messageCopied: 'A mensagem foi copiada.',
     thinking: 'Pensando...',
+    clearChat: 'Limpar conversa',
+    areYouSure: 'Você tem certeza?',
+    clearChatConfirmation: 'Isso excluirá permanentemente o histórico do chat. Esta ação não pode ser desfeita.',
+    cancel: 'Cancelar',
+    clear: 'Limpar',
   }
 };
 

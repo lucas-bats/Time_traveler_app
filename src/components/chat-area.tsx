@@ -6,12 +6,23 @@ import type { Character } from "@/lib/characters";
 import { MessageBubble } from "./message-bubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Send } from "lucide-react";
+import { Send, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocale } from "@/lib/locale.tsx";
 import { FavoritesSidebar } from "./favorites-sidebar";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export interface Message {
   id: string;
@@ -29,6 +40,7 @@ interface ChatAreaProps {
   onInputChange: (input: string) => void;
   onFormSubmit: (e: FormEvent) => Promise<void>;
   onToggleFavorite: (messageId: string) => void;
+  onClearChat: () => void;
 }
 
 export function ChatArea({
@@ -40,6 +52,7 @@ export function ChatArea({
   onInputChange,
   onFormSubmit,
   onToggleFavorite,
+  onClearChat,
 }: ChatAreaProps) {
   const { t, locale } = useLocale();
   const scrollViewportRef = useRef<HTMLDivElement>(null);
@@ -55,20 +68,45 @@ export function ChatArea({
   
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
-      <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm">
-        <div className="flex items-center p-4 border-b">
-          <Image
-            src={character.image}
-            alt={character.name}
-            width={48}
-            height={48}
-            className="rounded-full object-cover w-12 h-12"
-            data-ai-hint={character.aiHint}
-          />
-          <div className="ml-4">
-            <h2 className="font-headline text-xl text-primary">{character.name}</h2>
-            <p className="text-sm text-muted-foreground">{locale === 'pt' ? character.field_pt : character.field}</p>
+      <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm flex-1 min-h-0">
+        <div className="flex items-center justify-between p-4 border-b">
+          <div className="flex items-center">
+            <Image
+              src={character.image}
+              alt={character.name}
+              width={48}
+              height={48}
+              className="rounded-full object-cover w-12 h-12"
+              data-ai-hint={character.aiHint}
+            />
+            <div className="ml-4">
+              <h2 className="font-headline text-xl text-primary">{character.name}</h2>
+              <p className="text-sm text-muted-foreground">{locale === 'pt' ? character.field_pt : character.field}</p>
+            </div>
           </div>
+          {messages.length > 0 && (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label={t.clearChat}>
+                  <Trash2 className="h-5 w-5 text-muted-foreground" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{t.areYouSure}</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {t.clearChatConfirmation}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{t.cancel}</AlertDialogCancel>
+                  <AlertDialogAction onClick={onClearChat}>
+                    {t.clear}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
         </div>
         
         <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
