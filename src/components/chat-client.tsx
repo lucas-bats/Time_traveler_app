@@ -37,40 +37,40 @@ export function ChatClient({ figureId }: ChatClientProps) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-
+  
     const userMessageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: userMessageContent,
     };
-
+  
     const newMessages = [...messages, userMessage];
     setMessages(newMessages);
     setInput("");
     setIsLoading(true);
-
+  
     try {
       const result = await getAiResponse({
         historicalFigure: character!.name,
         userMessage: userMessageContent,
         language: locale,
       });
-
+  
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, we don't modify messages, so user's message stays
+        // On error, remove the user's message from the UI
+        setMessages(messages);
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Add AI message to the state, based on the `newMessages` array
         setMessages([...newMessages, aiMessage]);
       }
     } catch (error) {
@@ -80,7 +80,8 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-       // On error, we don't modify messages, so user's message stays
+      // On error, remove the user's message from the UI
+      setMessages(messages);
     } finally {
       setIsLoading(false);
     }
@@ -108,15 +109,17 @@ export function ChatClient({ figureId }: ChatClientProps) {
   }
 
   return (
-    <ChatArea
-      character={character}
-      messages={messages}
-      messageCount={messages.length}
-      input={input}
-      isLoading={isLoading}
-      onInputChange={setInput}
-      onFormSubmit={handleSubmit}
-      onToggleFavorite={handleToggleFavorite}
-    />
+    <div className="flex-1 flex flex-col min-h-0">
+      <ChatArea
+        character={character}
+        messages={messages}
+        messageCount={messages.length}
+        input={input}
+        isLoading={isLoading}
+        onInputChange={setInput}
+        onFormSubmit={handleSubmit}
+        onToggleFavorite={handleToggleFavorite}
+      />
+    </div>
   );
 }

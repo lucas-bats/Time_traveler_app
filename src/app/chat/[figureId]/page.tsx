@@ -13,7 +13,9 @@ export default function ChatPage() {
     <div className="flex flex-col h-screen h-dvh">
       <SiteHeader />
       {figureId ? (
-        <ChatClient figureId={figureId} />
+        <div className="flex-1 flex flex-col min-h-0">
+          <ChatClient figureId={figureId} />
+        </div>
       ) : (
         <div className="flex-1 flex items-center justify-center">
             <p>Loading character...</p>
