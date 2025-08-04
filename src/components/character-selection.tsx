@@ -12,17 +12,45 @@ interface CharacterSelectionProps {
   characters: Character[];
 }
 
+const eraOrder = ["Antiquity", "Medieval", "Renaissance", "Modern", "Contemporary"];
+const eraOrderPt = ["Antiguidade", "Medieval", "Renascentista", "Moderna", "Contemporânea"];
+
+const timeframes = {
+  en: {
+    "Antiquity": " (Before 476)",
+    "Medieval": " (476 - 1450)",
+    "Renaissance": " (1450 - 1650)",
+    "Modern": " (1650 - 1945)",
+    "Contemporary": " (1945 - Present)",
+  },
+  pt: {
+    "Antiguidade": " (Antes de 476)",
+    "Medieval": " (476 - 1450)",
+    "Renascentista": " (1450 - 1650)",
+    "Moderna": " (1650 - 1945)",
+    "Contemporânea": " (1945 - Presente)",
+  }
+};
+
 export function CharacterSelection({ characters }: CharacterSelectionProps) {
   const { t, locale } = useLocale();
   const [era, setEra] = useState("all");
   const [field, setField] = useState("all");
 
-  const eras = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.era_pt : c.era)))], [characters, locale]);
-  const fields = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.field_pt : c.field) ))], [characters, locale]);
+  const eras = useMemo(() => {
+    const uniqueEras = [...new Set(characters.map((c) => (locale === 'pt' ? c.era_pt : c.era)))];
+    const order = locale === 'pt' ? eraOrderPt : eraOrder;
+    uniqueEras.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+    return ["all", ...uniqueEras];
+  }, [characters, locale]);
+
+  const fields = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.field_pt : c.field) ))].sort((a,b) => a.localeCompare(b)), [characters, locale]);
   
-  const getOriginalEra = (translatedEra: string) => {
-    if (translatedEra === 'all') return 'all';
-    const character = characters.find(c => c.era_pt === translatedEra || c.era === translatedEra);
+  const getOriginalEra = (eraWithTimeframe: string) => {
+    if (eraWithTimeframe === 'all') return 'all';
+    // Remove timeframe for matching
+    const baseEra = eraWithTimeframe.split(" (")[0];
+    const character = characters.find(c => c.era_pt === baseEra || c.era === baseEra);
     return character ? character.era : 'all';
   }
 
@@ -42,6 +70,12 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
     });
   }, [characters, era, field, locale]);
 
+  const getDisplayName = (e: string) => {
+    if (e === 'all') return t.allEras;
+    const timeframe = locale === 'pt' ? timeframes.pt[e as keyof typeof timeframes.pt] : timeframes.en[e as keyof typeof timeframes.en];
+    return `${e}${timeframe || ''}`;
+  }
+
   return (
     <section className="w-full py-8 md:py-16">
       <div className="container px-4 md:px-6">
@@ -56,7 +90,7 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
                   onClick={() => setEra(e)}
                   className={cn("capitalize rounded-full px-4 py-1 h-auto text-sm", era === e && "bg-primary text-primary-foreground")}
                 >
-                  {e === 'all' ? t.allEras : e}
+                  {getDisplayName(e)}
                 </Button>
               ))}
             </div>
