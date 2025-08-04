@@ -36,7 +36,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || !character) return;
   
     const userMessageContent = input.trim();
     const userMessage: Message = {
@@ -45,15 +45,15 @@ export function ChatClient({ figureId }: ChatClientProps) {
       content: userMessageContent,
     };
   
-    // Add user message to state immediately
-    setMessages(prev => [...prev, userMessage]);
-    
+    // Add user message to state and clear input
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
   
     try {
       const result = await getAiResponse({
-        historicalFigure: character!.name,
+        historicalFigure: character.name,
         userMessage: userMessageContent,
         language: locale,
       });
@@ -65,15 +65,15 @@ export function ChatClient({ figureId }: ChatClientProps) {
           description: result.error || t.somethingWentWrong,
         });
         // On error, remove the user message that was optimistically added
-        setMessages(prev => prev.slice(0, prev.length -1));
+        setMessages(messages);
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Add AI message to state
-        setMessages(prev => [...prev, aiMessage]);
+        // Add AI message to the already updated state
+        setMessages([...updatedMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -83,7 +83,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
         description: errorMessage,
       });
       // On error, remove the user message that was optimistically added
-      setMessages(prev => prev.slice(0, prev.length -1));
+      setMessages(messages);
     } finally {
       setIsLoading(false);
     }
