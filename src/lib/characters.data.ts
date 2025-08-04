@@ -243,7 +243,7 @@ export const charactersData: Character[] = [
     "name": "Winston Churchill",
     "description": "A British statesman, army officer, and writer. He was Prime Minister of the United Kingdom from 1940 to 1945, during the Second World War, and again from 1951 to 1955.",
     "description_pt": "Um estadista, oficial do exército e escritor britânico. Ele foi Primeiro-Ministro do Reino Unido de 1940 a 1945, durante a Segunda Guerra Mundial, and novamente de 1951 a 1955.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250804_1105_Renaissance%20Churchill%20Portrait_simple_compose_01k1tpb2r8fv4az4br2n6qryq3.png?alt=media&token=9d58b478-2607-4643-8155-c150d6ed1e2b",
     "aiHint": "Winston Churchill",
     "era": "Modern",
     "era_pt": "Moderna",
