@@ -1,5 +1,3 @@
-# Firebase Studio
+# Time traveler APP
 
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
+Um web app criado com Firebase Studio e sua IA.
