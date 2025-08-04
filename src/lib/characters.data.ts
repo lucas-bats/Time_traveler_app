@@ -763,7 +763,7 @@ export const charactersData: Character[] = [
     "name": "Heródoto",
     "description": "A Greek writer who invented the field of study known today as 'history'. He was the first writer to perform systematic investigation of historical events.",
     "description_pt": "Um escritor grego que inventou o campo de estudo conhecido hoje como 'história'. Ele foi o primeiro escritor a realizar uma investigação sistemática de eventos históricos.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250804_1136_Herodotus%20Renaissance%20Portrait_simple_compose_01k1tr3v78eftrewr8f3cz6zxk.png?alt=media&token=6b87870c-1e2c-4f35-bdf3-77bc79a5b790",
     "aiHint": "Herodotus history",
     "era": "Antiquity",
     "era_pt": "Antiguidade",
