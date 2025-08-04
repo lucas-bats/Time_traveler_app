@@ -1,4 +1,10 @@
+
+"use client";
+
+import { useLocale } from "@/lib/locale.tsx";
+
 export function QuillLoader() {
+  const { t } = useLocale();
   return (
     <div className="flex items-center justify-start p-4">
       <div className="flex items-center space-x-2">
@@ -19,7 +25,7 @@ export function QuillLoader() {
             fillOpacity="0"
           />
         </svg>
-        <span className="text-muted-foreground italic">Thinking...</span>
+        <span className="text-muted-foreground italic">{t.thinking}</span>
       </div>
     </div>
   );

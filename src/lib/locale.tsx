@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -30,6 +31,7 @@ const translations = {
     somethingWentWrong: 'Something went wrong.',
     copiedToClipboard: 'Copied to clipboard!',
     messageCopied: 'The message has been copied.',
+    thinking: 'Thinking...',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -55,6 +57,7 @@ const translations = {
     somethingWentWrong: 'Algo deu errado.',
     copiedToClipboard: 'Copiado para a área de transferência!',
     messageCopied: 'A mensagem foi copiada.',
+    thinking: 'Pensando...',
   }
 };
 
