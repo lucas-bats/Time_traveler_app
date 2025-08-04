@@ -4,9 +4,14 @@
 import { useState, useMemo } from "react";
 import type { Character } from "@/lib/characters";
 import { CharacterCard } from "./character-card";
-import { Button } from "@/components/ui/button";
 import { useLocale } from "@/lib/locale";
-import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface CharacterSelectionProps {
   characters: Character[];
@@ -48,7 +53,6 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   
   const getOriginalEra = (eraWithTimeframe: string) => {
     if (eraWithTimeframe === 'all') return 'all';
-    // Remove timeframe for matching
     const baseEra = eraWithTimeframe.split(" (")[0];
     const character = characters.find(c => c.era_pt === baseEra || c.era === baseEra);
     return character ? character.era : 'all';
@@ -79,36 +83,36 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   return (
     <section className="w-full py-8 md:py-16">
       <div className="container px-4 md:px-6">
-        <div className="mb-8 flex flex-col gap-6">
-          <div className="flex flex-col items-center gap-3">
-            <h3 className="text-lg font-semibold text-primary">{t.filterByEra}</h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              {eras.map((e) => (
-                <Button
-                  key={e}
-                  variant={era === e ? "default" : "outline"}
-                  onClick={() => setEra(e)}
-                  className={cn("capitalize rounded-full px-4 py-1 h-auto text-sm", era === e && "bg-primary text-primary-foreground")}
-                >
-                  {getDisplayName(e)}
-                </Button>
-              ))}
-            </div>
+        <div className="mb-8 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
+          <div className="flex flex-col items-start gap-2 w-full md:w-auto">
+            <label htmlFor="era-filter" className="text-sm font-semibold text-primary">{t.filterByEra}</label>
+            <Select value={era} onValueChange={setEra}>
+              <SelectTrigger id="era-filter" className="w-full md:w-[280px]">
+                <SelectValue placeholder={t.allEras} />
+              </SelectTrigger>
+              <SelectContent>
+                {eras.map((e) => (
+                  <SelectItem key={e} value={e}>
+                    {getDisplayName(e)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <h3 className="text-lg font-semibold text-primary">{t.filterByField}</h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              {fields.map((f) => (
-                 <Button
-                    key={f}
-                    variant={field === f ? "default" : "outline"}
-                    onClick={() => setField(f)}
-                    className={cn("capitalize rounded-full px-4 py-1 h-auto text-sm", field === f && "bg-primary text-primary-foreground")}
-                >
-                  {f === 'all' ? t.allFields : f}
-                </Button>
-              ))}
-            </div>
+          <div className="flex flex-col items-start gap-2 w-full md:w-auto">
+            <label htmlFor="field-filter" className="text-sm font-semibold text-primary">{t.filterByField}</label>
+            <Select value={field} onValueChange={setField}>
+              <SelectTrigger id="field-filter" className="w-full md:w-[240px]">
+                <SelectValue placeholder={t.allFields} />
+              </SelectTrigger>
+              <SelectContent>
+                {fields.map((f) => (
+                   <SelectItem key={f} value={f}>
+                    {f === 'all' ? t.allFields : f}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
