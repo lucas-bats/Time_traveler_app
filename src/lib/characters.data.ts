@@ -685,7 +685,7 @@ export const charactersData: Character[] = [
     "name": "Hipócrates",
     "description": "A Greek physician of the Age of Pericles, who is considered one of the most outstanding figures in the history of medicine. He is often referred to as the 'Father of Medicine'.",
     "description_pt": "Um médico grego da Idade de Péricles, considerado uma das figuras mais proeminentes da história da medicina. Ele é frequentemente referido como o 'Pai da Medicina'.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250804_1140_Renaissance%20Hippocrates%20Portrait_simple_compose_01k1trbr0hfsr81jnka2h3erhr.png?alt=media&token=ee185cd5-e935-4a42-ad7d-862419c434cb",
     "aiHint": "Hippocrates medicine",
     "era": "Antiquity",
     "era_pt": "Antiguidade",
