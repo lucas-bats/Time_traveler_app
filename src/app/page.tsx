@@ -38,7 +38,7 @@ export default function Home() {
         </DropdownMenu>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-16">
+        <section className="w-full pt-12 pb-6 md:pt-16 md:pb-8">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-primary">
