@@ -308,7 +308,7 @@ export const charactersData: Character[] = [
     "name": "Toni Morrison",
     "description": "An American novelist. Her first novel, The Bluest Eye, was published in 1970. The critically acclaimed Song of Solomon (1977) brought her national attention and won the National Book Critics Circle Award.",
     "description_pt": "Uma romancista americana. Seu primeiro romance, O Olho Mais Azul, foi publicado em 1970. A aclamada Canção de Salomão (1977) a trouxe à atenção nacional e ganhou o Prêmio do Círculo Nacional de Críticos de Livros.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250804_1111_Renaissance%20Toni%20Morrison%20Portrait_simple_compose_01k1tpqkppfvj9q1we38c0smf4.png?alt=media&token=587f7a24-df48-4784-93d5-af6b842132ef",
     "aiHint": "Toni Morrison",
     "era": "Modern",
     "era_pt": "Moderna",
