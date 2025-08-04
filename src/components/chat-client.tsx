@@ -63,8 +63,8 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, remove the user's message from the UI
-        setMessages(messages);
+        // On error, we don't want to add an empty AI message
+        setMessages(newMessages); 
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -80,8 +80,8 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // On error, remove the user's message from the UI
-      setMessages(messages);
+      // On error, we don't want to add an empty AI message
+      setMessages(newMessages);
     } finally {
       setIsLoading(false);
     }

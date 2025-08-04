@@ -54,7 +54,7 @@ export function ChatArea({
   }, [messageCount]);
   
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0">
+    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm">
         <div className="flex items-center p-4 border-b">
           <Image
