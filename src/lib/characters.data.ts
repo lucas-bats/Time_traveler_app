@@ -659,7 +659,7 @@ export const charactersData: Character[] = [
     "name": "Arquimedes",
     "description": "A Greek mathematician, physicist, engineer, inventor, and astronomer. He is regarded as one of the leading scientists in classical antiquity.",
     "description_pt": "Um matemático, físico, engenheiro, inventor e astrônomo grego. Ele é considerado um dos principais cientistas da antiguidade clássica.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2F20250804_1128_Archimedes%20Renaissance%20Portrait_simple_compose_01k1tqnmkrf1fv4bfq6n52x9e4.png?alt=media&token=bd232410-d2d6-4c37-a8ca-e2d2023ee047",
     "aiHint": "Archimedes scientist",
     "era": "Antiquity",
     "era_pt": "Antiguidade",
