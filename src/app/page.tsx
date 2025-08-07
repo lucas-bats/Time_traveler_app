@@ -61,6 +61,9 @@ export default function Home() {
                 <Shuffle className="mr-2 h-5 w-5" />
                 {t.surpriseMe}
               </Button>
+               <p className="text-sm text-muted-foreground">
+                {t.surpriseMeDescription}
+              </p>
             </div>
           </div>
         </section>

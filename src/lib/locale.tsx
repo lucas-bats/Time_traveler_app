@@ -38,6 +38,7 @@ const translations = {
     cancel: 'Cancel',
     clear: 'Clear',
     surpriseMe: 'Surprise Me',
+    surpriseMeDescription: 'Click to chat with a random historical figure.',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -70,6 +71,7 @@ const translations = {
     cancel: 'Cancelar',
     clear: 'Limpar',
     surpriseMe: 'Surpreenda-me',
+    surpriseMeDescription: 'Clique para conversar com uma figura histórica aleatória.',
   }
 };
 
