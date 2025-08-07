@@ -34,25 +34,25 @@ export function ChatClient({ figureId }: ChatClientProps) {
     setLoadingCharacter(false);
   }, [figureId]);
 
-  const handleSendMessage = async (messageContent: string) => {
-    if (!messageContent.trim() || isLoading || !character) return;
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading || !character) return;
   
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: messageContent,
+      content: input,
     };
   
-    // Add user message to state and clear input
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput("");
     setIsLoading(true);
   
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
-        userMessage: messageContent,
+        userMessage: input,
         language: locale,
       });
   
@@ -62,16 +62,14 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        // On error, remove the user message that was optimistically added
-        setMessages(messages);
+        setMessages(messages); // Revert optimistic update
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Add AI message to the already updated state
-        setMessages((currentMessages) => [...currentMessages, aiMessage]);
+        setMessages([...newMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -80,20 +78,10 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // On error, remove the user message that was optimistically added
-      setMessages(messages);
+       setMessages(messages); // Revert optimistic update
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    handleSendMessage(input);
-  };
-  
-  const handleSuggestionClick = (suggestion: string) => {
-    handleSendMessage(suggestion);
   };
 
   const handleToggleFavorite = (messageId: string) => {
@@ -131,7 +119,6 @@ export function ChatClient({ figureId }: ChatClientProps) {
         isLoading={isLoading}
         onInputChange={setInput}
         onFormSubmit={handleSubmit}
-        onSuggestionClick={handleSuggestionClick}
         onToggleFavorite={handleToggleFavorite}
         onClearChat={handleClearChat}
       />
