@@ -34,15 +34,13 @@ export function ChatClient({ figureId }: ChatClientProps) {
     setLoadingCharacter(false);
   }, [figureId]);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading || !character) return;
+  const handleSendMessage = async (messageContent: string) => {
+    if (!messageContent.trim() || isLoading || !character) return;
   
-    const userMessageContent = input.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: userMessageContent,
+      content: messageContent,
     };
   
     // Add user message to state and clear input
@@ -54,7 +52,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
-        userMessage: userMessageContent,
+        userMessage: messageContent,
         language: locale,
       });
   
@@ -73,7 +71,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
           content: result.response,
         };
         // Add AI message to the already updated state
-        setMessages([...updatedMessages, aiMessage]);
+        setMessages((currentMessages) => [...currentMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -87,6 +85,15 @@ export function ChatClient({ figureId }: ChatClientProps) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    handleSendMessage(input);
+  };
+  
+  const handleSuggestionClick = (suggestion: string) => {
+    handleSendMessage(suggestion);
   };
 
   const handleToggleFavorite = (messageId: string) => {
@@ -124,6 +131,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
         isLoading={isLoading}
         onInputChange={setInput}
         onFormSubmit={handleSubmit}
+        onSuggestionClick={handleSuggestionClick}
         onToggleFavorite={handleToggleFavorite}
         onClearChat={handleClearChat}
       />

@@ -6,7 +6,7 @@ import type { Character } from "@/lib/characters";
 import { MessageBubble } from "./message-bubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Send, Trash2 } from "lucide-react";
+import { Send, Trash2, Book, User } from "lucide-react";
 import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -39,6 +39,7 @@ interface ChatAreaProps {
   isLoading: boolean;
   onInputChange: (input: string) => void;
   onFormSubmit: (e: FormEvent) => Promise<void>;
+  onSuggestionClick: (suggestion: string) => void;
   onToggleFavorite: (messageId: string) => void;
   onClearChat: () => void;
 }
@@ -51,6 +52,7 @@ export function ChatArea({
   isLoading,
   onInputChange,
   onFormSubmit,
+  onSuggestionClick,
   onToggleFavorite,
   onClearChat,
 }: ChatAreaProps) {
@@ -110,6 +112,24 @@ export function ChatArea({
         </div>
         
         <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
+            {messages.length === 0 && !isLoading && (
+              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold text-primary mb-2">{t.conversationStarters}</h3>
+                  <p className="text-sm">{t.conversationStartersSubtitle}</p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md">
+                   <Button variant="outline" className="h-auto py-3" onClick={() => onSuggestionClick(t.tellMeAboutYourLife)}>
+                    <User className="mr-2 h-4 w-4" />
+                    <span>{t.tellMeAboutYourLife}</span>
+                  </Button>
+                   <Button variant="outline" className="h-auto py-3" onClick={() => onSuggestionClick(t.tellMeAboutYourWork)}>
+                    <Book className="mr-2 h-4 w-4" />
+                    <span>{t.tellMeAboutYourWork}</span>
+                  </Button>
+                </div>
+              </div>
+            )}
           <div className="space-y-4">
             {messages.map((message) => (
               <MessageBubble
