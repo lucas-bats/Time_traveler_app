@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent, useCallback } from "react";
 import { notFound } from "next/navigation";
 import { getCharacterById, type Character } from "@/lib/characters";
 import { ChatArea, type Message } from "@/components/chat-area";
@@ -34,25 +34,24 @@ export function ChatClient({ figureId }: ChatClientProps) {
     setLoadingCharacter(false);
   }, [figureId]);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading || !character) return;
+  const handleSendMessage = useCallback(async (messageContent: string) => {
+    if (!messageContent.trim() || isLoading || !character) return;
   
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: input,
+      content: messageContent,
     };
   
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
-    setInput("");
+    // Use functional update to ensure we have the latest state
+    setMessages(prevMessages => [...prevMessages, userMessage]);
+    
     setIsLoading(true);
   
     try {
       const result = await getAiResponse({
         historicalFigure: character.name,
-        userMessage: input,
+        userMessage: messageContent,
         language: locale,
       });
   
@@ -62,14 +61,16 @@ export function ChatClient({ figureId }: ChatClientProps) {
           title: t.error,
           description: result.error || t.somethingWentWrong,
         });
-        setMessages(messages); // Revert optimistic update
+        // Revert optimistic update on error
+        setMessages(prevMessages => prevMessages.filter(msg => msg.id !== userMessage.id));
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        setMessages([...newMessages, aiMessage]);
+        // Use functional update to add AI message
+        setMessages(prevMessages => [...prevMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -78,10 +79,21 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-       setMessages(messages); // Revert optimistic update
+      // Revert optimistic update on error
+       setMessages(prevMessages => prevMessages.filter(msg => msg.id !== userMessage.id));
     } finally {
       setIsLoading(false);
     }
+  }, [character, isLoading, locale, setMessages, t, toast]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await handleSendMessage(input);
+    setInput("");
+  };
+  
+  const handleSuggestionClick = async (suggestion: string) => {
+    await handleSendMessage(suggestion);
   };
 
   const handleToggleFavorite = (messageId: string) => {
@@ -121,6 +133,7 @@ export function ChatClient({ figureId }: ChatClientProps) {
         onFormSubmit={handleSubmit}
         onToggleFavorite={handleToggleFavorite}
         onClearChat={handleClearChat}
+        onSuggestionClick={handleSuggestionClick}
       />
     </div>
   );

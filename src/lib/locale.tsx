@@ -39,6 +39,8 @@ const translations = {
     clear: 'Clear',
     surpriseMe: 'Surprise Me',
     surpriseMeDescription: 'Click to chat with a random historical figure.',
+    tellMeAboutYourLife: 'Tell me about your life',
+    tellMeAboutYourWork: 'Tell me about your work',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -72,6 +74,8 @@ const translations = {
     clear: 'Limpar',
     surpriseMe: 'Surpreenda-me',
     surpriseMeDescription: 'Clique para conversar com uma figura histórica aleatória.',
+    tellMeAboutYourLife: 'Conte-me sobre sua vida',
+    tellMeAboutYourWork: 'Conte-me sobre sua obra',
   }
 };
 

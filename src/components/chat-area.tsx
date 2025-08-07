@@ -41,6 +41,7 @@ interface ChatAreaProps {
   onFormSubmit: (e: FormEvent) => void;
   onToggleFavorite: (messageId: string) => void;
   onClearChat: () => void;
+  onSuggestionClick: (suggestion: string) => void;
 }
 
 export function ChatArea({
@@ -53,9 +54,12 @@ export function ChatArea({
   onFormSubmit,
   onToggleFavorite,
   onClearChat,
+  onSuggestionClick,
 }: ChatAreaProps) {
   const { t, locale } = useLocale();
   const scrollViewportRef = useRef<HTMLDivElement>(null);
+  
+  const suggestions = [t.tellMeAboutYourLife, t.tellMeAboutYourWork];
 
   useEffect(() => {
     if (scrollViewportRef.current) {
@@ -112,7 +116,14 @@ export function ChatArea({
         <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
             {messages.length === 0 && !isLoading && (
                <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                  <p>{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
+                  <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    {suggestions.map((suggestion, i) => (
+                      <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
+                        "{suggestion}"
+                      </Button>
+                    ))}
+                  </div>
               </div>
             )}
           <div className="space-y-4">
