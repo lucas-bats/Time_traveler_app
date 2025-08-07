@@ -11,11 +11,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Languages } from "lucide-react";
+import { Languages, Shuffle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const characters = getCharacters();
   const { t, setLocale } = useLocale();
+  const router = useRouter();
+
+  const handleRandomCharacter = () => {
+    if (characters.length > 0) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      const randomCharacter = characters[randomIndex];
+      router.push(`/chat/${randomCharacter.id}`);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -47,6 +57,10 @@ export default function Home() {
               <p className="max-w-[700px] text-muted-foreground md:text-xl">
                 {t.subtitle}
               </p>
+               <Button onClick={handleRandomCharacter} size="lg" className="mt-4">
+                <Shuffle className="mr-2 h-5 w-5" />
+                {t.surpriseMe}
+              </Button>
             </div>
           </div>
         </section>

@@ -37,6 +37,7 @@ const translations = {
     clearChatConfirmation: 'This will permanently delete the chat history. This action cannot be undone.',
     cancel: 'Cancel',
     clear: 'Clear',
+    surpriseMe: 'Surprise Me',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -68,6 +69,7 @@ const translations = {
     clearChatConfirmation: 'Isso excluirá permanentemente o histórico do chat. Esta ação não pode ser desfeita.',
     cancel: 'Cancelar',
     clear: 'Limpar',
+    surpriseMe: 'Surpreenda-me',
   }
 };
 
