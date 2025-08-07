@@ -43,9 +43,8 @@ export function ChatClient({ figureId }: ChatClientProps) {
       content: messageContent,
     };
   
-    // Use functional update to ensure we have the latest state
-    setMessages(prevMessages => [...prevMessages, userMessage]);
-    
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setIsLoading(true);
   
     try {
@@ -62,15 +61,14 @@ export function ChatClient({ figureId }: ChatClientProps) {
           description: result.error || t.somethingWentWrong,
         });
         // Revert optimistic update on error
-        setMessages(prevMessages => prevMessages.filter(msg => msg.id !== userMessage.id));
+        setMessages(messages);
       } else {
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Use functional update to add AI message
-        setMessages(prevMessages => [...prevMessages, aiMessage]);
+        setMessages([...newMessages, aiMessage]);
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -80,11 +78,11 @@ export function ChatClient({ figureId }: ChatClientProps) {
         description: errorMessage,
       });
       // Revert optimistic update on error
-       setMessages(prevMessages => prevMessages.filter(msg => msg.id !== userMessage.id));
+       setMessages(messages);
     } finally {
       setIsLoading(false);
     }
-  }, [character, isLoading, locale, setMessages, t, toast]);
+  }, [character, isLoading, locale, messages, setMessages, t, toast]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -93,7 +91,9 @@ export function ChatClient({ figureId }: ChatClientProps) {
   };
   
   const handleSuggestionClick = async (suggestion: string) => {
+    setInput(suggestion);
     await handleSendMessage(suggestion);
+    setInput("");
   };
 
   const handleToggleFavorite = (messageId: string) => {
