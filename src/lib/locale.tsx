@@ -1,11 +1,15 @@
-
+// Define que este é um "Client Component".
 "use client";
 
+// Importa hooks e tipos do React.
 import React, { createContext, useContext, useState, useEffect } from 'react';
+// Importa o hook personalizado para interagir com o localStorage.
 import useLocalStorage from '@/hooks/use-local-storage';
 
+// Define os tipos de locale (idiomas) suportados.
 type Locale = 'en' | 'pt';
 
+// Objeto que contém todas as strings de tradução para cada idioma.
 const translations = {
   en: {
     title: 'Time Traveler Talks',
@@ -79,35 +83,49 @@ const translations = {
   }
 };
 
+// Define o tipo para o valor do contexto de localização.
 type LocaleContextType = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: typeof translations.en;
+  t: typeof translations.en; // 't' terá a forma de um dos objetos de tradução.
 };
 
+// Cria o contexto de localização.
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
+/**
+ * Provedor de Contexto para Localização.
+ * Envolve a aplicação e fornece o estado do idioma e as funções de tradução
+ * para todos os componentes filhos.
+ */
 export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
+  // Usa o hook de localStorage para persistir a seleção de idioma.
   const [storedLocale, setStoredLocale] = useLocalStorage<Locale>('locale', 'en');
+  // Estado para saber se o componente está sendo renderizado no cliente.
   const [isClient, setIsClient] = useState(false);
 
+  // Garante que o código a seguir execute apenas no cliente.
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Determina o locale a ser usado, evitando problemas de hidratação.
   const locale = isClient ? storedLocale : 'en';
   
+  // Função para atualizar o idioma.
   const handleSetLocale = (newLocale: Locale) => {
     setStoredLocale(newLocale);
   };
   
+  // Seleciona o objeto de tradução correto com base no locale atual.
   const t = translations[locale];
 
+  // O valor que será fornecido pelo contexto.
   const value = { locale: storedLocale, setLocale: handleSetLocale, t };
 
+  // Na renderização do servidor (SSR), renderiza um provedor com valores padrão
+  // para evitar o erro de "hydration mismatch".
   if (!isClient) {
-    // Render a placeholder or nothing on the server to avoid mismatch
-    // Or render with default locale
     const defaultT = translations['en'];
     return (
       <LocaleContext.Provider value={{ locale: 'en', setLocale: () => {}, t: defaultT }}>
@@ -116,6 +134,7 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
+  // No cliente, renderiza o provedor com o valor correto.
   return (
     <LocaleContext.Provider value={value}>
       {children}
@@ -123,6 +142,10 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+/**
+ * Hook personalizado para consumir o contexto de localização.
+ * Facilita o acesso ao idioma atual e às traduções nos componentes.
+ */
 export const useLocale = () => {
   const context = useContext(LocaleContext);
   if (context === undefined) {

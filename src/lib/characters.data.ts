@@ -1,8 +1,12 @@
-
+// Importa o tipo Character para garantir a consistência dos dados.
 import type { Character } from "./characters";
 
-// NOTA: Substitua os URLs de imagem de placeholder por seus URLs reais do Firebase Storage.
-// Você pode obter o URL de acesso clicando no arquivo no Console do Firebase.
+/**
+ * @fileOverview Este arquivo contém o array de dados brutos para todas as
+ * figuras históricas disponíveis na aplicação. Cada objeto representa um
+ * personagem e inclui seu ID, nome, descrições em inglês e português,
+ * URL da imagem, e metadados para filtragem como era, campo e país.
+ */
 export const charactersData: Character[] = [
   {
     "id": "cleopatra",
