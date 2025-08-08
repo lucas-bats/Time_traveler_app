@@ -17,10 +17,12 @@ import {
 // Importa o componente de botão.
 import { Button } from "@/components/ui/button";
 // Importa ícones da biblioteca lucide-react.
-import { Languages, Shuffle } from "lucide-react";
+import { Languages, Shuffle, Heart } from "lucide-react";
 // Importa o hook useRouter do Next.js para navegação.
 import { useRouter } from "next/navigation";
 import { DonationSection } from "@/components/donation-section";
+import Link from "next/link";
+
 
 /**
  * Componente da página inicial (Home).
@@ -78,13 +80,22 @@ export default function Home() {
               <p className="max-w-[700px] text-muted-foreground md:text-xl">
                 {t.subtitle}
               </p>
-              {/* Botão para selecionar um personagem aleatório. */}
-              <Button onClick={handleRandomCharacter} size="lg" className="mt-4">
-                <Shuffle className="mr-2 h-5 w-5" />
-                {t.surpriseMe}
-              </Button>
+              <div className="flex flex-wrap justify-center gap-4 mt-4">
+                {/* Botão para selecionar um personagem aleatório. */}
+                <Button onClick={handleRandomCharacter} size="lg">
+                  <Shuffle className="mr-2 h-5 w-5" />
+                  {t.surpriseMe}
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/#donation-section">
+                     <Heart className="mr-2 h-5 w-5 text-destructive" />
+                     {t.supportTheProject}
+                  </Link>
+                </Button>
+              </div>
+
               {/* Descrição do botão "Surpreenda-me". */}
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mt-2">
                 {t.surpriseMeDescription}
               </p>
             </div>
