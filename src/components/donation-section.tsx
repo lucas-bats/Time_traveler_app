@@ -5,18 +5,21 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useLocale } from "@/lib/locale.tsx";
-import { Heart } from "lucide-react";
+import { Heart, CreditCard } from "lucide-react";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
+import { Separator } from "./ui/separator";
 
 /**
- * Componente para exibir a seção de doação via PIX.
+ * Componente para exibir a seção de doação via PIX e PayPal.
  */
 export function DonationSection() {
   const { t } = useLocale();
   const { toast } = useToast();
   const pixKey = "06e37bed-6cbc-4901-97f1-c5b7f1e154b1"; // Chave PIX
+  const paypalEmail = "lucaspaesbatista@yahoo.com.br";
+  const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=${paypalEmail}&item_name=Donation+for+Time+Traveler+Talks&currency_code=BRL`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(pixKey);
@@ -62,6 +65,18 @@ export function DonationSection() {
                             <Copy className="h-4 w-4" />
                             <span className="sr-only">Copiar chave PIX</span>
                         </Button>
+                    </div>
+
+                    <Separator className="my-4" />
+
+                    <div className="flex flex-col items-center gap-2">
+                       <p className="text-sm text-muted-foreground">{t.orDonateWith}</p>
+                       <Button asChild className="w-full max-w-xs">
+                          <a href={paypalUrl} target="_blank" rel="noopener noreferrer">
+                              <CreditCard className="mr-2 h-4 w-4" />
+                              {t.donateWithPaypal}
+                          </a>
+                       </Button>
                     </div>
                 </CardContent>
             </Card>

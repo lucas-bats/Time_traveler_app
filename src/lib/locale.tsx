@@ -51,6 +51,8 @@ const translations = {
     scanQrCode: 'Scan the QR code with your banking app',
     orCopyKey: 'Or copy the key below',
     pixKeyCopied: 'The PIX key has been copied!',
+    orDonateWith: 'Or donate with',
+    donateWithPaypal: 'Donate with PayPal',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -92,6 +94,8 @@ const translations = {
     scanQrCode: 'Escaneie o QR code com seu aplicativo do banco',
     orCopyKey: 'Ou copie a chave abaixo',
     pixKeyCopied: 'A chave PIX foi copiada!',
+    orDonateWith: 'Ou doe com',
+    donateWithPaypal: 'Doar com PayPal',
   }
 };
 
