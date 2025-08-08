@@ -16,7 +16,7 @@ import { Copy } from "lucide-react";
 export function DonationSection() {
   const { t } = useLocale();
   const { toast } = useToast();
-  const pixKey = "4de0d6b1-9515-472c-995e-ce514db1303c"; // Chave PIX
+  const pixKey = "06e37bed-6cbc-4901-97f1-c5b7f1e154b1"; // Chave PIX
 
   const handleCopy = () => {
     navigator.clipboard.writeText(pixKey);
