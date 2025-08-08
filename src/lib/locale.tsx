@@ -45,6 +45,12 @@ const translations = {
     surpriseMeDescription: 'Click to chat with a random historical figure.',
     tellMeAboutYourLife: 'Tell me about your life',
     tellMeAboutYourWork: 'Tell me about your work',
+    supportTheProject: 'Support the Project',
+    supportTheProjectDescription: 'If you enjoy this application, consider making a donation to help cover the maintenance and development costs. Any amount is appreciated!',
+    donateWithPix: 'Donate with PIX',
+    scanQrCode: 'Scan the QR code with your banking app',
+    orCopyKey: 'Or copy the key below',
+    pixKeyCopied: 'The PIX key has been copied!',
   },
   pt: {
     title: 'Conversas com Viajantes do Tempo',
@@ -80,6 +86,12 @@ const translations = {
     surpriseMeDescription: 'Clique para conversar com uma figura histórica aleatória.',
     tellMeAboutYourLife: 'Conte-me sobre sua vida',
     tellMeAboutYourWork: 'Conte-me sobre sua obra',
+    supportTheProject: 'Apoie o Projeto',
+    supportTheProjectDescription: 'Se você gostou desta aplicação, considere fazer uma doação para ajudar a cobrir os custos de manutenção e desenvolvimento. Qualquer valor é bem-vindo!',
+    donateWithPix: 'Doe com PIX',
+    scanQrCode: 'Escaneie o QR code com seu aplicativo do banco',
+    orCopyKey: 'Ou copie a chave abaixo',
+    pixKeyCopied: 'A chave PIX foi copiada!',
   }
 };
 

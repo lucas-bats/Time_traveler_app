@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Languages, Shuffle } from "lucide-react";
 // Importa o hook useRouter do Next.js para navegação.
 import { useRouter } from "next/navigation";
+import { DonationSection } from "@/components/donation-section";
 
 /**
  * Componente da página inicial (Home).
@@ -91,6 +92,8 @@ export default function Home() {
         </section>
         {/* Componente que renderiza a lista de personagens filtrável. */}
         <CharacterSelection characters={characters} />
+        {/* Seção de Doação */}
+        <DonationSection />
       </main>
       {/* Rodapé da página. */}
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
