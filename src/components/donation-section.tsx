@@ -48,7 +48,7 @@ export function DonationSection() {
                 </CardHeader>
                 <CardContent className="flex flex-col items-center gap-4">
                     <Image
-                        src="https://placehold.co/250x250.png"
+                        src="https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/8f40ec9d-e457-4987-b792-c9d3dbd30b59.jpg?alt=media&token=c6ae6803-3306-433d-bd73-82b1f39e9284"
                         alt="PIX QR Code"
                         width={250}
                         height={250}
