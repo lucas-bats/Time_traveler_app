@@ -1,7 +1,7 @@
 // Importa componentes do Next.js e da UI.
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Home, Languages } from "lucide-react";
+import { Home, Languages, Heart } from "lucide-react";
 import { useLocale } from "@/lib/locale.tsx";
 import {
   DropdownMenu,
@@ -57,6 +57,13 @@ export function SiteHeader() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            {/* Botão de link para a seção de doação. */}
+            <Button variant="ghost" size="icon" asChild>
+                <Link href="/#donation-section">
+                    <Heart className="h-5 w-5 text-destructive" />
+                    <span className="sr-only">{t.supportTheProject}</span>
+                </Link>
+            </Button>
           </nav>
         </div>
       </div>
