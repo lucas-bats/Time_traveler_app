@@ -1,6 +1,6 @@
-# Time Traveler Talks
+# Eternal Minds
 
-Time Traveler Talks is an interactive web application that allows users to chat with historical figures, powered by generative AI. Choose a personality from a curated list, or let us surprise you, and start a conversation to learn about their life, work, and the times they lived in.
+Eternal Minds is an interactive web application that allows users to chat with historical figures, powered by generative AI. Choose a personality from a curated list, or let us surprise you, and start a conversation to learn about their life, work, and the times they lived in.
 
 This project was built using Firebase Studio.
 

@@ -12,7 +12,7 @@ type Locale = 'en' | 'pt';
 // Objeto que contém todas as strings de tradução para cada idioma.
 const translations = {
   en: {
-    title: 'Time Traveler Talks',
+    title: 'Eternal Minds',
     subtitle: 'Engage in enlightening conversations with iconic figures from the past. Who will you talk to first?',
     allRightsReserved: 'All rights reserved',
     searchPlaceholder: 'Search for a figure...',
@@ -55,7 +55,7 @@ const translations = {
     donateWithPaypal: 'Donate with PayPal',
   },
   pt: {
-    title: 'Conversas com Viajantes do Tempo',
+    title: 'Eternal Minds',
     subtitle: 'Participe de conversas esclarecedoras com figuras icônicas do passado. Com quem você vai falar primeiro?',
     allRightsReserved: 'Todos os direitos reservados',
     searchPlaceholder: 'Procure por uma figura...',

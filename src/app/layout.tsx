@@ -11,7 +11,7 @@ import { LocaleProvider } from "@/lib/locale.tsx";
 
 // Define os metadados da aplicação, como título e descrição, para SEO.
 export const metadata: Metadata = {
-  title: "Time Traveler Talks",
+  title: "Eternal Minds",
   description: "Chat with historical figures, powered by AI.",
 };
 

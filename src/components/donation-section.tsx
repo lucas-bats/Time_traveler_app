@@ -19,7 +19,7 @@ export function DonationSection() {
   const { toast } = useToast();
   const pixKey = "06e37bed-6cbc-4901-97f1-c5b7f1e154b1"; // Chave PIX
   const paypalEmail = "lucaspaesbatista@yahoo.com.br";
-  const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=${paypalEmail}&item_name=Donation+for+Time+Traveler+Talks&currency_code=BRL`;
+  const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=${paypalEmail}&item_name=Donation+for+Eternal+Minds&currency_code=BRL`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(pixKey);
