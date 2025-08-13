@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 /**
  * Componente do cabeçalho do site.
@@ -25,8 +26,15 @@ export function SiteHeader() {
       <div className="container flex h-16 items-center">
         {/* Contêiner principal que alinha os itens à esquerda. */}
         <div className="flex flex-1 items-center gap-2 md:gap-4">
-          {/* Link para a página inicial com o título do site. */}
+          {/* Link para a página inicial com o logo e título do site. */}
           <Link href="/" className="flex items-center space-x-2 mr-4">
+            <Image 
+              src="https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/20250813_1429_Timeless%20Wisdom%20Logo_simple_compose_01k2j7m0tafhqvhhfv2k43r466.png?alt=media&token=a89a742f-8ae5-482c-8a43-ce8890ad3d2d" 
+              alt="Eternal Minds Logo" 
+              width={32} 
+              height={32}
+              className="h-8 w-8"
+            />
             <span className="font-bold font-headline text-primary text-xl">
               {t.title}
             </span>
