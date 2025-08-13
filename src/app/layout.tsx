@@ -42,6 +42,18 @@ export default function RootLayout({
         {/* Script do Google AdSense */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372729948864720"
      crossOrigin="anonymous"></script>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CNMYM732N3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CNMYM732N3');
+            `,
+          }}
+        />
       </head>
       {/* Define a tag <body> com classes de estilo base. */}
       <body className={cn("font-body antialiased min-h-screen")}>
