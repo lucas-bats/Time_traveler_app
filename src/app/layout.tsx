@@ -39,6 +39,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
           rel="stylesheet"
         />
+        {/* Script do Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372729948864720"
+     crossOrigin="anonymous"></script>
       </head>
       {/* Define a tag <body> com classes de estilo base. */}
       <body className={cn("font-body antialiased min-h-screen")}>
