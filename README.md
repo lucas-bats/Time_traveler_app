@@ -16,6 +16,8 @@ This project is built with a modern, robust, and scalable technology stack:
 
 ## Getting Started
 
+Access the app: https://studio--time-traveler-talks.us-central1.hosted.app/
+
 To get the development environment running, follow these steps:
 
 ### Prerequisites
