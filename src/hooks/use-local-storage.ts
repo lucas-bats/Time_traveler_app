@@ -1,52 +1,52 @@
-// Define que este código deve ser executado no cliente.
+// Defines that this code should run on the client.
 "use client";
 
-// Importa hooks do React.
+// Imports React hooks.
 import { useState, useEffect, useCallback } from "react";
 
 /**
- * Um hook personalizado que funciona como `useState`, mas persiste o valor no `localStorage`.
- * Ele também sincroniza o estado entre abas/janelas abertas.
- * @param key A chave a ser usada no localStorage.
- * @param initialValue O valor inicial a ser usado se não houver nada no localStorage.
- * @returns Uma tupla contendo o valor armazenado e uma função para atualizá-lo.
+ * A custom hook that works like `useState`, but persists the value in `localStorage`.
+ * It also synchronizes the state between open tabs/windows.
+ * @param key The key to be used in localStorage.
+ * @param initialValue The initial value to be used if nothing is in localStorage.
+ * @returns A tuple containing the stored value and a function to update it.
  */
 export default function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void] {
-  // O estado que armazena nosso valor.
-  // A função passada para useState só é executada na primeira renderização.
+  // The state that stores our value.
+  // The function passed to useState is only executed on the first render.
   const [storedValue, setStoredValue] = useState<T>(() => {
-    // Se estiver no servidor (SSR), retorna o valor inicial.
+    // If on the server (SSR), return the initial value.
     if (typeof window === "undefined") {
       return initialValue;
     }
     try {
-      // Tenta obter o item do localStorage.
+      // Try to get the item from localStorage.
       const item = window.localStorage.getItem(key);
-      // Retorna o item parseado ou o valor inicial se não existir.
+      // Return the parsed item or the initial value if it doesn't exist.
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      // Em caso de erro, loga e retorna o valor inicial.
+      // In case of an error, log it and return the initial value.
       console.log(error);
       return initialValue;
     }
   });
 
-  // Uma versão "envelopada" do `setValue` do useState que também persiste no localStorage.
-  // useCallback é usado para memorizar a função e evitar recriações desnecessárias.
+  // A "wrapped" version of `setValue` from useState that also persists to localStorage.
+  // useCallback is used to memoize the function and avoid unnecessary re-creations.
   const setValue = useCallback((value: T | ((val: T) => T)) => {
     try {
-      // Permite que o valor seja uma função, como no `useState` original.
+      // Allows the value to be a function, just like in the original `useState`.
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;
-      // Atualiza o estado.
+      // Update the state.
       setStoredValue(valueToStore);
-      // Salva no localStorage.
+      // Save to localStorage.
       if (typeof window !== "undefined") {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        // Dispara um evento personalizado para notificar outras abas.
+        // Dispatch a custom event to notify other tabs.
         window.dispatchEvent(new Event("local-storage"));
       }
     } catch (error) {
@@ -55,16 +55,16 @@ export default function useLocalStorage<T>(
   }, [key, storedValue]);
 
 
-  // Efeito para ouvir mudanças no localStorage vindas de outras abas.
+  // Effect to listen for changes in localStorage from other tabs.
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent | CustomEvent) => {
-      // Se o evento é de 'storage', verifica se a chave é a que estamos observando.
+      // If the event is from 'storage', check if the key is the one we are observing.
       if ((e as StorageEvent).key && (e as StorageEvent).key !== key) {
         return;
       }
       
       try {
-        // Atualiza o estado com o novo valor do localStorage.
+        // Update the state with the new value from localStorage.
         const item = window.localStorage.getItem(key);
         setStoredValue(item ? JSON.parse(item) : initialValue);
       } catch (error) {
@@ -72,12 +72,12 @@ export default function useLocalStorage<T>(
       }
     };
 
-    // Adiciona o listener para o evento 'storage' (outras abas).
+    // Add listener for the 'storage' event (other tabs).
     window.addEventListener("storage", handleStorageChange);
-    // Adiciona o listener para nosso evento personalizado 'local-storage' (mesma aba).
+    // Add listener for our custom 'local-storage' event (same tab).
     window.addEventListener("local-storage", handleStorageChange);
 
-    // Função de limpeza: remove os listeners quando o componente é desmontado.
+    // Cleanup function: remove listeners when the component unmounts.
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("local-storage", handleStorageChange);

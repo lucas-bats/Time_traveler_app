@@ -1,20 +1,20 @@
-// Define que este é um código do lado do cliente.
+// Defines this as client-side code.
 "use client"
 
-// Inspirado na biblioteca react-hot-toast
+// Inspired by the react-hot-toast library
 import * as React from "react"
 
-// Importa tipos dos componentes de Toast.
+// Imports types from Toast components.
 import type {
   ToastActionElement,
   ToastProps,
 } from "@/components/ui/toast"
 
-// Constantes para controlar o comportamento do toast.
-const TOAST_LIMIT = 1 // Limite de toasts visíveis ao mesmo tempo.
-const TOAST_REMOVE_DELAY = 1000000 // Tempo para remover o toast do DOM após ser fechado.
+// Constants to control toast behavior.
+const TOAST_LIMIT = 1 // Limit of visible toasts at the same time.
+const TOAST_REMOVE_DELAY = 1000000 // Time to remove the toast from the DOM after it's closed.
 
-// Define o tipo de um toast gerenciado pelo hook.
+// Defines the type of a toast managed by the hook.
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
@@ -22,7 +22,7 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement
 }
 
-// Define os tipos de ações que o reducer pode manipular.
+// Defines the action types that the reducer can handle.
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
@@ -30,7 +30,7 @@ const actionTypes = {
   REMOVE_TOAST: "REMOVE_TOAST",
 } as const
 
-// Contador para gerar IDs únicos para os toasts.
+// Counter to generate unique IDs for toasts.
 let count = 0
 
 function genId() {
@@ -40,7 +40,7 @@ function genId() {
 
 type ActionType = typeof actionTypes
 
-// Define os tipos das ações.
+// Defines the action types.
 type Action =
   | {
       type: ActionType["ADD_TOAST"]
@@ -59,15 +59,15 @@ type Action =
       toastId?: ToasterToast["id"]
     }
 
-// Define a forma do estado global dos toasts.
+// Defines the shape of the global toast state.
 interface State {
   toasts: ToasterToast[]
 }
 
-// Mapa para armazenar os timeouts de remoção dos toasts.
+// Map to store removal timeouts for toasts.
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
-// Função que adiciona um toast à fila de remoção.
+// Function that adds a toast to the removal queue.
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
@@ -84,7 +84,7 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout)
 }
 
-// O reducer que gerencia o estado dos toasts.
+// The reducer that manages the toast state.
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -137,13 +137,13 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
-// Array de listeners para o padrão observer.
+// Array of listeners for the observer pattern.
 const listeners: Array<(state: State) => void> = []
 
-// O estado global armazenado em memória.
+// The global state stored in memory.
 let memoryState: State = { toasts: [] }
 
-// Função de dispatch que atualiza o estado e notifica os listeners.
+// Dispatch function that updates the state and notifies listeners.
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
   listeners.forEach((listener) => {
@@ -151,10 +151,10 @@ function dispatch(action: Action) {
   })
 }
 
-// Tipo para a criação de um novo toast.
+// Type for creating a new toast.
 type Toast = Omit<ToasterToast, "id">
 
-// Função para criar um novo toast.
+// Function to create a new toast.
 function toast({ ...props }: Toast) {
   const id = genId()
 
@@ -184,7 +184,7 @@ function toast({ ...props }: Toast) {
   }
 }
 
-// O hook personalizado que os componentes usarão para interagir com o sistema de toasts.
+// The custom hook that components will use to interact with the toast system.
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 

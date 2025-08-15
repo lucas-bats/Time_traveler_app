@@ -1,16 +1,16 @@
-// Define que este arquivo executa apenas no servidor, nunca no lado do cliente.
+// Defines that this file runs only on the server, never on the client-side.
 "use server";
 
-// Importa a função do fluxo de IA e seu tipo de entrada.
+// Import the AI flow function and its input type.
 import {
   chatWithHistoricalFigure,
   type ChatWithHistoricalFigureInput,
 } from "@/ai/flows/chat-with-historical-figure";
-// Importa a biblioteca Zod para validação de esquemas.
+// Import the Zod library for schema validation.
 import { z } from "zod";
 
-// Define um esquema de validação usando Zod para a entrada da ação.
-// Isso garante que os dados recebidos tenham o formato esperado antes de serem processados.
+// Define a validation schema using Zod for the action's input.
+// This ensures that the received data has the expected format before being processed.
 const actionSchema = z.object({
   historicalFigure: z.string(),
   userMessage: z.string(),
@@ -18,29 +18,29 @@ const actionSchema = z.object({
 });
 
 /**
- * Função de Ação do Servidor (Server Action) que interage com o fluxo de IA.
- * Ela recebe a entrada do cliente, valida-a e chama o fluxo Genkit.
- * @param input - Os dados para a conversa, incluindo a figura histórica, a mensagem do usuário e o idioma.
- * @returns Um objeto contendo a resposta da IA ou uma mensagem de erro.
+ * Server Action function that interacts with the AI flow.
+ * It receives input from the client, validates it, and calls the Genkit flow.
+ * @param input - The data for the conversation, including the historical figure, user message, and language.
+ * @returns An object containing the AI's response or an error message.
  */
 export async function getAiResponse(input: ChatWithHistoricalFigureInput) {
-  // Valida o input recebido contra o esquema definido.
+  // Validate the received input against the defined schema.
   const parsedInput = actionSchema.safeParse(input);
 
-  // Se a validação falhar, retorna um erro.
+  // If validation fails, return an error.
   if (!parsedInput.success) {
     return { error: "Invalid input." };
   }
 
   try {
-    // Se a validação for bem-sucedida, chama o fluxo de IA com os dados validados.
+    // If validation is successful, call the AI flow with the validated data.
     const result = await chatWithHistoricalFigure(parsedInput.data);
-    // Retorna a resposta da IA.
+    // Return the AI's response.
     return { response: result.response };
   } catch (e: any) {
-    // Em caso de erro durante a execução do fluxo de IA, captura a exceção.
+    // In case of an error during the AI flow execution, catch the exception.
     console.error(e);
-    // Retorna a mensagem de erro específica do fluxo ou uma mensagem genérica.
+    // Return the specific error message from the flow or a generic message.
     const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
     return { error: errorMessage };
   }

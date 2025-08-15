@@ -1,7 +1,7 @@
-// Define que este é um "Client Component".
+// Defines this as a "Client Component".
 "use client";
 
-// Importa utilitários e componentes.
+// Imports utilities and components.
 import { cn } from "@/lib/utils";
 import type { Message } from "./chat-area";
 import { Button } from "./ui/button";
@@ -9,26 +9,26 @@ import { Copy, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/lib/locale.tsx";
 
-// Define a interface para as props do componente.
+// Defines the interface for the component's props.
 interface MessageBubbleProps {
   message: Message;
   onToggleFavorite: (messageId: string) => void;
 }
 
 /**
- * Componente que renderiza uma única bolha de mensagem no chat.
- * Inclui o conteúdo da mensagem e ações como copiar e favoritar.
+ * Component that renders a single message bubble in the chat.
+ * Includes the message content and actions like copy and favorite.
  */
 export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps) {
-  // Obtém a função de tradução.
+  // Gets the translation function.
   const { t } = useLocale();
-  // Hook para exibir notificações.
+  // Hook to display notifications.
   const { toast } = useToast();
-  // Verifica se a mensagem é do usuário.
+  // Checks if the message is from the user.
   const isUser = message.role === "user";
 
   /**
-   * Manipulador para copiar o conteúdo da mensagem para a área de transferência.
+   * Handler to copy the message content to the clipboard.
    */
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content);
@@ -39,40 +39,40 @@ export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps)
   };
 
   return (
-    // Contêiner principal da bolha, alinhado à direita para o usuário e à esquerda para o assistente.
+    // Main container of the bubble, aligned right for the user and left for the assistant.
     <div
       className={cn(
         "flex items-end gap-2 group",
         isUser ? "justify-end" : "justify-start"
       )}
     >
-      {/* Ações (Favoritar, Copiar) - aparecem no hover para mensagens do assistente. */}
+      {/* Actions (Favorite, Copy) - appear on hover for assistant messages. */}
       {!isUser && (
          <div className="flex flex-col items-center space-x-2">
             <div className="flex items-center -space-x-2.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                {/* Botão de favoritar */}
+                {/* Favorite button */}
                 <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => onToggleFavorite(message.id)}>
                     <Star className={cn("h-4 w-4", message.favorited ? "fill-accent text-accent" : "text-muted-foreground")} />
                 </Button>
-                {/* Botão de copiar */}
+                {/* Copy button */}
                 <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleCopy}>
                     <Copy className="h-4 w-4 text-muted-foreground" />
                 </Button>
             </div>
          </div>
       )}
-      {/* A bolha de mensagem com o conteúdo de texto. */}
+      {/* The message bubble with the text content. */}
       <div
         className={cn(
           "max-w-md rounded-2xl p-4 text-white",
           isUser
-            ? "bg-primary rounded-br-md" // Estilo para o usuário
-            : "bg-secondary text-secondary-foreground rounded-bl-md" // Estilo para o assistente
+            ? "bg-primary rounded-br-md" // Style for the user
+            : "bg-secondary text-secondary-foreground rounded-bl-md" // Style for the assistant
         )}
       >
         <p className="whitespace-pre-wrap">{message.content}</p>
       </div>
-      {/* Ação de copiar - aparece no hover para mensagens do usuário. */}
+      {/* Copy action - appears on hover for user messages. */}
        {isUser && (
          <div className="flex flex-col items-center space-x-2">
             <div className="flex items-center -space-x-2.5 opacity-0 group-hover:opacity-100 transition-opacity">

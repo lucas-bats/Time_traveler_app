@@ -1,38 +1,38 @@
-// Importa os dados brutos dos personagens de um arquivo separado.
+// Imports the raw character data from a separate file.
 import { charactersData } from "@/lib/characters.data";
 
-// Define a interface (o "contrato" ou a "forma") para um objeto Character.
-// Isso ajuda a garantir que todos os objetos de personagem tenham as mesmas propriedades e tipos.
+// Defines the interface (the "contract" or "shape") for a Character object.
+// This helps ensure that all character objects have the same properties and types.
 export interface Character {
-  id: string; // Identificador único.
-  name: string; // Nome do personagem.
-  description: string; // Descrição em inglês.
-  description_pt: string; // Descrição em português.
-  image: string; // URL da imagem do personagem.
-  aiHint: string; // Dica para a IA gerar imagens ou conteúdo relacionado.
-  era: string; // Período histórico em inglês.
-  era_pt: string; // Período histórico em português.
-  field: string; // Campo de atuação em inglês.
-  field_pt: string; // Campo de atuação em português.
-  country: string; // País de origem.
+  id: string; // Unique identifier.
+  name: string; // Character's name.
+  description: string; // Description in English.
+  description_pt: string; // Description in Portuguese.
+  image: string; // URL of the character's image.
+  aiHint: string; // Hint for the AI to generate related images or content.
+  era: string; // Historical period in English.
+  era_pt: string; // Historical period in Portuguese.
+  field: string; // Field of expertise in English.
+  field_pt: string; // Field of expertise in Portuguese.
+  country: string; // Country of origin.
 }
 
 /**
- * Retorna uma lista de todos os personagens.
- * Os dados são importados do arquivo `characters.data.ts` e ordenados alfabeticamente pelo nome.
- * @returns {Character[]} Um array de objetos Character.
+ * Returns a list of all characters.
+ * The data is imported from the `characters.data.ts` file and sorted alphabetically by name.
+ * @returns {Character[]} An array of Character objects.
  */
 export function getCharacters(): Character[] {
-  // Ordena os personagens pelo nome em ordem alfabética.
+  // Sorts the characters by name in alphabetical order.
   return charactersData.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
- * Encontra e retorna um único personagem pelo seu ID.
- * @param {string} id - O ID do personagem a ser encontrado.
- * @returns {Character | undefined} O objeto do personagem se encontrado, ou undefined se não.
+ * Finds and returns a single character by their ID.
+ * @param {string} id - The ID of the character to find.
+ * @returns {Character | undefined} The character object if found, or undefined if not.
  */
 export function getCharacterById(id: string): Character | undefined {
-  // Usa o método `find` para procurar o personagem com o ID correspondente.
+  // Uses the `find` method to search for the character with the matching ID.
   return charactersData.find((character) => character.id === id);
 }

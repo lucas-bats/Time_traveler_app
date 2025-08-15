@@ -1,15 +1,15 @@
-// Define que este é um "Client Component".
+// Defines this as a "Client Component".
 "use client";
 
-// Importa hooks e tipos do React.
+// Imports React hooks and types.
 import React, { createContext, useContext, useState, useEffect } from 'react';
-// Importa o hook personalizado para interagir com o localStorage.
+// Imports the custom hook for interacting with localStorage.
 import useLocalStorage from '@/hooks/use-local-storage';
 
-// Define os tipos de locale (idiomas) suportados.
+// Defines the supported locale types.
 type Locale = 'en' | 'pt';
 
-// Objeto que contém todas as strings de tradução para cada idioma.
+// Object containing all translation strings for each language.
 const translations = {
   en: {
     title: 'Eternal Minds',
@@ -99,48 +99,48 @@ const translations = {
   }
 };
 
-// Define o tipo para o valor do contexto de localização.
+// Defines the type for the localization context value.
 type LocaleContextType = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: typeof translations.en; // 't' terá a forma de um dos objetos de tradução.
+  t: typeof translations.en; // 't' will have the shape of one of the translation objects.
 };
 
-// Cria o contexto de localização.
+// Creates the localization context.
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 /**
- * Provedor de Contexto para Localização.
- * Envolve a aplicação e fornece o estado do idioma e as funções de tradução
- * para todos os componentes filhos.
+ * Context Provider for Localization.
+ * Wraps the application and provides the language state and translation functions
+ * to all child components.
  */
 export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
-  // Usa o hook de localStorage para persistir a seleção de idioma.
+  // Uses the localStorage hook to persist the language selection.
   const [storedLocale, setStoredLocale] = useLocalStorage<Locale>('locale', 'en');
-  // Estado para saber se o componente está sendo renderizado no cliente.
+  // State to know if the component is being rendered on the client.
   const [isClient, setIsClient] = useState(false);
 
-  // Garante que o código a seguir execute apenas no cliente.
+  // Ensures the following code only runs on the client.
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Determina o locale a ser usado, evitando problemas de hidratação.
+  // Determines the locale to be used, avoiding hydration issues.
   const locale = isClient ? storedLocale : 'en';
   
-  // Função para atualizar o idioma.
+  // Function to update the language.
   const handleSetLocale = (newLocale: Locale) => {
     setStoredLocale(newLocale);
   };
   
-  // Seleciona o objeto de tradução correto com base no locale atual.
+  // Selects the correct translation object based on the current locale.
   const t = translations[locale];
 
-  // O valor que será fornecido pelo contexto.
+  // The value that will be provided by the context.
   const value = { locale: storedLocale, setLocale: handleSetLocale, t };
 
-  // Na renderização do servidor (SSR), renderiza um provedor com valores padrão
-  // para evitar o erro de "hydration mismatch".
+  // On server-side rendering (SSR), renders a provider with default values
+  // to avoid a "hydration mismatch" error.
   if (!isClient) {
     const defaultT = translations['en'];
     return (
@@ -150,7 +150,7 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  // No cliente, renderiza o provedor com o valor correto.
+  // On the client, render the provider with the correct value.
   return (
     <LocaleContext.Provider value={value}>
       {children}
@@ -159,8 +159,8 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 /**
- * Hook personalizado para consumir o contexto de localização.
- * Facilita o acesso ao idioma atual e às traduções nos componentes.
+ * Custom hook to consume the localization context.
+ * Facilitates access to the current language and translations in components.
  */
 export const useLocale = () => {
   const context = useContext(LocaleContext);

@@ -1,44 +1,44 @@
-// Define que este é um "Client Component", executado no navegador.
+// Defines this as a "Client Component," executed in the browser.
 "use client";
 
-// Importa o componente de seleção de personagens.
+// Imports the character selection component.
 import { CharacterSelection } from "@/components/character-selection";
-// Importa a função para obter a lista de personagens.
+// Imports the function to get the list of characters.
 import { getCharacters } from "@/lib/characters";
-// Importa o hook para usar o contexto de localização (idioma).
+// Imports the hook to use the localization (language) context.
 import { useLocale } from "@/lib/locale";
-// Importa componentes de UI para o menu suspenso.
+// Imports UI components for the dropdown menu.
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// Importa o componente de botão.
+// Imports the button component.
 import { Button } from "@/components/ui/button";
-// Importa ícones da biblioteca lucide-react.
+// Imports icons from the lucide-react library.
 import { Languages, Shuffle, Heart } from "lucide-react";
-// Importa o hook useRouter do Next.js para navegação.
+// Imports the useRouter hook from Next.js for navigation.
 import { useRouter } from "next/navigation";
 import { DonationSection } from "@/components/donation-section";
 import Link from "next/link";
 
 
 /**
- * Componente da página inicial (Home).
- * Exibe o título, subtítulo, seletor de idioma e a lista de personagens para iniciar o chat.
+ * Home page component.
+ * Displays the title, subtitle, language selector, and the list of characters to start a chat.
  */
 export default function Home() {
-  // Obtém a lista de todos os personagens.
+  // Gets the list of all characters.
   const characters = getCharacters();
-  // Obtém as funções e o estado do contexto de localização (t para traduções, setLocale para mudar o idioma).
+  // Gets the functions and state from the localization context (t for translations, setLocale to change language).
   const { t, setLocale } = useLocale();
-  // Obtém a instância do roteador para navegar programaticamente.
+  // Gets the router instance for programmatic navigation.
   const router = useRouter();
 
   /**
-   * Manipulador de evento para o botão "Surpreenda-me".
-   * Seleciona um personagem aleatório e navega para a página de chat dele.
+   * Event handler for the "Surprise Me" button.
+   * Selects a random character and navigates to their chat page.
    */
   const handleRandomCharacter = () => {
     if (characters.length > 0) {
@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Cabeçalho posicionado no canto superior direito para o seletor de idioma. */}
+      {/* Header positioned in the top right corner for the language selector. */}
       <header className="absolute top-0 right-0 p-4 z-10">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -70,7 +70,7 @@ export default function Home() {
         </DropdownMenu>
       </header>
       <main className="flex-1">
-        {/* Seção principal com o título e subtítulo da aplicação. */}
+        {/* Main section with the application's title and subtitle. */}
         <section className="w-full pt-6 pb-3 md:pt-8 md:pb-4">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -81,7 +81,7 @@ export default function Home() {
                 {t.subtitle}
               </p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
-                {/* Botão para selecionar um personagem aleatório. */}
+                {/* Button to select a random character. */}
                 <Button onClick={handleRandomCharacter} size="lg">
                   <Shuffle className="mr-2 h-5 w-5" />
                   {t.surpriseMe}
@@ -94,19 +94,19 @@ export default function Home() {
                 </Button>
               </div>
 
-              {/* Descrição do botão "Surpreenda-me". */}
+              {/* Description for the "Surprise Me" button. */}
               <p className="text-sm text-muted-foreground mt-2">
                 {t.surpriseMeDescription}
               </p>
             </div>
           </div>
         </section>
-        {/* Componente que renderiza a lista de personagens filtrável. */}
+        {/* Component that renders the filterable list of characters. */}
         <CharacterSelection characters={characters} />
-        {/* Seção de Doação */}
+        {/* Donation Section */}
         <DonationSection />
       </main>
-      {/* Rodapé da página. */}
+      {/* Page footer. */}
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-muted-foreground">
           &copy; 2024 {t.title}. {t.allRightsReserved}.

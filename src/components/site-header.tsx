@@ -1,4 +1,4 @@
-// Importa componentes do Next.js e da UI.
+// Imports components from Next.js and the UI library.
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Home, Languages, Heart } from "lucide-react";
@@ -12,21 +12,21 @@ import {
 import Image from "next/image";
 
 /**
- * Componente do cabeçalho do site.
- * É exibido em todas as páginas e contém a navegação principal,
- * como o link para a Home e o seletor de idioma.
+ * Site header component.
+ * It is displayed on all pages and contains the main navigation,
+ * such as the link to Home and the language selector.
  */
 export function SiteHeader() {
-  // Obtém o contexto de localização.
+  // Gets the localization context.
   const { t, setLocale } = useLocale();
 
   return (
-    // O elemento header é fixo no topo da página.
+    // The header element is fixed at the top of the page.
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
-        {/* Contêiner principal que alinha os itens à esquerda. */}
+        {/* Main container that aligns items to the left. */}
         <div className="flex flex-1 items-center gap-2 md:gap-4">
-          {/* Link para a página inicial com o logo e título do site. */}
+          {/* Link to the homepage with the site logo and title. */}
           <Link href="/" className="flex items-center space-x-2 mr-4">
             <Image 
               src="https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/20250813_1429_Timeless%20Wisdom%20Logo_simple_compose_01k2j7m0tafhqvhhfv2k43r466.png?alt=media&token=a89a742f-8ae5-482c-8a43-ce8890ad3d2d" 
@@ -39,16 +39,16 @@ export function SiteHeader() {
               {t.title}
             </span>
           </Link>
-          {/* Navegação principal com os botões. */}
+          {/* Main navigation with buttons. */}
           <nav className="flex items-center space-x-1">
-            {/* Botão de link para a Home. */}
+            {/* Button link to Home. */}
             <Button variant="ghost" asChild>
               <Link href="/">
                 <Home className="h-5 w-5 md:mr-2" />
                 <span className="hidden md:inline">{t.home}</span>
               </Link>
             </Button>
-            {/* Menu suspenso para a seleção de idioma. */}
+            {/* Dropdown menu for language selection. */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -65,7 +65,7 @@ export function SiteHeader() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* Botão de link para a seção de doação. */}
+            {/* Button link to the donation section. */}
             <Button variant="ghost" size="icon" asChild>
                 <Link href="/#donation-section">
                     <Heart className="h-5 w-5 text-destructive" />

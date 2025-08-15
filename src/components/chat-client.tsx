@@ -1,51 +1,51 @@
-// Define que este é um "Client Component", executado no navegador.
+// Defines this as a "Client Component," executed in the browser.
 "use client";
 
-// Importa hooks do React e funções do Next.js.
+// Imports React hooks and Next.js functions.
 import { useEffect, useState, type FormEvent, useCallback } from "react";
 import { notFound } from "next/navigation";
-// Importa funções e tipos de dados de personagens.
+// Imports character data types and functions.
 import { getCharacterById, type Character } from "@/lib/characters";
-// Importa componentes da interface do chat.
+// Imports chat interface components.
 import { ChatArea, type Message } from "@/components/chat-area";
-// Importa a ação do servidor para obter a resposta da IA.
+// Imports the server action to get the AI response.
 import { getAiResponse } from "@/app/actions";
-// Importa hooks personalizados.
+// Imports custom hooks.
 import { useToast } from "@/hooks/use-toast";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { useLocale } from "@/lib/locale.tsx";
 
-// Define a interface para as props do componente.
+// Defines the interface for the component's props.
 interface ChatClientProps {
   figureId: string;
 }
 
 /**
- * Componente cliente para a funcionalidade de chat.
- * Gerencia o estado da conversa, incluindo mensagens, input do usuário,
- * e a comunicação com a IA através de Server Actions.
+ * Client component for the chat functionality.
+ * Manages the conversation state, including messages, user input,
+ * and communication with the AI through Server Actions.
  */
 export function ChatClient({ figureId }: ChatClientProps) {
-  // Estado para armazenar os dados do personagem atual.
+  // State to store the data of the current character.
   const [character, setCharacter] = useState<Character | null>(null);
-  // Estado para controlar o carregamento dos dados do personagem.
+  // State to control the loading of character data.
   const [loadingCharacter, setLoadingCharacter] = useState(true);
-  // Estado para o texto digitado pelo usuário.
+  // State for the text typed by the user.
   const [input, setInput] = useState("");
-  // Estado para controlar o indicador de carregamento da resposta da IA.
+  // State to control the loading indicator for the AI's response.
   const [isLoading, setIsLoading] = useState(false);
   
-  // Hook para exibir notificações (toasts).
+  // Hook to display notifications (toasts).
   const { toast } = useToast();
-  // Hook para o contexto de localização (idioma).
+  // Hook for the localization (language) context.
   const { t, locale } = useLocale();
-  // Chave única para o localStorage baseada no ID da figura.
+  // Unique key for localStorage based on the figure's ID.
   const storageKey = `chat_history_${figureId}`;
   
-  // Hook personalizado para persistir as mensagens do chat no localStorage.
+  // Custom hook to persist chat messages in localStorage.
   const [messages, setMessages] = useLocalStorage<Message[]>(storageKey, []);
 
-  // Efeito que busca os dados do personagem quando o figureId muda.
+  // Effect that fetches the character's data when the figureId changes.
   useEffect(() => {
     const foundCharacter = getCharacterById(figureId);
     if (foundCharacter) {
@@ -55,36 +55,36 @@ export function ChatClient({ figureId }: ChatClientProps) {
   }, [figureId]);
 
   /**
-   * Função para enviar uma mensagem.
-   * Lida com a adição da mensagem do usuário ao estado, chama a IA,
-   * e adiciona a resposta do bot.
+   * Function to send a message.
+   * Handles adding the user's message to the state, calls the AI,
+   * and adds the bot's response.
    */
   const handleSendMessage = useCallback(async (messageContent: string) => {
-    // Retorna se a mensagem estiver vazia, se a IA já estiver respondendo, ou se não houver personagem.
+    // Returns if the message is empty, if the AI is already responding, or if there is no character.
     if (!messageContent.trim() || isLoading || !character) return;
   
-    // Cria o objeto da mensagem do usuário.
+    // Creates the user's message object.
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
       content: messageContent,
     };
   
-    // Captura o estado anterior das mensagens para o caso de erro.
+    // Captures the previous state of messages in case of an error.
     const previousMessages = messages;
-    // Adiciona a mensagem do usuário à lista de forma otimista.
+    // Adds the user's message to the list optimistically.
     setMessages([...messages, userMessage]);
     setIsLoading(true);
   
     try {
-      // Chama a Server Action para obter a resposta da IA.
+      // Calls the Server Action to get the AI's response.
       const result = await getAiResponse({
         historicalFigure: character.name,
         userMessage: messageContent,
         language: locale,
       });
   
-      // Se houver um erro, exibe um toast e reverte a atualização otimista.
+      // If there is an error, displays a toast and reverts the optimistic update.
       if (result.error || !result.response) {
         toast({
           variant: "destructive",
@@ -93,13 +93,13 @@ export function ChatClient({ figureId }: ChatClientProps) {
         });
         setMessages(previousMessages);
       } else {
-        // Se for bem-sucedido, cria o objeto da mensagem da IA.
+        // If successful, creates the AI's message object.
         const aiMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
           content: result.response,
         };
-        // Adiciona a mensagem da IA à lista de mensagens.
+        // Adds the AI's message to the message list.
         setMessages([...messages, userMessage, aiMessage]);
       }
     } catch (error) {
@@ -109,35 +109,35 @@ export function ChatClient({ figureId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-       // Reverte a atualização otimista em caso de exceção.
+       // Reverts the optimistic update in case of an exception.
        setMessages(previousMessages);
     } finally {
-      // Garante que o estado de carregamento seja desativado.
+      // Ensures the loading state is turned off.
       setIsLoading(false);
     }
   }, [character, isLoading, locale, messages, setMessages, t, toast]);
 
   /**
-   * Manipulador para o envio do formulário.
+   * Handler for form submission.
    */
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await handleSendMessage(input);
-    setInput(""); // Limpa o campo de input após o envio.
+    setInput(""); // Clears the input field after sending.
   };
   
   /**
-   * Manipulador para o clique em uma pergunta sugerida.
+   * Handler for clicking on a suggested question.
    */
   const handleSuggestionClick = async (suggestion: string) => {
-    // Define o input com a sugestão para que o usuário veja o que foi enviado.
+    // Sets the input with the suggestion so the user sees what was sent.
     setInput(suggestion);
     await handleSendMessage(suggestion);
-    setInput(""); // Limpa o campo de input.
+    setInput(""); // Clears the input field.
   };
 
   /**
-   * Alterna o estado de "favorito" de uma mensagem.
+   * Toggles the "favorite" state of a message.
    */
   const handleToggleFavorite = (messageId: string) => {
     setMessages((prevMessages) =>
@@ -148,13 +148,13 @@ export function ChatClient({ figureId }: ChatClientProps) {
   };
 
   /**
-   * Limpa todo o histórico de chat.
+   * Clears the entire chat history.
    */
   const handleClearChat = () => {
     setMessages([]);
   };
 
-  // Se o personagem ainda estiver carregando, exibe uma mensagem.
+  // If the character is still loading, displays a message.
   if (loadingCharacter) {
     return (
       <div className="flex-1 flex items-center justify-center">
@@ -163,13 +163,13 @@ export function ChatClient({ figureId }: ChatClientProps) {
     );
   }
 
-  // Se o personagem não for encontrado, exibe a página de erro 404.
+  // If the character is not found, displays the 404 error page.
   if (!character) {
     notFound();
     return null;
   }
 
-  // Renderiza a área de chat com todas as props necessárias.
+  // Renders the chat area with all necessary props.
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <ChatArea

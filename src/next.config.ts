@@ -1,44 +1,44 @@
-// Importa o tipo NextConfig para garantir que o objeto de configuração tenha a forma correta.
+// Imports the NextConfig type to ensure the configuration object has the correct shape.
 import type {NextConfig} from 'next';
 
-// Define o objeto de configuração para o Next.js.
+// Defines the configuration object for Next.js.
 const nextConfig: NextConfig = {
-  /* Opções de configuração do Next.js vão aqui */
+  /* Next.js configuration options go here */
   
-  // Configurações do TypeScript.
+  // TypeScript settings.
   typescript: {
-    // Ignora erros de build do TypeScript. Útil para desenvolvimento rápido,
-    // mas deve ser usado com cautela em produção.
+    // Ignores TypeScript build errors. Useful for rapid development,
+    // but should be used with caution in production.
     ignoreBuildErrors: true,
   },
   
-  // Configurações do ESLint.
+  // ESLint settings.
   eslint: {
-    // Ignora a verificação do ESLint durante o processo de build.
-    // Permite que o build prossiga mesmo que haja avisos ou erros do linter.
+    // Ignores ESLint checks during the build process.
+    // Allows the build to proceed even if there are linter warnings or errors.
     ignoreDuringBuilds: true,
   },
   
-  // Configurações de otimização de imagens do Next.js (`next/image`).
+  // Next.js image optimization settings (`next/image`).
   images: {
-    // Define uma lista de domínios permitidos para carregar imagens externas.
-    // Isso é uma medida de segurança para evitar o carregamento de imagens de fontes não confiáveis.
+    // Defines a list of allowed domains for loading external images.
+    // This is a security measure to prevent loading images from untrusted sources.
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co', // Domínio para imagens de placeholder.
+        hostname: 'placehold.co', // Domain for placeholder images.
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'videos.openai.com', // Domínio para vídeos (se aplicável).
+        hostname: 'videos.openai.com', // Domain for videos (if applicable).
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com', // Domínio para imagens armazenadas no Firebase Storage.
+        hostname: 'firebasestorage.googleapis.com', // Domain for images stored in Firebase Storage.
         port: '',
         pathname: '/**',
       }
@@ -46,5 +46,5 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Exporta a configuração para que o Next.js possa usá-la.
+// Exports the configuration so Next.js can use it.
 export default nextConfig;

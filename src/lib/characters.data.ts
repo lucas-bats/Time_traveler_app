@@ -1,11 +1,11 @@
-// Importa o tipo Character para garantir a consistência dos dados.
+// Imports the Character type to ensure data consistency.
 import type { Character } from "./characters";
 
 /**
- * @fileOverview Este arquivo contém o array de dados brutos para todas as
- * figuras históricas disponíveis na aplicação. Cada objeto representa um
- * personagem e inclui seu ID, nome, descrições em inglês e português,
- * URL da imagem, e metadados para filtragem como era, campo e país.
+ * @fileOverview This file contains the raw data array for all
+ * historical figures available in the application. Each object represents a
+ * character and includes their ID, name, descriptions in English and Portuguese,
+ * image URL, and metadata for filtering such as era, field, and country.
  */
 export const charactersData: Character[] = [
   {

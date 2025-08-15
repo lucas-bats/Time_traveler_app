@@ -1,36 +1,36 @@
 import * as React from "react"
 
-// Define o ponto de quebra para a detecção de dispositivos móveis.
+// Defines the breakpoint for mobile device detection.
 const MOBILE_BREAKPOINT = 768
 
 /**
- * Um hook personalizado para detectar se o dispositivo do usuário é móvel.
- * Baseia-se na largura da janela do navegador.
- * @returns {boolean} `true` se a largura da janela for menor que o `MOBILE_BREAKPOINT`, `false` caso contrário.
+ * A custom hook to detect if the user's device is mobile.
+ * It is based on the browser's window width.
+ * @returns {boolean} `true` if the window width is less than `MOBILE_BREAKPOINT`, `false` otherwise.
  */
 export function useIsMobile() {
-  // O estado para armazenar se é móvel ou não. Começa como `undefined`
-  // para evitar problemas de hidratação entre servidor e cliente.
+  // The state to store whether it's mobile or not. Starts as `undefined`
+  // to avoid hydration issues between server and client.
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 
   React.useEffect(() => {
-    // Cria uma Media Query List para observar a mudança no tamanho da tela.
+    // Creates a Media Query List to observe changes in screen size.
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
     
-    // Função para ser chamada quando a condição da media query mudar.
+    // Function to be called when the media query condition changes.
     const onChange = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
 
-    // Adiciona o listener para o evento de mudança.
+    // Adds the listener for the change event.
     mql.addEventListener("change", onChange)
     
-    // Define o estado inicial na primeira renderização no cliente.
+    // Sets the initial state on the first client-side render.
     setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     
-    // Função de limpeza: remove o listener quando o componente é desmontado.
+    // Cleanup function: removes the listener when the component unmounts.
     return () => mql.removeEventListener("change", onChange)
-  }, []) // O array de dependências vazio garante que o efeito rode apenas uma vez.
+  }, []) // The empty dependency array ensures the effect runs only once.
 
   return !!isMobile
 }

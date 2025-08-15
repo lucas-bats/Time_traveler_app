@@ -1,7 +1,7 @@
-// Define que este é um "Client Component".
+// Defines this as a "Client Component".
 "use client";
 
-// Importa hooks do React, componentes e tipos.
+// Imports React hooks, components, and types.
 import { useRef, useEffect, type FormEvent } from "react";
 import type { Character } from "@/lib/characters";
 import { MessageBubble } from "./message-bubble";
@@ -25,7 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-// Define a estrutura de uma mensagem no chat.
+// Defines the structure of a message in the chat.
 export interface Message {
   id: string;
   role: "user" | "assistant";
@@ -33,7 +33,7 @@ export interface Message {
   favorited?: boolean;
 }
 
-// Define a interface para as props do componente ChatArea.
+// Defines the interface for the ChatArea component's props.
 interface ChatAreaProps {
   character: Character;
   messages: Message[];
@@ -48,8 +48,8 @@ interface ChatAreaProps {
 }
 
 /**
- * Componente principal da área de chat.
- * É responsável por exibir as mensagens, o campo de entrada e a barra lateral de favoritos.
+ * Main component for the chat area.
+ * It is responsible for displaying messages, the input field, and the favorites sidebar.
  */
 export function ChatArea({
   character,
@@ -63,15 +63,15 @@ export function ChatArea({
   onClearChat,
   onSuggestionClick,
 }: ChatAreaProps) {
-  // Obtém o contexto de localização.
+  // Gets the localization context.
   const { t, locale } = useLocale();
-  // Ref para a área de rolagem para controlar o scroll.
+  // Ref for the scroll area to control scrolling.
   const scrollViewportRef = useRef<HTMLDivElement>(null);
   
-  // Define as sugestões de perguntas iniciais.
+  // Defines the initial question suggestions.
   const suggestions = [t.tellMeAboutYourLife, t.tellMeAboutYourWork];
 
-  // Efeito que rola a área de chat para o final sempre que uma nova mensagem é adicionada.
+  // Effect that scrolls the chat area to the bottom whenever a new message is added.
   useEffect(() => {
     if (scrollViewportRef.current) {
       scrollViewportRef.current.scrollTo({
@@ -82,10 +82,10 @@ export function ChatArea({
   }, [messageCount]);
   
   return (
-    // Layout principal que divide a área de chat e a barra lateral de favoritos.
+    // Main layout that divides the chat area and the favorites sidebar.
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm flex-1 min-h-0">
-        {/* Cabeçalho da área de chat com imagem e nome do personagem. */}
+        {/* Header of the chat area with the character's image and name. */}
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex items-center">
             <Image
@@ -101,7 +101,7 @@ export function ChatArea({
               <p className="text-sm text-muted-foreground">{locale === 'pt' ? character.field_pt : character.field}</p>
             </div>
           </div>
-          {/* Botão para limpar o chat, visível apenas se houver mensagens. */}
+          {/* Button to clear the chat, visible only if there are messages. */}
           {messages.length > 0 && (
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -127,9 +127,9 @@ export function ChatArea({
           )}
         </div>
         
-        {/* Área de rolagem onde as mensagens são exibidas. */}
+        {/* Scrollable area where messages are displayed. */}
         <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
-            {/* Se não houver mensagens e não estiver carregando, exibe as sugestões. */}
+            {/* If there are no messages and it's not loading, display suggestions. */}
             {messages.length === 0 && !isLoading && (
                <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
                   <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
@@ -143,7 +143,7 @@ export function ChatArea({
               </div>
             )}
           <div className="space-y-4">
-            {/* Mapeia e renderiza cada mensagem. */}
+            {/* Maps and renders each message. */}
             {messages.map((message) => (
               <MessageBubble
                 key={message.id}
@@ -151,12 +151,12 @@ export function ChatArea({
                 onToggleFavorite={onToggleFavorite}
               />
             ))}
-            {/* Mostra o loader de "digitando" enquanto a IA responde. */}
+            {/* Shows the "typing" loader while the AI is responding. */}
             {isLoading && <QuillLoader />}
           </div>
         </ScrollArea>
         
-        {/* Seção inferior com o formulário de envio de mensagem. */}
+        {/* Bottom section with the message submission form. */}
         <div className="p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <form onSubmit={onFormSubmit} className="flex items-start gap-4">
             <Textarea
@@ -166,7 +166,7 @@ export function ChatArea({
               className="flex-1 resize-none"
               rows={1}
               onKeyDown={(e) => {
-                // Permite enviar com "Enter" e quebrar linha com "Shift + Enter".
+                // Allows sending with "Enter" and line break with "Shift + Enter".
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
                   onFormSubmit(e);
@@ -181,7 +181,7 @@ export function ChatArea({
         </div>
       </div>
       
-      {/* Barra lateral para exibir mensagens favoritadas. */}
+      {/* Sidebar to display favorited messages. */}
       <FavoritesSidebar messages={messages} characterName={character.name} />
     </div>
   );

@@ -1,7 +1,7 @@
-// Define que este é um "Client Component".
+// Defines this as a "Client Component".
 "use client";
 
-// Importa componentes do Next.js e React.
+// Imports components from Next.js and React.
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useLocale } from "@/lib/locale.tsx";
@@ -12,12 +12,12 @@ import { Copy } from "lucide-react";
 import { Separator } from "./ui/separator";
 
 /**
- * Componente para exibir a seção de doação via PIX e PayPal.
+ * Component to display the donation section via PIX and PayPal.
  */
 export function DonationSection() {
   const { t } = useLocale();
   const { toast } = useToast();
-  const pixKey = "06e37bed-6cbc-4901-97f1-c5b7f1e154b1"; // Chave PIX
+  const pixKey = "06e37bed-6cbc-4901-97f1-c5b7f1e154b1"; // PIX Key
   const paypalEmail = "lucaspaesbatista@yahoo.com.br";
   const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=${paypalEmail}&item_name=Donation+for+Eternal+Minds&currency_code=BRL`;
 
@@ -63,7 +63,7 @@ export function DonationSection() {
                         <p className="text-sm font-mono flex-1 truncate">{pixKey}</p>
                         <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleCopy}>
                             <Copy className="h-4 w-4" />
-                            <span className="sr-only">Copiar chave PIX</span>
+                            <span className="sr-only">Copy PIX key</span>
                         </Button>
                     </div>
 

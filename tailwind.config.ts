@@ -1,17 +1,17 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  // Configura o modo escuro para ser ativado por uma classe no elemento HTML.
+  // Configures dark mode to be activated by a class on the HTML element.
   darkMode: ["class"],
-  // Define os arquivos onde o Tailwind deve procurar por classes para gerar o CSS.
+  // Defines the files where Tailwind should look for classes to generate the CSS.
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // Onde as customizações e extensões do tema do Tailwind são definidas.
+  // Where customizations and extensions of the Tailwind theme are defined.
   theme: {
-    // Configurações para o container.
+    // Settings for the container.
     container: {
       center: true,
       padding: "2rem",
@@ -19,14 +19,14 @@ export default {
         "2xl": "1400px",
       },
     },
-    // Estende o tema padrão do Tailwind.
+    // Extends the default Tailwind theme.
     extend: {
-      // Define fontes personalizadas.
+      // Defines custom fonts.
       fontFamily: {
-        body: ["Literata", "serif"], // Fonte para o corpo do texto.
-        headline: ["'Playfair Display'", "serif"], // Fonte para títulos.
+        body: ["Literata", "serif"], // Font for the body text.
+        headline: ["'Playfair Display'", "serif"], // Font for headings.
       },
-      // Define cores personalizadas usando variáveis CSS (HSL) para theming.
+      // Defines custom colors using CSS variables (HSL) for theming.
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -61,7 +61,7 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        // Cores para gráficos.
+        // Colors for charts.
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
@@ -69,7 +69,7 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        // Cores específicas para a sidebar.
+        // Specific colors for the sidebar.
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -81,13 +81,13 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-      // Personaliza o raio da borda.
+      // Customizes the border radius.
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      // Define animações personalizadas (keyframes).
+      // Defines custom animations (keyframes).
       keyframes: {
         "accordion-down": {
           from: {
@@ -106,16 +106,16 @@ export default {
           },
         },
       },
-      // Mapeia os keyframes para classes de animação.
+      // Maps the keyframes to animation classes.
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  // Adiciona plugins do Tailwind.
+  // Adds Tailwind plugins.
   plugins: [
-    require("tailwindcss-animate"), // Para animações.
-    require("@tailwindcss/line-clamp") // Para truncar texto com "..."
+    require("tailwindcss-animate"), // For animations.
+    require("@tailwindcss/line-clamp") // For truncating text with "...".
   ],
 } satisfies Config;

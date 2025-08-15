@@ -1,26 +1,26 @@
-// Importa o tipo Metadata do Next.js para definir os metadados da página.
+// Imports the Metadata type from Next.js to define page metadata.
 import type { Metadata } from "next";
-// Importa o componente Toaster para exibir notificações.
+// Imports the Toaster component to display notifications.
 import { Toaster } from "@/components/ui/toaster";
-// Importa o arquivo de estilos globais.
+// Imports the global styles file.
 import "./globals.css";
-// Importa a função de utilidade cn para mesclar classes do Tailwind.
+// Imports the cn utility function to merge Tailwind classes.
 import { cn } from "@/lib/utils";
-// Importa o provedor de contexto para o gerenciamento de localidade (idioma).
+// Imports the context provider for locale (language) management.
 import { LocaleProvider } from "@/lib/locale.tsx";
 
-// Define os metadados da aplicação, como título e descrição, para SEO.
+// Defines the application's metadata, such as title and description, for SEO.
 export const metadata: Metadata = {
   title: "Eternal Minds",
   description: "Chat with historical figures, powered by AI.",
 };
 
 /**
- * Componente de Layout Raiz (Root Layout) da aplicação.
- * Ele envolve todas as páginas e é responsável por definir a estrutura HTML base,
- * carregar fontes, e prover contextos globais.
- * @param {object} props - As propriedades do componente.
- * @param {React.ReactNode} props.children - Os componentes filhos que serão renderizados dentro do layout.
+ * Root Layout component of the application.
+ * It wraps all pages and is responsible for defining the base HTML structure,
+ * loading fonts, and providing global contexts.
+ * @param {object} props - The component's properties.
+ * @param {React.ReactNode} props.children - The child components that will be rendered within the layout.
  */
 export default function RootLayout({
   children,
@@ -28,18 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Define a tag <html> com o idioma e suprime avisos de hidratação.
+    // Defines the <html> tag with the language and suppresses hydration warnings.
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Pré-conecta aos servidores de fontes do Google para otimizar o carregamento. */}
+        {/* Pre-connects to Google's font servers to optimize loading. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Importa as fontes Literata e Playfair Display do Google Fonts. */}
+        {/* Imports the Literata and Playfair Display fonts from Google Fonts. */}
         <link
           href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
           rel="stylesheet"
         />
-        {/* Script do Google AdSense */}
+        {/* Google AdSense Script */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372729948864720"
      crossOrigin="anonymous"></script>
         {/* Google tag (gtag.js) */}
@@ -55,13 +55,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      {/* Define a tag <body> com classes de estilo base. */}
+      {/* Defines the <body> tag with base style classes. */}
       <body className={cn("font-body antialiased min-h-screen")}>
-        {/* O LocaleProvider envolve a aplicação para fornecer o contexto de idioma. */}
+        {/* The LocaleProvider wraps the application to provide the language context. */}
         <LocaleProvider>
-          {/* Renderiza os componentes filhos (as páginas). */}
+          {/* Renders the child components (the pages). */}
           {children}
-          {/* O Toaster é renderizado aqui para estar disponível em toda a aplicação. */}
+          {/* The Toaster is rendered here to be available throughout the application. */}
           <Toaster />
         </LocaleProvider>
       </body>

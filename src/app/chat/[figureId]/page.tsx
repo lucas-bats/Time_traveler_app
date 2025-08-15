@@ -1,39 +1,39 @@
-// Define que este componente é um "Client Component", ou seja, executa no navegador.
+// Defines this component as a "Client Component," meaning it executes in the browser.
 "use client";
 
-// Importa o hook useParams do Next.js para acessar parâmetros da rota.
+// Imports the useParams hook from Next.js to access route parameters.
 import { useParams } from "next/navigation";
-// Importa o componente do cabeçalho do site.
+// Imports the site header component.
 import { SiteHeader } from "@/components/site-header";
-// Importa o componente principal do cliente de chat.
+// Imports the main chat client component.
 import { ChatClient } from "@/components/chat-client";
 
 /**
- * Componente de página para a tela de chat.
- * Ele é responsável por renderizar a interface de conversa para uma figura histórica específica.
+ * Page component for the chat screen.
+ * It is responsible for rendering the conversation interface for a specific historical figure.
  */
 export default function ChatPage() {
-  // Usa o hook useParams para obter os parâmetros da URL.
+  // Uses the useParams hook to get parameters from the URL.
   const params = useParams();
   
-  // Extrai o 'figureId' dos parâmetros. Como pode ser uma string ou um array de strings,
-  // garantimos que seja sempre uma única string.
+  // Extracts the 'figureId' from the parameters. Since it can be a string or an array of strings,
+  // we ensure it is always a single string.
   const figureId = Array.isArray(params.figureId) ? params.figureId[0] : params.figureId;
 
   return (
-    // Estrutura principal da página de chat, que ocupa toda a altura da tela.
+    // Main structure of the chat page, which takes up the full screen height.
     <div className="flex flex-col h-screen h-dvh">
-      {/* Renderiza o cabeçalho do site. */}
+      {/* Renders the site header. */}
       <SiteHeader />
       
-      {/* Verifica se o figureId foi obtido da URL. */}
+      {/* Checks if the figureId was obtained from the URL. */}
       {figureId ? (
-        // Se houver um figureId, renderiza o componente de chat, passando o ID.
+        // If there is a figureId, render the chat component, passing the ID.
         <div className="flex-1 flex flex-col min-h-0">
           <ChatClient figureId={figureId} />
         </div>
       ) : (
-        // Se não houver figureId, mostra uma mensagem de carregamento.
+        // If there is no figureId, show a loading message.
         <div className="flex-1 flex items-center justify-center">
             <p>Loading character...</p>
         </div>
