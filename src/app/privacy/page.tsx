@@ -1,7 +1,12 @@
+"use client";
+
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { useLocale } from "@/lib/locale.tsx";
 
 export default function PrivacyPolicyPage() {
+    const { t } = useLocale();
+    
     return (
         <div className="flex flex-col min-h-screen">
             <SiteHeader />
@@ -9,52 +14,52 @@ export default function PrivacyPolicyPage() {
                 <div className="container px-4 md:px-6 py-12 md:py-24 lg:py-32">
                     <div className="max-w-3xl mx-auto">
                         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl font-headline text-primary">
-                            Privacy Policy
+                            {t.privacyPolicy}
                         </h1>
                         <p className="mt-4 text-lg text-muted-foreground">
-                            Last Updated: August 14, 2024
+                            {t.lastUpdated}
                         </p>
                         <p className="mt-4 text-lg text-muted-foreground">
-                            Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use Eternal Minds.
+                           {t.privacyIntro}
                         </p>
                         
                         <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
-                           Information We Collect
+                           {t.infoWeCollectTitle}
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">
-                           We do not collect any personal information from our users. All interactions and chat histories are stored directly on your device using your browser's local storage. We do not have access to your conversations.
+                           {t.infoWeCollectText1}
                         </p>
                         <ul className="mt-4 list-disc list-inside space-y-2 text-lg text-muted-foreground">
-                            <li><strong>Chat Data:</strong> Your conversations with historical figures are saved in your browser's local storage to allow you to continue them later. This data is not transmitted to our servers.</li>
-                            <li><strong>Analytics:</strong> We use Google Analytics to collect anonymous usage data to help us understand how our site is being used and how we can improve it. This includes information like page views and session duration, but does not include any personal identifying information.</li>
+                            <li><strong>{t.chatDataTitle}:</strong> {t.chatDataText}</li>
+                            <li><strong>{t.analyticsTitle}:</strong> {t.analyticsText}</li>
                         </ul>
 
                         <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
-                            How We Use Information
+                            {t.howWeUseInfoTitle}
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">
-                           Since we do not collect personal information, we do not use it for any purpose. The anonymous data collected by Google Analytics is used solely for improving our website and services.
+                           {t.howWeUseInfoText}
                         </p>
 
                         <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
-                           Third-Party Services
+                           {t.thirdPartyServicesTitle}
                         </h2>
                          <p className="mt-4 text-lg text-muted-foreground">
-                           We use Google AdSense to display ads on our website. Google may use cookies to serve ads based on a user's prior visits to our website or other websites. You can opt out of personalized advertising by visiting Google's Ad Settings.
+                           {t.thirdPartyServicesText}
                         </p>
 
                         <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
-                            Changes to This Policy
+                            {t.changesToPolicyTitle}
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">
-                            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+                            {t.changesToPolicyText}
                         </p>
 
                          <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
-                            Contact Us
+                            {t.contactUsTitle}
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">
-                            If you have any questions about this Privacy Policy, please contact us at: lucaspaesbatista@yahoo.com.br
+                            {t.contactUsText}
                         </p>
                     </div>
                 </div>
