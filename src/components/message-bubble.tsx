@@ -64,9 +64,9 @@ export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps)
       {/* The message bubble with the text content. */}
       <div
         className={cn(
-          "max-w-md rounded-2xl p-4 text-white",
+          "max-w-md rounded-2xl p-4",
           isUser
-            ? "bg-primary rounded-br-md" // Style for the user
+            ? "bg-primary text-primary-foreground rounded-br-md" // Style for the user
             : "bg-secondary text-secondary-foreground rounded-bl-md" // Style for the assistant
         )}
       >
