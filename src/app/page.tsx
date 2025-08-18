@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import { DonationSection } from "@/components/donation-section";
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 
 
 /**
@@ -51,25 +52,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header positioned in the top right corner for the language selector. */}
-      <header className="absolute top-0 right-0 p-4 z-10">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Languages className="h-5 w-5" />
-              <span className="sr-only">Change language</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setLocale("en")}>
-              English
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLocale("pt")}>
-              Português
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </header>
+      <SiteHeader />
       <main className="flex-1">
         {/* Main section with the application's title and subtitle. */}
         <section className="w-full pt-6 pb-3 md:pt-8 md:pb-4">

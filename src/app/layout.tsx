@@ -8,6 +8,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 // Imports the context provider for locale (language) management.
 import { LocaleProvider } from "@/lib/locale.tsx";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Defines the application's metadata, such as title and description, for SEO.
 export const metadata: Metadata = {
@@ -57,13 +58,20 @@ export default function RootLayout({
       </head>
       {/* Defines the <body> tag with base style classes. */}
       <body className={cn("font-body antialiased min-h-screen")}>
-        {/* The LocaleProvider wraps the application to provide the language context. */}
-        <LocaleProvider>
-          {/* Renders the child components (the pages). */}
-          {children}
-          {/* The Toaster is rendered here to be available throughout the application. */}
-          <Toaster />
-        </LocaleProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* The LocaleProvider wraps the application to provide the language context. */}
+          <LocaleProvider>
+            {/* Renders the child components (the pages). */}
+            {children}
+            {/* The Toaster is rendered here to be available throughout the application. */}
+            <Toaster />
+          </LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
