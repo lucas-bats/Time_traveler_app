@@ -1,3 +1,5 @@
+"use client";
+
 // Imports components from Next.js and the UI library.
 import Link from "next/link";
 import { Button } from "./ui/button";
