@@ -111,6 +111,10 @@ export default function Home() {
         <p className="text-xs text-muted-foreground">
           &copy; 2024 {t.title}. {t.allRightsReserved}.
         </p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+            <Link className="text-xs hover:underline underline-offset-4" href="/about">{t.about}</Link>
+            <Link className="text-xs hover:underline underline-offset-4" href="/privacy">{t.privacyPolicy}</Link>
+        </nav>
       </footer>
     </div>
   );

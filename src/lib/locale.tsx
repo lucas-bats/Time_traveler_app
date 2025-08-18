@@ -53,6 +53,8 @@ const translations = {
     pixKeyCopied: 'The PIX key has been copied!',
     orDonateWith: 'Or donate with',
     donateWithPaypal: 'Donate with PayPal',
+    about: 'About',
+    privacyPolicy: 'Privacy Policy',
   },
   pt: {
     title: 'Eternal Minds',
@@ -96,6 +98,8 @@ const translations = {
     pixKeyCopied: 'A chave PIX foi copiada!',
     orDonateWith: 'Ou doe com',
     donateWithPaypal: 'Doar com PayPal',
+    about: 'Sobre',
+    privacyPolicy: 'Política de Privacidade',
   }
 };
 
