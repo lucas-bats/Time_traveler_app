@@ -93,7 +93,7 @@ export function ChatArea({
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm flex-1 min-h-0">
         {/* Header of the chat area with the character's image and name. */}
-        <div className="flex items-center justify-between p-4 border-b">
+        <div className="flex items-center justify-between p-4 border-b shrink-0">
           <div className="flex items-center">
             <Image
               src={character.image}
@@ -134,50 +134,53 @@ export function ChatArea({
           )}
         </div>
         
-        <Tabs defaultValue="chat" className="flex-1 flex flex-col min-h-0">
-          <TabsList className="mx-4 mt-4 shrink-0">
-            <TabsTrigger value="chat">{t.chat}</TabsTrigger>
-            <TabsTrigger value="connections">{t.connections}</TabsTrigger>
-          </TabsList>
-          <TabsContent value="chat" className="flex-1 flex flex-col min-h-0">
-            {/* Scrollable area where messages are displayed. */}
-            <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
-                {/* If there are no messages and it's not loading, display suggestions. */}
-                {messages.length === 0 && !isLoading && (
-                  <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                      <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        {suggestions.map((suggestion, i) => (
-                          <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
-                            "{suggestion}"
-                          </Button>
-                        ))}
-                      </div>
-                  </div>
-                )}
-              <div className="space-y-4">
-                {/* Maps and renders each message. */}
-                {messages.map((message) => (
-                  <MessageBubble
-                    key={message.id}
-                    message={message}
-                    onToggleFavorite={onToggleFavorite}
-                  />
-                ))}
-                {/* Shows the "typing" loader while the AI is responding. */}
-                {isLoading && <QuillLoader />}
-              </div>
-            </ScrollArea>
-          </TabsContent>
-          <TabsContent value="connections" className="flex-1 min-h-0 overflow-hidden">
-             <ScrollArea className="h-full p-4">
-                <CharacterConnections influences={influences} influenced={influenced} />
-             </ScrollArea>
-          </TabsContent>
-        </Tabs>
+        {/* This container will hold the tabs and allow the content to scroll correctly */}
+        <div className="flex-1 flex flex-col min-h-0">
+            <Tabs defaultValue="chat" className="flex-1 flex flex-col min-h-0">
+            <TabsList className="mx-4 mt-4 shrink-0">
+                <TabsTrigger value="chat">{t.chat}</TabsTrigger>
+                <TabsTrigger value="connections">{t.connections}</TabsTrigger>
+            </TabsList>
+            <TabsContent value="chat" className="flex-1 flex flex-col min-h-0">
+                {/* Scrollable area where messages are displayed. */}
+                <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
+                    {/* If there are no messages and it's not loading, display suggestions. */}
+                    {messages.length === 0 && !isLoading && (
+                    <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
+                        <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                            {suggestions.map((suggestion, i) => (
+                            <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
+                                "{suggestion}"
+                            </Button>
+                            ))}
+                        </div>
+                    </div>
+                    )}
+                <div className="space-y-4">
+                    {/* Maps and renders each message. */}
+                    {messages.map((message) => (
+                    <MessageBubble
+                        key={message.id}
+                        message={message}
+                        onToggleFavorite={onToggleFavorite}
+                    />
+                    ))}
+                    {/* Shows the "typing" loader while the AI is responding. */}
+                    {isLoading && <QuillLoader />}
+                </div>
+                </ScrollArea>
+            </TabsContent>
+            <TabsContent value="connections" className="flex-1 min-h-0">
+                <ScrollArea className="h-full p-4">
+                    <CharacterConnections influences={influences} influenced={influenced} />
+                </ScrollArea>
+            </TabsContent>
+            </Tabs>
+        </div>
         
         {/* Bottom section with the message submission form. */}
-        <div className="p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shrink-0">
           <form onSubmit={onFormSubmit} className="flex items-start gap-4">
             <Textarea
               value={input}
