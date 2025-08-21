@@ -81,6 +81,12 @@ const translations = {
     changesToPolicyText: 'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.',
     contactUsTitle: 'Contact Us',
     contactUsText: 'If you have any questions about this Privacy Policy, please contact us at: lucaspaesbatista@yahoo.com.br',
+    chat: 'Chat',
+    connections: 'Connections',
+    influencedBy: 'Influenced by',
+    influenced: 'Influenced',
+    noInfluencesFound: 'No direct influences found for this figure.',
+    noInfluencedFound: 'This figure did not directly influence anyone in our records.',
   },
   pt: {
     title: 'Eternal Minds',
@@ -152,6 +158,12 @@ const translations = {
     changesToPolicyText: 'Podemos atualizar esta Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página.',
     contactUsTitle: 'Entre em Contato',
     contactUsText: 'Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco em: lucaspaesbatista@yahoo.com.br',
+    chat: 'Chat',
+    connections: 'Conexões',
+    influencedBy: 'Influenciado por',
+    influenced: 'Influenciou',
+    noInfluencesFound: 'Nenhuma influência direta encontrada para esta figura.',
+    noInfluencedFound: 'Esta figura não influenciou diretamente ninguém em nossos registros.',
   }
 };
 

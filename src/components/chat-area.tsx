@@ -24,6 +24,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getInfluencedBy, getInfluencesFor, type DetailedConnection } from "@/lib/connections";
+import { CharacterConnections } from "./character-connections";
 
 // Defines the structure of a message in the chat.
 export interface Message {
@@ -70,6 +73,10 @@ export function ChatArea({
   
   // Defines the initial question suggestions.
   const suggestions = [t.tellMeAboutYourLife, t.tellMeAboutYourWork];
+
+  // Gets connection data for the character.
+  const influences = getInfluencesFor(character.id);
+  const influenced = getInfluencedBy(character.id);
 
   // Effect that scrolls the chat area to the bottom whenever a new message is added.
   useEffect(() => {
@@ -127,34 +134,47 @@ export function ChatArea({
           )}
         </div>
         
-        {/* Scrollable area where messages are displayed. */}
-        <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
-            {/* If there are no messages and it's not loading, display suggestions. */}
-            {messages.length === 0 && !isLoading && (
-               <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                  <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    {suggestions.map((suggestion, i) => (
-                      <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
-                        "{suggestion}"
-                      </Button>
-                    ))}
+        <Tabs defaultValue="chat" className="flex-1 flex flex-col min-h-0">
+          <TabsList className="mx-4 mt-4">
+            <TabsTrigger value="chat">{t.chat}</TabsTrigger>
+            <TabsTrigger value="connections">{t.connections}</TabsTrigger>
+          </TabsList>
+          <TabsContent value="chat" className="flex-1 flex flex-col min-h-0">
+            {/* Scrollable area where messages are displayed. */}
+            <ScrollArea className="flex-1 p-4" viewportRef={scrollViewportRef}>
+                {/* If there are no messages and it's not loading, display suggestions. */}
+                {messages.length === 0 && !isLoading && (
+                  <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
+                      <p className="mb-4">{`${t.ask} ${character.name} ${t.aQuestion}`}</p>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        {suggestions.map((suggestion, i) => (
+                          <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
+                            "{suggestion}"
+                          </Button>
+                        ))}
+                      </div>
                   </div>
+                )}
+              <div className="space-y-4">
+                {/* Maps and renders each message. */}
+                {messages.map((message) => (
+                  <MessageBubble
+                    key={message.id}
+                    message={message}
+                    onToggleFavorite={onToggleFavorite}
+                  />
+                ))}
+                {/* Shows the "typing" loader while the AI is responding. */}
+                {isLoading && <QuillLoader />}
               </div>
-            )}
-          <div className="space-y-4">
-            {/* Maps and renders each message. */}
-            {messages.map((message) => (
-              <MessageBubble
-                key={message.id}
-                message={message}
-                onToggleFavorite={onToggleFavorite}
-              />
-            ))}
-            {/* Shows the "typing" loader while the AI is responding. */}
-            {isLoading && <QuillLoader />}
-          </div>
-        </ScrollArea>
+            </ScrollArea>
+          </TabsContent>
+          <TabsContent value="connections" className="flex-1 min-h-0">
+             <ScrollArea className="h-full p-4">
+                <CharacterConnections influences={influences} influenced={influenced} />
+             </ScrollArea>
+          </TabsContent>
+        </Tabs>
         
         {/* Bottom section with the message submission form. */}
         <div className="p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
