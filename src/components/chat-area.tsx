@@ -135,7 +135,7 @@ export function ChatArea({
         </div>
         
         <Tabs defaultValue="chat" className="flex-1 flex flex-col min-h-0">
-          <TabsList className="mx-4 mt-4">
+          <TabsList className="mx-4 mt-4 shrink-0">
             <TabsTrigger value="chat">{t.chat}</TabsTrigger>
             <TabsTrigger value="connections">{t.connections}</TabsTrigger>
           </TabsList>
@@ -169,7 +169,7 @@ export function ChatArea({
               </div>
             </ScrollArea>
           </TabsContent>
-          <TabsContent value="connections" className="flex-1 min-h-0">
+          <TabsContent value="connections" className="flex-1 min-h-0 overflow-hidden">
              <ScrollArea className="h-full p-4">
                 <CharacterConnections influences={influences} influenced={influenced} />
              </ScrollArea>
