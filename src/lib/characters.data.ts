@@ -832,7 +832,7 @@ export const charactersData: Character[] = [
     "name": "Isaac Newton",
     "description": "An English mathematician, physicist, and astronomer who was a pivotal figure in the scientific revolution. His formulation of the laws of motion and universal gravitation laid the groundwork for classical mechanics.",
     "description_pt": "Um matemático, físico e astrônomo inglês que foi uma figura central na revolução científica. Sua formulação das leis do movimento e da gravitação universal estabeleceu as bases da mecânica clássica.",
-    "image": "https://placehold.co/400x400.png",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FNewton%20Portrait_simple_compose_01k36sncwvf7va409q89z9rnvq%20(1).png?alt=media&token=6d52549d-ad5b-4705-9b00-35056681546b",
     "aiHint": "Isaac Newton scientist",
     "era": "Modern",
     "era_pt": "Moderna",
