@@ -98,6 +98,10 @@ export function ChatArea({
   
   const defaultTab = isCharacter ? "chat" : "participants";
   const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
+  
+  const placeholderText = isEvent && locale === 'pt' 
+    ? `${t.askAbout} ${subjectName}${t.aQuestion}`
+    : `${t.ask} ${subjectName}${t.aQuestion}`;
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
@@ -153,7 +157,12 @@ export function ChatArea({
                   <ScrollArea className="h-full p-4" viewportRef={scrollViewportRef}>
                       {messages.length === 0 && !isLoading && (
                       <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                          <p className="mb-4">{`${t.ask} ${subjectName} ${t.aQuestion}`}</p>
+                          <p className="mb-4">
+                            {isEvent && locale === 'pt' 
+                                ? `${t.askAbout} ${subjectName}${t.aQuestion}`
+                                : `${t.ask} ${subjectName}${t.aQuestion}`
+                            }
+                          </p>
                           <div className="flex flex-col sm:flex-row gap-2">
                               {suggestions.map((suggestion, i) => (
                               <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
@@ -207,7 +216,7 @@ export function ChatArea({
             <Textarea
               value={input}
               onChange={(e) => onInputChange(e.target.value)}
-              placeholder={`${t.ask} ${subjectName} ${t.aQuestion}`}
+              placeholder={placeholderText}
               className="flex-1 resize-none"
               rows={1}
               onKeyDown={(e) => {

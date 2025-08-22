@@ -98,10 +98,7 @@ export const eventsData: Event[] = [
       "winston-churchill",
       "franklin-roosevelt",
       "joseph-stalin",
-      "adolf_hitler",
-      "benito_mussolini",
       "charles_de_gaulle",
-      "hirohito"
     ],
     "context": "With roots in the Treaty of Versailles and the rise of totalitarian regimes, World War II resulted in millions of deaths, the Holocaust, the use of nuclear weapons, and the beginning of the Cold War.",
     "context_pt": "Com raízes no Tratado de Versalhes e na ascensão dos regimes totalitários, a Segunda Guerra Mundial resultou em milhões de mortes, o Holocausto, o uso de armas nucleares e o início da Guerra Fria.",
