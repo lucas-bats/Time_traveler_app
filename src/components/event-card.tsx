@@ -25,10 +25,10 @@ export function EventCard({ event }: EventCardProps) {
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <CardHeader className="p-0">
-        <Link href={`/chat/event/${event.id}`} aria-label={`${t.chatWith} ${event.name}`}>
+        <Link href={`/chat/event/${event.id}`} aria-label={`${t.chatWith} ${locale === 'pt' ? event.name_pt : event.name}`}>
           <Image
             src={event.image || "https://placehold.co/400x400.png"}
-            alt={event.name}
+            alt={locale === 'pt' ? event.name_pt : event.name}
             width={400}
             height={400}
             className="w-full h-64 object-cover bg-black/5"
@@ -38,7 +38,7 @@ export function EventCard({ event }: EventCardProps) {
       </CardHeader>
       <CardContent className="p-6">
         <CardTitle className="font-headline text-2xl mb-2 text-primary">
-          {event.name}
+          {locale === 'pt' ? event.name_pt : event.name}
         </CardTitle>
         <CardDescription className="line-clamp-3 mb-4 text-muted-foreground h-[60px]">
           {locale === 'pt' ? event.description_pt : event.description}

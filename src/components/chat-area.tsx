@@ -97,6 +97,7 @@ export function ChatArea({
   }, [messageCount]);
   
   const defaultTab = isCharacter ? "chat" : "participants";
+  const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
@@ -105,15 +106,15 @@ export function ChatArea({
           <div className="flex items-center">
             <Image
               src={subject.image || 'https://placehold.co/128x128.png'}
-              alt={subject.name}
+              alt={subjectName}
               width={48}
               height={48}
               className="rounded-full object-cover w-12 h-12"
               data-ai-hint={isCharacter ? subject.aiHint : 'historical event'}
             />
             <div className="ml-4">
-              <h2 className="font-headline text-xl text-primary">{subject.name}</h2>
-              <p className="text-sm text-muted-foreground">{locale === 'pt' ? subject.area_pt : subject.area}</p>
+              <h2 className="font-headline text-xl text-primary">{subjectName}</h2>
+              <p className="text-sm text-muted-foreground">{locale === 'pt' && 'area_pt' in subject ? subject.area_pt : subject.area}</p>
             </div>
           </div>
           {messages.length > 0 && (
@@ -152,7 +153,7 @@ export function ChatArea({
                   <ScrollArea className="h-full p-4" viewportRef={scrollViewportRef}>
                       {messages.length === 0 && !isLoading && (
                       <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
-                          <p className="mb-4">{`${t.ask} ${subject.name} ${t.aQuestion}`}</p>
+                          <p className="mb-4">{`${t.ask} ${subjectName} ${t.aQuestion}`}</p>
                           <div className="flex flex-col sm:flex-row gap-2">
                               {suggestions.map((suggestion, i) => (
                               <Button key={i} variant="outline" size="sm" onClick={() => onSuggestionClick(suggestion)}>
@@ -206,7 +207,7 @@ export function ChatArea({
             <Textarea
               value={input}
               onChange={(e) => onInputChange(e.target.value)}
-              placeholder={`${t.ask} ${subject.name} ${t.aQuestion}`}
+              placeholder={`${t.ask} ${subjectName} ${t.aQuestion}`}
               className="flex-1 resize-none"
               rows={1}
               onKeyDown={(e) => {
@@ -224,7 +225,7 @@ export function ChatArea({
         </div>
       </div>
       
-      <FavoritesSidebar messages={messages} characterName={subject.name} />
+      <FavoritesSidebar messages={messages} characterName={subjectName} />
     </div>
   );
 }
