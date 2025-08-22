@@ -41,7 +41,7 @@ export interface Message {
 }
 
 // Defines a generic type for the chat subject (either Character or Event).
-type ChatSubject = (Character & { type: 'character' }) | (Event & { type: 'event' });
+export type ChatSubject = (Character & { type: 'character' }) | (Event & { type: 'event' });
 
 // Defines the interface for the ChatArea component's props.
 interface ChatAreaProps {
@@ -96,7 +96,6 @@ export function ChatArea({
     }
   }, [messageCount]);
   
-  const defaultTab = isCharacter ? "chat" : "participants";
   const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
   
   const placeholderText = isEvent
@@ -104,7 +103,7 @@ export function ChatArea({
     : `${t.ask} ${subjectName}...`;
 
   return (
-    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
+    <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0">
       <div className="flex flex-col h-full bg-card rounded-lg border shadow-sm min-h-0">
         <div className="flex items-center justify-between p-4 border-b shrink-0">
           <div className="flex items-center">
@@ -143,14 +142,15 @@ export function ChatArea({
         </div>
         
         <div className="flex-1 flex flex-col min-h-0">
-          <Tabs defaultValue={defaultTab} className="flex flex-col flex-1 min-h-0">
-            <div className="px-4 mt-4 shrink-0">
-              <TabsList>
-                  <TabsTrigger value="chat"><MessageSquare className="mr-2 h-4 w-4"/>{t.chat}</TabsTrigger>
-                  {isCharacter && <TabsTrigger value="connections">{t.connections}</TabsTrigger>}
-                  {isEvent && <TabsTrigger value="participants"><Users className="mr-2 h-4 w-4"/>{t.participants}</TabsTrigger>}
-              </TabsList>
-            </div>
+          <Tabs defaultValue="chat" className="flex flex-col flex-1 min-h-0">
+            {isCharacter && (
+              <div className="px-4 mt-4 shrink-0">
+                <TabsList>
+                    <TabsTrigger value="chat"><MessageSquare className="mr-2 h-4 w-4"/>{t.chat}</TabsTrigger>
+                    <TabsTrigger value="connections">{t.connections}</TabsTrigger>
+                </TabsList>
+              </div>
+            )}
 
             <div className="flex-1 min-h-0 mt-2">
               <TabsContent value="chat" className="h-full">
@@ -188,25 +188,6 @@ export function ChatArea({
                     </ScrollArea>
                 </TabsContent>
               )}
-
-              {isEvent && (
-                 <TabsContent value="participants" className="h-full">
-                    <ScrollArea className="h-full p-4">
-                        <div className="space-y-4">
-                            <h3 className="text-xl font-headline text-primary mb-4">{t.keyParticipants}</h3>
-                            {participants.map(p => (
-                               <div key={p.id} className="flex items-center gap-4 p-2 rounded-md border bg-background">
-                                    <Image src={p.image} alt={p.name} width={40} height={40} className="rounded-full w-10 h-10 object-cover"/>
-                                    <div>
-                                        <Link href={`/chat/${p.id}`} className="font-bold hover:underline">{p.name}</Link>
-                                        <p className="text-sm text-muted-foreground">{locale === 'pt' ? p.description_pt : p.description}</p>
-                                    </div>
-                               </div>
-                            ))}
-                        </div>
-                    </ScrollArea>
-                </TabsContent>
-              )}
             </div>
           </Tabs>
         </div>
@@ -234,7 +215,11 @@ export function ChatArea({
         </div>
       </div>
       
-      <FavoritesSidebar messages={messages} characterName={subjectName} />
+      <FavoritesSidebar 
+        subject={subject}
+        messages={messages} 
+        participants={participants}
+      />
     </div>
   );
 }
