@@ -100,8 +100,8 @@ export function ChatArea({
   const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
   
   const placeholderText = isEvent
-    ? `${t.askAbout} ${subjectName}${t.aQuestion}`
-    : `${t.ask} ${subjectName}${t.aQuestion}`;
+    ? `${t.askAbout} ${subjectName}...`
+    : `${t.ask} ${subjectName}...`;
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0 h-full">
@@ -152,15 +152,15 @@ export function ChatArea({
               </TabsList>
             </div>
 
-            <div className="flex-1 overflow-y-auto mt-2">
+            <div className="flex-1 min-h-0 mt-2">
               <TabsContent value="chat" className="h-full">
                   <ScrollArea className="h-full p-4" viewportRef={scrollViewportRef}>
                       {messages.length === 0 && !isLoading && (
                       <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
                           <p className="mb-4">
                             {isEvent 
-                                ? `${t.askAbout} ${subjectName}${t.aQuestion}`
-                                : `${t.ask} ${subjectName}${t.aQuestion}`
+                                ? `${t.askAbout} ${subjectName}...`
+                                : `${t.ask} ${subjectName}...`
                             }
                           </p>
                           <div className="flex flex-col sm:flex-row gap-2">
