@@ -8,13 +8,12 @@ import type { Event } from "@/lib/events";
 import { MessageBubble } from "./message-bubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Send, Trash2, Users, MessageSquare } from "lucide-react";
+import { Send, Trash2, MessageSquare, Info } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLocale } from "@/lib/locale.tsx";
-import { FavoritesSidebar } from "./favorites-sidebar";
+import { FavoritesSidebar, FavoritesSidebarContent } from "./favorites-sidebar";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,11 +25,18 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getInfluencedBy, getInfluencesFor } from "@/lib/connections";
 import { CharacterConnections } from "./character-connections";
 import { getCharacterById } from "@/lib/characters";
-import { Badge } from "./ui/badge";
+
 
 // Defines the structure of a message in the chat.
 export interface Message {
@@ -120,25 +126,48 @@ export function ChatArea({
               <p className="text-sm text-muted-foreground">{locale === 'pt' && 'area_pt' in subject ? subject.area_pt : subject.area}</p>
             </div>
           </div>
-          {messages.length > 0 && (
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label={t.clearChat}>
-                  <Trash2 className="h-5 w-5 text-muted-foreground" />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>{t.areYouSure}</AlertDialogTitle>
-                  <AlertDialogDescription>{t.clearChatConfirmation}</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>{t.cancel}</AlertDialogCancel>
-                  <AlertDialogAction onClick={onClearChat}>{t.clear}</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          )}
+          <div className="flex items-center gap-2">
+            <div className="lg:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label={t.details}>
+                    <Info className="h-5 w-5 text-muted-foreground" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>{t.details}</SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-4 h-[calc(100%-4rem)]">
+                     <FavoritesSidebarContent 
+                        subject={subject}
+                        messages={messages} 
+                        participants={participants}
+                     />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+            {messages.length > 0 && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="ghost" size="icon" aria-label={t.clearChat}>
+                    <Trash2 className="h-5 w-5 text-muted-foreground" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>{t.areYouSure}</AlertDialogTitle>
+                    <AlertDialogDescription>{t.clearChatConfirmation}</AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{t.cancel}</AlertDialogCancel>
+                    <AlertDialogAction onClick={onClearChat}>{t.clear}</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
+          </div>
         </div>
         
         <div className="flex-1 flex flex-col min-h-0">
@@ -215,11 +244,13 @@ export function ChatArea({
         </div>
       </div>
       
-      <FavoritesSidebar 
-        subject={subject}
-        messages={messages} 
-        participants={participants}
-      />
+      <div className="hidden lg:block">
+        <FavoritesSidebar 
+          subject={subject}
+          messages={messages} 
+          participants={participants}
+        />
+      </div>
     </div>
   );
 }

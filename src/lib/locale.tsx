@@ -97,6 +97,7 @@ const translations = {
     whatWereTheConsequences: 'What were the main consequences?',
     participants: 'Participants',
     keyParticipants: 'Key Participants',
+    details: 'Details',
   },
   pt: {
     title: 'Eternal Minds',
@@ -117,7 +118,7 @@ const translations = {
     yourFavoriteMessages: 'Suas mensagens favoritas aparecerão aqui.',
     clickStarToSave: 'Clique na estrela em uma mensagem para salvá-la.',
     ask: 'Faça uma pergunta para',
-    askAbout: 'Faça uma pergunta sobre',
+    askAbout: 'Pergunte sobre',
     aQuestion: '...',
     error: 'Erro',
     somethingWentWrong: 'Algo deu errado.',
@@ -184,6 +185,7 @@ const translations = {
     whatWereTheConsequences: 'Quais foram as principais consequências?',
     participants: 'Participantes',
     keyParticipants: 'Principais Participantes',
+    details: 'Detalhes',
   }
 };
 
