@@ -99,7 +99,7 @@ export function ChatArea({
   const defaultTab = isCharacter ? "chat" : "participants";
   const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
   
-  const placeholderText = isEvent && locale === 'pt' 
+  const placeholderText = isEvent
     ? `${t.askAbout} ${subjectName}${t.aQuestion}`
     : `${t.ask} ${subjectName}${t.aQuestion}`;
 
@@ -158,7 +158,7 @@ export function ChatArea({
                       {messages.length === 0 && !isLoading && (
                       <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
                           <p className="mb-4">
-                            {isEvent && locale === 'pt' 
+                            {isEvent 
                                 ? `${t.askAbout} ${subjectName}${t.aQuestion}`
                                 : `${t.ask} ${subjectName}${t.aQuestion}`
                             }

@@ -31,7 +31,7 @@ const translations = {
     clickStarToSave: 'Click the star on a message to save it.',
     ask: 'Ask',
     askAbout: 'Ask about',
-    aQuestion: 'a question...',
+    aQuestion: ' a question...',
     error: 'Error',
     somethingWentWrong: 'Something went wrong.',
     copiedToClipboard: 'Copied to clipboard!',
