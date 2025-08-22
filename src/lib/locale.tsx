@@ -13,7 +13,7 @@ type Locale = 'en' | 'pt';
 const translations = {
   en: {
     title: 'Eternal Minds',
-    subtitle: 'Engage in enlightening conversations with iconic figures from the past. Who will you talk to first?',
+    subtitle: 'Engage in enlightening conversations with iconic figures and pivotal events from the past. Who, or what, will you talk to first?',
     allRightsReserved: 'All rights reserved',
     searchPlaceholder: 'Search for a figure...',
     filterByEra: 'Filter by Era',
@@ -99,7 +99,7 @@ const translations = {
   },
   pt: {
     title: 'Eternal Minds',
-    subtitle: 'Participe de conversas esclarecedoras com figuras icônicas do passado. Com quem você vai falar primeiro?',
+    subtitle: 'Participe de conversas esclarecedoras com figuras icônicas e eventos cruciais do passado. Com quem, ou com o quê, você vai falar primeiro?',
     allRightsReserved: 'Todos os direitos reservados',
     searchPlaceholder: 'Procure por uma figura...',
     filterByEra: 'Filtrar por Época',
