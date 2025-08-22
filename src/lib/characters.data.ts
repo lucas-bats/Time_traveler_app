@@ -969,5 +969,57 @@ export const charactersData: Character[] = [
     "field": "Politics",
     "field_pt": "Política",
     "country": "France"
+  },
+  {
+    "id": "dom_pedro_i",
+    "name": "Dom Pedro I",
+    "description": "Founder and first ruler of the Empire of Brazil, he reigned as 'Emperor of Brazil' from 1822 to 1831. He declared Brazil's independence from Portugal.",
+    "description_pt": "Fundador e primeiro governante do Império do Brasil, reinou como 'Imperador do Brasil' de 1822 a 1831. Ele declarou a independência do Brasil de Portugal.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FDom%20Pedro%20I%20Portrait_simple_compose_01k39bj0v4ew0b201y6b0w410p.png?alt=media&token=18585489-3220-4e20-9a25-e51c1482f716",
+    "aiHint": "Dom Pedro I Brazil",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Brazil/Portugal"
+  },
+  {
+    "id": "jose_bonifacio",
+    "name": "José Bonifácio",
+    "description": "A Brazilian statesman, naturalist, professor, and poet, he was a crucial figure in the Brazilian independence, earning the title of 'Patriarch of Independence.'",
+    "description_pt": "Estadista, naturalista, professor e poeta brasileiro, foi uma figura crucial na independência do Brasil, recebendo o título de 'Patriarca da Independência'.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FJos%C3%A9%20Bonif%C3%A1cio%20Portrait_simple_compose_01k39bjcwnfa899zay39962459.png?alt=media&token=ac4b8408-7662-4303-9e12-4a008e7b337c",
+    "aiHint": "Jose Bonifacio Brazil",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Brazil"
+  },
+  {
+    "id": "maria_leopoldina",
+    "name": "Maria Leopoldina",
+    "description": "An Archduchess of Austria and the first Empress of Brazil. She played a significant role in the process of Brazil's independence.",
+    "description_pt": "Arquiduquesa da Áustria e primeira Imperatriz do Brasil. Ela desempenhou um papel significativo no processo de independência do Brasil.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FLeopoldina%20Portrait_simple_compose_01k39bjqf2ejq9z8q71x8gch35.png?alt=media&token=2620a2f4-754f-4d2d-ab00-51780517926b",
+    "aiHint": "Maria Leopoldina Brazil",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Austria/Brazil"
+  },
+  {
+    "id": "joao_vi",
+    "name": "Dom João VI",
+    "description": "King of the United Kingdom of Portugal, Brazil and the Algarves from 1816 to 1825. His court's move to Brazil was a pivotal event that paved the way for independence.",
+    "description_pt": "Rei do Reino Unido de Portugal, Brasil e Algarves de 1816 a 1825. A transferência de sua corte para o Brasil foi um evento crucial que abriu caminho para a independência.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FJo%C3%A3o%20VI%20Portrait_simple_compose_01k39bk475f459z2cbr6gnh7v2.png?alt=media&token=c96d926a-9f5e-49b0-967a-11501cdd66da",
+    "aiHint": "Joao VI Portugal",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Portugal/Brazil"
   }
 ]
