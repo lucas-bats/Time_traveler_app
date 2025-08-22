@@ -52,7 +52,7 @@ export const eventsData: Event[] = [
     ],
     "context": "In the early 19th century, tensions between the colony and the metropole grew. The movement culminated in 1822, when Dom Pedro I proclaimed independence, breaking with Portugal and consolidating Brazil as a sovereign nation.",
     "context_pt": "No início do século XIX, as tensões entre a colônia e a metrópole cresceram. O movimento culminou em 1822, quando Dom Pedro I proclamou a independência, rompendo com Portugal e consolidando o Brasil como uma nação soberana.",
-    "image": "https://placehold.co/400x400.png"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FBrazil's%20Independence%202%201822_simple_compose_01k392chk7fxxadfvk16mqmgpe.PNG?alt=media&token=626ac21f-f4e2-4942-b79b-0d3ae4d7d0a7"
   },
   {
     "id": "primeira_guerra_mundial",
@@ -75,7 +75,7 @@ export const eventsData: Event[] = [
     ],
     "context": "With imperialist rivalries, military alliances, and nationalist tensions, World War I transformed world politics and led to the fall of empires such as the Austro-Hungarian, Ottoman, German, and Russian.",
     "context_pt": "Com rivalidades imperialistas, alianças militares e tensões nacionalistas, a Primeira Guerra Mundial transformou a política mundial и levou à queda de impérios como o Austro-Húngaro, Otomano, Alemão e Russo.",
-    "image": "https://placehold.co/400x400.png"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWI%20Scene_simple_compose_01k392j3xnfktracf4g0rrngps.png?alt=media&token=2b99e404-27a0-401f-87e8-a669b902b810"
   },
   {
     "id": "segunda_guerra_mundial",
@@ -99,6 +99,6 @@ export const eventsData: Event[] = [
     ],
     "context": "With roots in the Treaty of Versailles and the rise of totalitarian regimes, World War II resulted in millions of deaths, the Holocaust, the use of nuclear weapons, and the beginning of the Cold War.",
     "context_pt": "Com raízes no Tratado de Versalhes e na ascensão dos regimes totalitários, a Segunda Guerra Mundial resultou em milhões de mortes, o Holocausto, o uso de armas nucleares e o início da Guerra Fria.",
-    "image": "https://placehold.co/400x400.png"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWII%20Guerra%20e%20Insensatez_remix_01k392vfr0e22a97q8yqrc2exf.png?alt=media&token=e9fb493f-8720-4d67-9aa7-7d3eaed46a63"
   }
 ]
