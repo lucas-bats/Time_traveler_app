@@ -891,5 +891,44 @@ export const charactersData: Character[] = [
     "field": "Politics",
     "field_pt": "Política",
     "country": "USA"
+  },
+  {
+    "id": "gavrilo-princip",
+    "name": "Gavrilo Princip",
+    "description": "A Bosnian Serb member of Young Bosnia who assassinated Archduke Franz Ferdinand of Austria in Sarajevo on 28 June 1914, sparking the outbreak of World War I.",
+    "description_pt": "Um sérvio-bósnio membro da Jovem Bósnia que assassinou o arquiduque Francisco Ferdinando da Áustria em Sarajevo em 28 de junho de 1914, desencadeando o início da Primeira Guerra Mundial.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Gavrilo Princip",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "History",
+    "field_pt": "História",
+    "country": "Bosnia / Serbia"
+  },
+  {
+    "id": "franz-ferdinand",
+    "name": "Franz Ferdinand",
+    "description": "Archduke of Austria-Este, Austro-Hungarian and Royal Prince of Hungary and of Bohemia, and from 1896 until his death, heir presumptive to the Austro-Hungarian throne. His assassination in Sarajevo is considered the most immediate cause of World War I.",
+    "description_pt": "Arquiduque da Áustria-Este, Príncipe Austro-Húngaro e Real da Hungria e da Boêmia e, de 1896 até sua morte, herdeiro presuntivo do trono Austro-Húngaro. Seu assassinato em Sarajevo é considerado a causa mais imediata da Primeira Guerra Mundial.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Franz Ferdinand",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Austria-Hungary"
+  },
+  {
+    "id": "woodrow-wilson",
+    "name": "Woodrow Wilson",
+    "description": "The 28th president of the United States, serving from 1913 to 1921. A member of the Democratic Party, Wilson oversaw the passage of progressive legislative policies and led the United States during World War I.",
+    "description_pt": "O 28º presidente dos Estados Unidos, servindo de 1913 a 1921. Membro do Partido Democrata, Wilson supervisionou a aprovação de políticas legislativas progressistas e liderou os Estados Unidos durante a Primeira Guerra Mundial.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Woodrow Wilson",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "USA"
   }
 ]
