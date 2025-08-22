@@ -11,6 +11,8 @@ import { ChatClient } from "@/components/chat-client";
 /**
  * Page component for the event chat screen.
  * It is responsible for rendering the conversation interface for a specific historical event.
+ * This component acts as a wrapper, extracting the event ID from the URL
+ * and passing it to the main ChatClient component.
  */
 export default function EventChatPage() {
   // Uses the useParams hook to get parameters from the URL.

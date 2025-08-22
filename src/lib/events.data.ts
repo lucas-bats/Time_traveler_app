@@ -1,5 +1,11 @@
+// Imports the Event type to ensure data consistency.
 import type { Event } from "./events";
 
+/**
+ * @fileOverview This file contains the raw data array for all historical events
+ * available in the application. Each object represents an event and includes
+ * its details, such as ID, name, description, participants, and image URL.
+ */
 export const eventsData: Event[] = [
   {
     "id": "french-revolution",
@@ -66,15 +72,15 @@ export const eventsData: Event[] = [
     "description": "A global conflict involving the major world powers, triggered by the assassination of Archduke Franz Ferdinand and marked by trench warfare and wars of attrition.",
     "description_pt": "Conflito global que envolveu as principais potências mundiais, desencadeado pelo assassinato do arquiduque Francisco Ferdinando e marcado por trincheiras e guerras de desgaste.",
     "participants": [
-      "gavrilo_princip",
-      "francisco_ferdinando",
-      "woodrow_wilson",
+      "gavrilo-princip",
+      "franz-ferdinand",
+      "woodrow-wilson",
       "karl-marx",
       "otto-von-bismarck",
       "queen-victoria"
     ],
     "context": "With imperialist rivalries, military alliances, and nationalist tensions, World War I transformed world politics and led to the fall of empires such as the Austro-Hungarian, Ottoman, German, and Russian.",
-    "context_pt": "Com rivalidades imperialistas, alianças militares e tensões nacionalistas, a Primeira Guerra Mundial transformou a política mundial и levou à queda de impérios como o Austro-Húngaro, Otomano, Alemão e Russo.",
+    "context_pt": "Com rivalidades imperialistas, alianças militares e tensões nacionalistas, a Primeira Guerra Mundial transformou a política mundial e levou à queda de impérios como o Austro-Húngaro, Otomano, Alemão e Russo.",
     "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWI%20Scene_simple_compose_01k392j3xnfktracf4g0rrngps.png?alt=media&token=2b99e404-27a0-401f-87e8-a669b902b810"
   },
   {
@@ -90,8 +96,8 @@ export const eventsData: Event[] = [
     "description_pt": "Maior conflito da história da humanidade, iniciado pela invasão da Polônia pela Alemanha Nazista, envolvendo praticamente todas as nações do mundo.",
     "participants": [
       "winston-churchill",
-      "franklin_roosevelt",
-      "joseph_stalin",
+      "franklin-roosevelt",
+      "joseph-stalin",
       "adolf_hitler",
       "benito_mussolini",
       "charles_de_gaulle",

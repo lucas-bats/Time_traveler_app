@@ -10,6 +10,7 @@ import {
   chatWithEvent,
   type ChatWithEventInput
 } from "@/ai/flows/chat-with-event";
+// Import data retrieval functions.
 import { getEventById } from "@/lib/events";
 import { getCharacterById } from "@/lib/characters";
 // Import the Zod library for schema validation.
@@ -23,21 +24,27 @@ const characterActionSchema = z.object({
 });
 
 /**
- * Server Action function for character chat.
- * It receives input from the client, validates it, and calls the Genkit flow.
+ * Server Action for character chat.
+ * It receives input from the client, validates it, and calls the appropriate Genkit flow.
+ * @param input The data for the character chat.
+ * @returns An object with the AI's response or an error message.
  */
 export async function getAiResponse(input: ChatWithHistoricalFigureInput) {
+  // Validate the input against the schema.
   const parsedInput = characterActionSchema.safeParse(input);
 
+  // If validation fails, return an error.
   if (!parsedInput.success) {
     return { error: "Invalid input." };
   }
 
   try {
+    // Call the Genkit flow for chatting with a historical figure.
     const result = await chatWithHistoricalFigure(parsedInput.data);
     return { response: result.response };
   } catch (e: any) {
     console.error(e);
+    // Handle potential errors from the AI flow.
     const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
     return { error: errorMessage };
   }
@@ -51,26 +58,32 @@ const eventActionSchema = z.object({
 });
 
 /**
- * Server Action function for event chat.
- * It receives input, fetches event data, and calls the Genkit flow.
+ * Server Action for event chat.
+ * It receives an event ID and a user message, fetches event data, and calls the Genkit flow.
+ * @param input The data for the event chat.
+ * @returns An object with the AI's response or an error message.
  */
 export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }) {
+  // Validate the input.
   const parsedInput = eventActionSchema.safeParse(input);
 
   if (!parsedInput.success) {
     return { error: "Invalid input." };
   }
 
+  // Retrieve the event details using the provided ID.
   const event = getEventById(parsedInput.data.eventId);
   if (!event) {
     return { error: "Event not found." };
   }
 
+  // Get the names of the participants for the AI prompt.
   const participants = event.participants
     .map(id => getCharacterById(id)?.name)
     .filter((name): name is string => !!name);
 
   try {
+    // Call the Genkit flow for chatting with an event.
     const result = await chatWithEvent({
       eventName: event.name,
       eventContext: event.context,
@@ -81,6 +94,7 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
     return { response: result.response };
   } catch (e: any) {
     console.error(e);
+    // Handle potential errors from the AI flow.
     const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
     return { error: errorMessage };
   }
