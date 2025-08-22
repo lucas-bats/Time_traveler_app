@@ -87,6 +87,15 @@ const translations = {
     influenced: 'Influenced',
     noInfluencesFound: 'No direct influences found for this figure.',
     noInfluencedFound: 'This figure did not directly influence anyone in our records.',
+    characters: 'Characters',
+    events: 'Events',
+    noEventsFound: 'No Events Found',
+    checkBackLater: 'Check back later for new historical events.',
+    chatWithTheEvent: 'Chat with the Event',
+    whatWereTheCauses: 'What were the main causes?',
+    whatWereTheConsequences: 'What were the main consequences?',
+    participants: 'Participants',
+    keyParticipants: 'Key Participants',
   },
   pt: {
     title: 'Eternal Minds',
@@ -164,6 +173,15 @@ const translations = {
     influenced: 'Influenciou',
     noInfluencesFound: 'Nenhuma influência direta encontrada para esta figura.',
     noInfluencedFound: 'Esta figura não influenciou diretamente ninguém em nossos registros.',
+    characters: 'Personagens',
+    events: 'Eventos',
+    noEventsFound: 'Nenhum Evento Encontrado',
+    checkBackLater: 'Volte mais tarde para novos eventos históricos.',
+    chatWithTheEvent: 'Conversar com o Evento',
+    whatWereTheCauses: 'Quais foram as principais causas?',
+    whatWereTheConsequences: 'Quais foram as principais consequências?',
+    participants: 'Participantes',
+    keyParticipants: 'Principais Participantes',
   }
 };
 

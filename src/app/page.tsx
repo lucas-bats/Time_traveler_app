@@ -1,47 +1,31 @@
 // Defines this as a "Client Component," executed in the browser.
 "use client";
 
-// Imports the character selection component.
 import { CharacterSelection } from "@/components/character-selection";
-// Imports the function to get the list of characters.
+import { EventSelection } from "@/components/event-selection";
 import { getCharacters } from "@/lib/characters";
-// Imports the hook to use the localization (language) context.
+import { getEvents } from "@/lib/events";
 import { useLocale } from "@/lib/locale";
-// Imports UI components for the dropdown menu.
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-// Imports the button component.
 import { Button } from "@/components/ui/button";
-// Imports icons from the lucide-react library.
-import { Languages, Shuffle, Heart } from "lucide-react";
-// Imports the useRouter hook from Next.js for navigation.
+import { Heart, Shuffle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { DonationSection } from "@/components/donation-section";
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 /**
  * Home page component.
- * Displays the title, subtitle, language selector, and the list of characters to start a chat.
+ * Displays the title, subtitle, and tabs for character and event selection.
  */
 export default function Home() {
-  // Gets the list of all characters.
   const characters = getCharacters();
-  // Gets the functions and state from the localization context (t for translations, setLocale to change language).
-  const { t, setLocale } = useLocale();
-  // Gets the router instance for programmatic navigation.
+  const events = getEvents();
+  const { t } = useLocale();
   const router = useRouter();
 
-  /**
-   * Event handler for the "Surprise Me" button.
-   * Selects a random character and navigates to their chat page.
-   */
   const handleRandomCharacter = () => {
     if (characters.length > 0) {
       const randomIndex = Math.floor(Math.random() * characters.length);
@@ -54,7 +38,6 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <SiteHeader />
       <main className="flex-1">
-        {/* Main section with the application's title and subtitle. */}
         <section className="w-full pt-6 pb-3 md:pt-8 md:pb-4">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -65,7 +48,6 @@ export default function Home() {
                 {t.subtitle}
               </p>
               <div className="flex flex-wrap justify-center gap-4 mt-4">
-                {/* Button to select a random character. */}
                 <Button onClick={handleRandomCharacter} size="lg">
                   <Shuffle className="mr-2 h-5 w-5" />
                   {t.surpriseMe}
@@ -77,20 +59,30 @@ export default function Home() {
                   </Link>
                 </Button>
               </div>
-
-              {/* Description for the "Surprise Me" button. */}
               <p className="text-sm text-muted-foreground mt-2">
                 {t.surpriseMeDescription}
               </p>
             </div>
           </div>
         </section>
-        {/* Component that renders the filterable list of characters. */}
-        <CharacterSelection characters={characters} />
-        {/* Donation Section */}
+
+        <Tabs defaultValue="characters" className="w-full">
+            <div className="flex justify-center">
+                <TabsList>
+                    <TabsTrigger value="characters">{t.characters}</TabsTrigger>
+                    <TabsTrigger value="events">{t.events}</TabsTrigger>
+                </TabsList>
+            </div>
+            <TabsContent value="characters">
+                <CharacterSelection characters={characters} />
+            </TabsContent>
+            <TabsContent value="events">
+                <EventSelection events={events} />
+            </TabsContent>
+        </Tabs>
+
         <DonationSection />
       </main>
-      {/* Page footer. */}
       <SiteFooter />
     </div>
   );
