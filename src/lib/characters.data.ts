@@ -930,5 +930,44 @@ export const charactersData: Character[] = [
     "field": "Politics",
     "field_pt": "Política",
     "country": "USA"
+  },
+  {
+    "id": "franklin-roosevelt",
+    "name": "Franklin D. Roosevelt",
+    "description": "The 32nd U.S. President, who led the country through the Great Depression and World War II. He is known for his New Deal domestic agenda and his wartime leadership.",
+    "description_pt": "O 32º Presidente dos EUA, que liderou o país durante a Grande Depressão e a Segunda Guerra Mundial. É conhecido por sua agenda doméstica do New Deal e por sua liderança em tempos de guerra.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Franklin Roosevelt",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "USA"
+  },
+  {
+    "id": "joseph-stalin",
+    "name": "Joseph Stalin",
+    "description": "The leader of the Soviet Union from the 1920s until his death in 1953. He played a crucial role in the defeat of Nazi Germany in World War II but was also responsible for the deaths of millions.",
+    "description_pt": "O líder da União Soviética desde a década de 1920 até sua morte em 1953. Ele desempenhou um papel crucial na derrota da Alemanha Nazista na Segunda Guerra Mundial, mas também foi responsável pela morte de milhões.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Joseph Stalin",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Soviet Union"
+  },
+  {
+    "id": "charles_de_gaulle",
+    "name": "Charles de Gaulle",
+    "description": "A French army officer and statesman who led Free France against Nazi Germany in World War II and chaired the Provisional Government of the French Republic from 1944 to 1946 in order to re-establish democracy in France.",
+    "description_pt": "Um oficial do exército francês e estadista que liderou a França Livre contra a Alemanha Nazista na Segunda Guerra Mundial e presidiu o Governo Provisório da República Francesa de 1944 a 1946 para restabelecer a democracia na França.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Charles de Gaulle",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "France"
   }
 ]
