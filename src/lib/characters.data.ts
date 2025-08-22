@@ -1021,5 +1021,57 @@ export const charactersData: Character[] = [
     "field": "Politics",
     "field_pt": "Política",
     "country": "Portugal/Brazil"
+  },
+  {
+    "id": "louis-xvi",
+    "name": "Louis XVI",
+    "description": "The last King of France before the fall of the monarchy during the French Revolution. His reign was marked by attempts at reform that were ultimately overwhelmed by social and economic turmoil.",
+    "description_pt": "O último Rei da França antes da queda da monarquia durante a Revolução Francesa. Seu reinado foi marcado por tentativas de reforma que foram finalmente superadas pela turbulência social e econômica.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Louis XVI France",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "France"
+  },
+  {
+    "id": "marie-antoinette",
+    "name": "Marie Antoinette",
+    "description": "The last Queen of France before the French Revolution. She became a symbol of the excesses of the monarchy, which led to her execution.",
+    "description_pt": "A última Rainha da França antes da Revolução Francesa. Ela se tornou um símbolo dos excessos da monarquia, o que levou à sua execução.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Marie Antoinette France",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "Austria/France"
+  },
+  {
+    "id": "robespierre",
+    "name": "Robespierre",
+    "description": "A French lawyer and statesman who was one of the best-known and most influential figures of the French Revolution. He was a key figure during the Reign of Terror.",
+    "description_pt": "Um advogado e estadista francês que foi uma das figuras mais conhecidas e influentes da Revolução Francesa. Ele foi uma figura chave durante o Período do Terror.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Robespierre France",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "France"
+  },
+  {
+    "id": "napoleon-bonaparte",
+    "name": "Napoleon Bonaparte",
+    "description": "A French statesman and military leader who rose to prominence during the French Revolution and led several successful campaigns during the Revolutionary Wars. He was Emperor of the French from 1804 until 1814 and again briefly in 1815.",
+    "description_pt": "Um estadista e líder militar francês que ascendeu à proeminência durante a Revolução Francesa e liderou várias campanhas bem-sucedidas durante as Guerras Revolucionárias. Ele foi Imperador dos Franceses de 1804 a 1814 e novamente por um breve período em 1815.",
+    "image": "https://placehold.co/400x400.png",
+    "aiHint": "Napoleon Bonaparte",
+    "era": "Modern",
+    "era_pt": "Moderna",
+    "field": "Politics",
+    "field_pt": "Política",
+    "country": "France"
   }
 ]
