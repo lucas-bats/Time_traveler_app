@@ -1,6 +1,6 @@
 # Eternal Minds
 
-Eternal Minds is an interactive web application that allows users to chat with historical figures, powered by generative AI. Choose a personality from a curated list, or let us surprise you, and start a conversation to learn about their life, work, and the times they lived in.
+Eternal Minds is an interactive web application that allows users to chat with historical figures and pivotal historical events, powered by generative AI. Choose a personality from a curated list, or engage with an event to hear the perspectives of its key participants. Start a conversation to learn about history in a new and interactive way.
 
 This project was built using Firebase Studio.
 
@@ -55,6 +55,6 @@ This will start the Next.js application on `http://localhost:9002`.
 -   `src/app/`: Contains the main pages and layouts of the application, following the Next.js App Router structure.
 -   `src/components/`: Home to the React components used throughout the application.
     -   `src/components/ui/`: Contains the ShadCN UI components.
--   `src/lib/`: Includes helper functions, data definitions, and localization logic.
--   `src/ai/`: Holds the Genkit flows and AI-related logic.
+-   `src/lib/`: Includes helper functions, data definitions (for characters, events, and their connections), and localization logic.
+-   `src/ai/`: Holds the Genkit flows and AI-related logic for both character and event chats.
 -   `public/`: Static assets like images and fonts.
