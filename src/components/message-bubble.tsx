@@ -70,7 +70,7 @@ export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps)
             : "bg-secondary text-secondary-foreground rounded-bl-md" // Style for the assistant
         )}
       >
-        <p className="whitespace-pre-wrap">{message.content}{!isUser && !message.content.trim() ? "..." : ""}</p>
+        <p className="whitespace-pre-wrap">{message.content}</p>
       </div>
       {/* Copy action - appears on hover for user messages. */}
        {isUser && (
