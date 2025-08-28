@@ -32,9 +32,10 @@ export type ChatWithHistoricalFigureInput = z.infer<typeof ChatWithHistoricalFig
  */
 export async function chatWithHistoricalFigure(
   input: ChatWithHistoricalFigureInput
-): Promise<ReadableStream<Uint8Array>> {
+): Promise<ReadableStream<string>> {
   // Call the main flow and return its result.
-  return chatWithHistoricalFigureFlow(input);
+  const {stream} = chatWithHistoricalFigureFlow(input);
+  return stream;
 }
 
 // Define the AI prompt using `ai.definePrompt`.
@@ -62,7 +63,7 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
   // The implementation function of the flow.
   async input => {
     // Call the prompt defined above with the flow's input.
-    const {stream} = await prompt(input);
-    return stream.pipeThrough(new TextEncoder());
+    const llmResponse = await prompt(input);
+    return llmResponse.stream();
   }
 );

@@ -31,8 +31,9 @@ export type ChatWithEventInput = z.infer<typeof ChatWithEventInputSchema>;
  */
 export async function chatWithEvent(
   input: ChatWithEventInput
-): Promise<ReadableStream<Uint8Array>> {
-  return chatWithEventFlow(input);
+): Promise<ReadableStream<string>> {
+  const {stream} = chatWithEventFlow(input);
+  return stream;
 }
 
 // Defines the AI prompt for the event chat.
@@ -69,7 +70,7 @@ const chatWithEventFlow = ai.defineFlow(
   // The implementation function of the flow.
   async input => {
     // Calls the prompt with the provided input.
-    const {stream} = await prompt(input);
-    return stream.pipeThrough(new TextEncoder());
+    const llmResponse = await prompt(input);
+    return llmResponse.stream();
   }
 );
