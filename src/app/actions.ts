@@ -29,7 +29,7 @@ const characterActionSchema = z.object({
  * @param input The data for the character chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promise<ReadableStream<Uint8Array>> {
+export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promise<ReadableStream> {
   // Validate the input against the schema.
   const parsedInput = characterActionSchema.safeParse(input);
 
@@ -42,18 +42,8 @@ export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promi
     // Call the Genkit flow for chatting with a historical figure.
     const stream = await chatWithHistoricalFigure(parsedInput.data);
     
-    // Ensure the stream is a ReadableStream and transform it
-    if (stream instanceof ReadableStream) {
-        const textEncoder = new TextEncoder();
-        const transformStream = new TransformStream({
-            transform(chunk, controller) {
-                controller.enqueue(textEncoder.encode(chunk));
-            },
-        });
-        return stream.pipeThrough(transformStream);
-    }
-    
-    throw new Error("The AI response was not a valid stream.");
+    // Return the raw stream. The client will handle decoding.
+    return stream;
 
   } catch (e: any) {
     console.error(e);
@@ -76,7 +66,7 @@ const eventActionSchema = z.object({
  * @param input The data for the event chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }): Promise<ReadableStream<Uint8Array>> {
+export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }): Promise<ReadableStream> {
   // Validate the input.
   const parsedInput = eventActionSchema.safeParse(input);
 
@@ -105,19 +95,9 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
       language: parsedInput.data.language,
     });
     
-    // Ensure the stream is a ReadableStream and transform it
-    if (stream instanceof ReadableStream) {
-        const textEncoder = new TextEncoder();
-        const transformStream = new TransformStream({
-            transform(chunk, controller) {
-                controller.enqueue(textEncoder.encode(chunk));
-            },
-        });
-        return stream.pipeThrough(transformStream);
-    }
+    // Return the raw stream.
+    return stream;
     
-    throw new Error("The AI response was not a valid stream.");
-
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.

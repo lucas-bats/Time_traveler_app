@@ -79,7 +79,7 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
     setIsLoading(true);
   
     try {
-      let stream: ReadableStream<Uint8Array>;
+      let stream;
       if (subject.type === 'character') {
         stream = await getAiResponse({
           historicalFigure: subject.name,
@@ -94,7 +94,7 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
         });
       }
 
-      const reader = stream.getReader();
+      const reader = (stream as ReadableStream<Uint8Array>).getReader();
       const decoder = new TextDecoder();
       
       while (true) {
