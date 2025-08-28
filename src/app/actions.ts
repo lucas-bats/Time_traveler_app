@@ -41,7 +41,20 @@ export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promi
   try {
     // Call the Genkit flow for chatting with a historical figure.
     const stream = await chatWithHistoricalFigure(parsedInput.data);
-    return stream as ReadableStream<Uint8Array>;
+    
+    // Ensure the stream is a ReadableStream and transform it
+    if (stream instanceof ReadableStream) {
+        const textEncoder = new TextEncoder();
+        const transformStream = new TransformStream({
+            transform(chunk, controller) {
+                controller.enqueue(textEncoder.encode(chunk));
+            },
+        });
+        return stream.pipeThrough(transformStream);
+    }
+    
+    throw new Error("The AI response was not a valid stream.");
+
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
@@ -91,7 +104,20 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
       userMessage: parsedInput.data.userMessage,
       language: parsedInput.data.language,
     });
-    return stream as ReadableStream<Uint8Array>;
+    
+    // Ensure the stream is a ReadableStream and transform it
+    if (stream instanceof ReadableStream) {
+        const textEncoder = new TextEncoder();
+        const transformStream = new TransformStream({
+            transform(chunk, controller) {
+                controller.enqueue(textEncoder.encode(chunk));
+            },
+        });
+        return stream.pipeThrough(transformStream);
+    }
+    
+    throw new Error("The AI response was not a valid stream.");
+
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
