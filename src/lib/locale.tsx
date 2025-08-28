@@ -1,3 +1,4 @@
+// Defines this as a "Client Component".
 "use client";
 
 // Imports React hooks and types.
@@ -29,8 +30,7 @@ const translations = {
     yourFavoriteMessages: 'Your favorite messages will appear here.',
     clickStarToSave: 'Click the star on a message to save it.',
     ask: 'Ask',
-    askAbout: 'Ask about',
-    aQuestion: ' a question...',
+    aQuestion: 'a question...',
     error: 'Error',
     somethingWentWrong: 'Something went wrong.',
     copiedToClipboard: 'Copied to clipboard!',
@@ -96,7 +96,6 @@ const translations = {
     whatWereTheConsequences: 'What were the main consequences?',
     participants: 'Participants',
     keyParticipants: 'Key Participants',
-    details: 'Details',
   },
   pt: {
     title: 'Eternal Minds',
@@ -117,7 +116,6 @@ const translations = {
     yourFavoriteMessages: 'Suas mensagens favoritas aparecerão aqui.',
     clickStarToSave: 'Clique na estrela em uma mensagem para salvá-la.',
     ask: 'Faça uma pergunta para',
-    askAbout: 'Pergunte sobre',
     aQuestion: '...',
     error: 'Erro',
     somethingWentWrong: 'Algo deu errado.',
@@ -184,7 +182,6 @@ const translations = {
     whatWereTheConsequences: 'Quais foram as principais consequências?',
     participants: 'Participantes',
     keyParticipants: 'Principais Participantes',
-    details: 'Detalhes',
   }
 };
 

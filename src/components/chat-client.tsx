@@ -9,11 +9,12 @@ import { getCharacterById, type Character } from "@/lib/characters";
 import { getEventById, type Event } from "@/lib/events";
 // Imports chat interface components.
 import { ChatArea, type Message } from "@/components/chat-area";
+// Imports the server actions to get AI responses.
+import { getAiResponse, getEventAiResponse } from "@/app/actions";
 // Imports custom hooks.
 import { useToast } from "@/hooks/use-toast";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { useLocale } from "@/lib/locale.tsx";
-import { getAiResponse, getEventAiResponse } from "@/app/actions";
 
 // Defines the interface for the component's props.
 interface ChatClientProps {
@@ -68,8 +69,9 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
       role: "user",
       content: messageContent,
     };
-    
-    setMessages(prevMessages => [...prevMessages, userMessage]);
+  
+    const previousMessages = messages;
+    setMessages([...messages, userMessage]);
     setIsLoading(true);
   
     try {
@@ -80,26 +82,29 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
           userMessage: messageContent,
           language: locale,
         });
-      } else {
+      } else { // subject.type === 'event'
         result = await getEventAiResponse({
           eventId: id,
           userMessage: messageContent,
           language: locale,
         });
       }
-      
-      if ('error' in result) {
-        throw new Error(result.error);
+  
+      if (result.error || !result.response) {
+        toast({
+          variant: "destructive",
+          title: t.error,
+          description: result.error || t.somethingWentWrong,
+        });
+        setMessages(previousMessages);
+      } else {
+        const aiMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: result.response,
+        };
+        setMessages([...messages, userMessage, aiMessage]);
       }
-      
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: result.response,
-      };
-
-      setMessages(prevMessages => [...prevMessages, aiMessage]);
-
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
       toast({
@@ -107,12 +112,11 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // Remove the user message if the AI fails to respond
-      setMessages(prevMessages => prevMessages.slice(0, -1));
+       setMessages(previousMessages);
     } finally {
       setIsLoading(false);
     }
-  }, [subject, id, isLoading, locale, setMessages, t, toast]);
+  }, [subject, id, isLoading, locale, messages, setMessages, t, toast]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

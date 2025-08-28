@@ -29,7 +29,7 @@ const characterActionSchema = z.object({
  * @param input The data for the character chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promise<{ response: string } | { error: string }> {
+export async function getAiResponse(input: ChatWithHistoricalFigureInput) {
   // Validate the input against the schema.
   const parsedInput = characterActionSchema.safeParse(input);
 
@@ -40,8 +40,8 @@ export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promi
 
   try {
     // Call the Genkit flow for chatting with a historical figure.
-    const response = await chatWithHistoricalFigure(parsedInput.data);
-    return { response };
+    const result = await chatWithHistoricalFigure(parsedInput.data);
+    return { response: result.response };
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
@@ -63,7 +63,7 @@ const eventActionSchema = z.object({
  * @param input The data for the event chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }): Promise<{ response: string } | { error: string }> {
+export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }) {
   // Validate the input.
   const parsedInput = eventActionSchema.safeParse(input);
 
@@ -84,14 +84,14 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
 
   try {
     // Call the Genkit flow for chatting with an event.
-    const response = await chatWithEvent({
+    const result = await chatWithEvent({
       eventName: event.name,
       eventContext: event.context,
       participants: participants,
       userMessage: parsedInput.data.userMessage,
       language: parsedInput.data.language,
     });
-    return { response };
+    return { response: result.response };
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
