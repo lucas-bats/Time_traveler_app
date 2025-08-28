@@ -48,7 +48,7 @@ export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps)
     >
       {/* Actions (Favorite, Copy) - appear on hover for assistant messages. */}
       {!isUser && (
-         <div className="flex flex-col items-center space-x-2">
+         <div className="flex flex-col items-center space-x-2 self-end">
             <div className="flex items-center -space-x-2.5 opacity-0 group-hover:opacity-100 transition-opacity">
                 {/* Favorite button */}
                 <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => onToggleFavorite(message.id)}>
@@ -70,11 +70,11 @@ export function MessageBubble({ message, onToggleFavorite }: MessageBubbleProps)
             : "bg-secondary text-secondary-foreground rounded-bl-md" // Style for the assistant
         )}
       >
-        <p className="whitespace-pre-wrap">{message.content}</p>
+        <p className="whitespace-pre-wrap">{message.content}{!isUser && !message.content.trim() ? "..." : ""}</p>
       </div>
       {/* Copy action - appears on hover for user messages. */}
        {isUser && (
-         <div className="flex flex-col items-center space-x-2">
+         <div className="flex flex-col items-center space-x-2 self-end">
             <div className="flex items-center -space-x-2.5 opacity-0 group-hover:opacity-100 transition-opacity">
                 <Button variant="ghost" size="icon" className="h-7 w-7" onClick={handleCopy}>
                     <Copy className="h-4 w-4 text-muted-foreground" />

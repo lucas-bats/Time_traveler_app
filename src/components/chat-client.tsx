@@ -9,8 +9,6 @@ import { getCharacterById, type Character } from "@/lib/characters";
 import { getEventById, type Event } from "@/lib/events";
 // Imports chat interface components.
 import { ChatArea, type Message } from "@/components/chat-area";
-// Imports the server actions to get AI responses.
-import { getAiResponse, getEventAiResponse } from "@/app/actions";
 // Imports custom hooks.
 import { useToast } from "@/hooks/use-toast";
 import useLocalStorage from "@/hooks/use-local-storage";
@@ -70,41 +68,51 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
       content: messageContent,
     };
   
-    const previousMessages = messages;
-    setMessages([...messages, userMessage]);
+    const aiMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      role: "assistant",
+      content: "",
+    };
+
+    setMessages(prevMessages => [...prevMessages, userMessage, aiMessage]);
     setIsLoading(true);
   
     try {
-      let result;
-      if (subject.type === 'character') {
-        result = await getAiResponse({
-          historicalFigure: subject.name,
+      const response = await fetch(`/api/chat/${subject.type}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           userMessage: messageContent,
           language: locale,
-        });
-      } else { // subject.type === 'event'
-        result = await getEventAiResponse({
-          eventId: id,
-          userMessage: messageContent,
-          language: locale,
+          ...(subject.type === 'character' ? { historicalFigure: subject.name, figureId: id } : { eventId: id })
+        })
+      });
+
+      if (!response.ok || !response.body) {
+          const errorText = await response.text();
+          throw new Error(errorText || 'Failed to get response from the server.');
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value, { stream: true });
+        setMessages(prevMessages => {
+          const lastMessage = prevMessages[prevMessages.length - 1];
+          if (lastMessage.role === 'assistant') {
+            return [
+              ...prevMessages.slice(0, -1),
+              { ...lastMessage, content: lastMessage.content + chunk }
+            ];
+          }
+          return prevMessages;
         });
       }
-  
-      if (result.error || !result.response) {
-        toast({
-          variant: "destructive",
-          title: t.error,
-          description: result.error || t.somethingWentWrong,
-        });
-        setMessages(previousMessages);
-      } else {
-        const aiMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: result.response,
-        };
-        setMessages([...messages, userMessage, aiMessage]);
-      }
+
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
       toast({
@@ -112,11 +120,12 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-       setMessages(previousMessages);
+      // Remove the empty user and AI messages if an error occurs
+      setMessages(prevMessages => prevMessages.slice(0, -2));
     } finally {
       setIsLoading(false);
     }
-  }, [subject, id, isLoading, locale, messages, setMessages, t, toast]);
+  }, [subject, id, isLoading, locale, setMessages, t, toast]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

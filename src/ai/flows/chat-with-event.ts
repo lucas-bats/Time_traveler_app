@@ -7,13 +7,10 @@
  * Exported Functions:
  * - chatWithEvent: The main function that executes the flow.
  * - ChatWithEventInput: The input type for the function.
- * - ChatWithEventOutput: The return type for the function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { getEventById } from '@/lib/events';
-import { getCharacterById } from '@/lib/characters';
 
 // Defines the input schema for the event chat flow using Zod.
 const ChatWithEventInputSchema = z.object({
@@ -26,13 +23,6 @@ const ChatWithEventInputSchema = z.object({
 // Exports the TypeScript type inferred from the Zod schema.
 export type ChatWithEventInput = z.infer<typeof ChatWithEventInputSchema>;
 
-// Defines the output schema for the event chat flow.
-const ChatWithEventOutputSchema = z.object({
-  response: z.string().describe('The response from the historical event, representing multiple perspectives.'),
-});
-// Exports the TypeScript type inferred from the Zod schema.
-export type ChatWithEventOutput = z.infer<typeof ChatWithEventOutputSchema>;
-
 /**
  * An asynchronous exported function that serves as a wrapper for the chatWithEventFlow.
  * Client-side components will call this Server Action to interact with the AI.
@@ -41,7 +31,7 @@ export type ChatWithEventOutput = z.infer<typeof ChatWithEventOutputSchema>;
  */
 export async function chatWithEvent(
   input: ChatWithEventInput
-): Promise<ChatWithEventOutput> {
+): Promise<ReadableStream<Uint8Array>> {
   return chatWithEventFlow(input);
 }
 
@@ -49,7 +39,6 @@ export async function chatWithEvent(
 const prompt = ai.definePrompt({
   name: 'chatWithEventPrompt',
   input: {schema: ChatWithEventInputSchema},
-  output: {schema: ChatWithEventOutputSchema},
   // The prompt template instructing the AI on how to respond.
   // It uses Handlebars syntax to insert dynamic data like the event name and participants.
   prompt: `You are the representation of the historical event: {{eventName}}.
@@ -74,26 +63,13 @@ const chatWithEventFlow = ai.defineFlow(
   {
     name: 'chatWithEventFlow',
     inputSchema: ChatWithEventInputSchema,
-    outputSchema: ChatWithEventOutputSchema,
+    outputSchema: z.string(),
+    stream: true,
   },
   // The implementation function of the flow.
   async input => {
-    // Implements a retry logic for robustness.
-    let attempts = 0;
-    const maxAttempts = 3;
-
-    while (attempts < maxAttempts) {
-      attempts++;
-      // Calls the prompt with the provided input.
-      const { output } = await prompt(input);
-
-      // If a valid response is received, return it.
-      if (output?.response) {
-        return output;
-      }
-    }
-
-    // If no response is generated after all attempts, throw an error.
-    throw new Error('The AI was unable to generate a response. Please try rephrasing your question.');
+    // Calls the prompt with the provided input.
+    const {stream} = await prompt(input);
+    return stream.pipeThrough(new TextEncoder());
   }
 );

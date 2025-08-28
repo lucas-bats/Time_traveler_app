@@ -8,7 +8,6 @@
  * Exported Functions:
  * - chatWithHistoricalFigure: The main function that executes the flow.
  * - ChatWithHistoricalFigureInput: The input type for the function.
- * - ChatWithHistoricalFigureOutput: The return type for the function.
  */
 
 // Import the configured Genkit instance and the Zod library for validation.
@@ -25,13 +24,6 @@ const ChatWithHistoricalFigureInputSchema = z.object({
 // Export the TypeScript type inferred from the Zod schema.
 export type ChatWithHistoricalFigureInput = z.infer<typeof ChatWithHistoricalFigureInputSchema>;
 
-// Define the output schema for the flow.
-const ChatWithHistoricalFigureOutputSchema = z.object({
-  response: z.string().describe('The response from the historical figure.'),
-});
-// Export the TypeScript type inferred from the Zod schema.
-export type ChatWithHistoricalFigureOutput = z.infer<typeof ChatWithHistoricalFigureOutputSchema>;
-
 /**
  * Asynchronous exported function that serves as a wrapper for the flow.
  * Client-side components will call this function.
@@ -40,7 +32,7 @@ export type ChatWithHistoricalFigureOutput = z.infer<typeof ChatWithHistoricalFi
  */
 export async function chatWithHistoricalFigure(
   input: ChatWithHistoricalFigureInput
-): Promise<ChatWithHistoricalFigureOutput> {
+): Promise<ReadableStream<Uint8Array>> {
   // Call the main flow and return its result.
   return chatWithHistoricalFigureFlow(input);
 }
@@ -49,7 +41,6 @@ export async function chatWithHistoricalFigure(
 const prompt = ai.definePrompt({
   name: 'chatWithHistoricalFigurePrompt', // Unique name for the prompt.
   input: {schema: ChatWithHistoricalFigureInputSchema}, // Define the input schema.
-  output: {schema: ChatWithHistoricalFigureOutputSchema}, // Define the output schema.
   // The prompt template that will be sent to the language model.
   // Uses Handlebars syntax ({{...}}) to insert the input data.
   prompt: `You are {{historicalFigure}}, a historical figure. Respond to the following message as if you were them, using their personality, vocabulary, and historical context.
@@ -65,26 +56,13 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
   {
     name: 'chatWithHistoricalFigureFlow', // Unique name for the flow.
     inputSchema: ChatWithHistoricalFigureInputSchema, // Input schema.
-    outputSchema: ChatWithHistoricalFigureOutputSchema, // Output schema.
+    outputSchema: z.string(),
+    stream: true,
   },
   // The implementation function of the flow.
   async input => {
-    // Implements a retry logic for robustness.
-    let attempts = 0;
-    const maxAttempts = 3;
-
-    while (attempts < maxAttempts) {
-      attempts++;
-      // Call the prompt defined above with the flow's input.
-      const { output } = await prompt(input);
-
-      // If the prompt returns a valid response, return the output.
-      if (output?.response) {
-        return output;
-      }
-    }
-
-    // If the maximum number of attempts is reached without success, throw an error.
-    throw new Error('The AI was unable to generate a response. Please try rephrasing your question.');
+    // Call the prompt defined above with the flow's input.
+    const {stream} = await prompt(input);
+    return stream.pipeThrough(new TextEncoder());
   }
 );
