@@ -26,6 +26,12 @@ export default function AboutPage() {
                             {t.ourVisionText}
                         </p>
                         <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
+                            {t.learningToolTitle}
+                        </h2>
+                        <p className="mt-4 text-lg text-muted-foreground">
+                            {t.learningToolText}
+                        </p>
+                        <h2 className="mt-12 text-3xl font-bold tracking-tighter font-headline text-primary">
                             {t.howItWorksTitle}
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">

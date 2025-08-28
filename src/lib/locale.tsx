@@ -1,4 +1,3 @@
-// Defines this as a "Client Component".
 "use client";
 
 // Imports React hooks and types.
@@ -60,6 +59,8 @@ const translations = {
     aboutIntro: 'Eternal Minds is an interactive web application that allows users to chat with historical figures, powered by cutting-edge generative AI. Our mission is to make history more accessible, engaging, and personal.',
     ourVisionTitle: 'Our Vision',
     ourVisionText: 'We believe that the best way to learn about the past is to interact with it. Instead of just reading about historical figures in a textbook, Eternal Minds allows you to ask them questions directly. You can learn about their lives, their work, their perspectives, and the times they lived in, all through natural conversation.',
+    learningToolTitle: 'A Tool for Learning and Research',
+    learningToolText: 'Eternal Minds is not just an entertainment platform; it is a powerful educational tool. Students, educators, and history enthusiasts can use our application to explore different perspectives on historical events, understand the context of great discoveries, and deepen their knowledge in a dynamic and interactive way.',
     howItWorksTitle: 'How It Works',
     howItWorksText1: 'This application is built using a modern technology stack to provide a seamless and responsive experience:',
     howItWorksTech1: 'For a fast and dynamic user interface.',
@@ -148,6 +149,8 @@ const translations = {
     aboutIntro: 'Eternal Minds é uma aplicação web interativa que permite aos usuários conversar com figuras históricas, impulsionada por inteligência artificial generativa de ponta. Nossa missão é tornar a história mais acessível, envolvente e pessoal.',
     ourVisionTitle: 'Nossa Visão',
     ourVisionText: 'Acreditamos que a melhor maneira de aprender sobre o passado é interagindo com ele. Em vez de apenas ler sobre figuras históricas em um livro didático, o Eternal Minds permite que você faça perguntas diretamente a elas. Você pode aprender sobre suas vidas, seus trabalhos, suas perspectivas e os tempos em que viveram, tudo através de uma conversa natural.',
+    learningToolTitle: 'Uma Ferramenta de Aprendizagem e Pesquisa',
+    learningToolText: 'Eternal Minds não é apenas uma plataforma de entretenimento; é uma poderosa ferramenta educacional. Estudantes, educadores e entusiastas da história podem usar nossa aplicação para explorar diferentes perspectivas sobre eventos históricos, entender o contexto de grandes descobertas e aprofundar seus conhecimentos de uma forma dinâmica e interativa.',
     howItWorksTitle: 'Como Funciona',
     howItWorksText1: 'Esta aplicação é construída usando uma pilha de tecnologia moderna para fornecer uma experiência fluida e responsiva:',
     howItWorksTech1: 'Para uma interface de usuário rápida e dinâmica.',
