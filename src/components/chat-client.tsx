@@ -13,6 +13,7 @@ import { ChatArea, type Message } from "@/components/chat-area";
 import { useToast } from "@/hooks/use-toast";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { useLocale } from "@/lib/locale.tsx";
+import { getAiResponse, getEventAiResponse } from "@/app/actions";
 
 // Defines the interface for the component's props.
 interface ChatClientProps {
@@ -78,22 +79,22 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
     setIsLoading(true);
   
     try {
-      const response = await fetch(`/api/chat/${subject.type}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      let stream: ReadableStream<Uint8Array>;
+      if (subject.type === 'character') {
+        stream = await getAiResponse({
+          historicalFigure: subject.name,
           userMessage: messageContent,
           language: locale,
-          ...(subject.type === 'character' ? { historicalFigure: subject.name, figureId: id } : { eventId: id })
-        })
-      });
-
-      if (!response.ok || !response.body) {
-          const errorText = await response.text();
-          throw new Error(errorText || 'Failed to get response from the server.');
+        });
+      } else {
+        stream = await getEventAiResponse({
+          eventId: id,
+          userMessage: messageContent,
+          language: locale,
+        });
       }
 
-      const reader = response.body.getReader();
+      const reader = stream.getReader();
       const decoder = new TextDecoder();
       
       while (true) {
