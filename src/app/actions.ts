@@ -41,7 +41,7 @@ export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promi
   try {
     // Call the Genkit flow for chatting with a historical figure.
     const stream = await chatWithHistoricalFigure(parsedInput.data);
-    return stream;
+    return stream as ReadableStream<Uint8Array>;
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
@@ -91,7 +91,7 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
       userMessage: parsedInput.data.userMessage,
       language: parsedInput.data.language,
     });
-    return stream;
+    return stream as ReadableStream<Uint8Array>;
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
