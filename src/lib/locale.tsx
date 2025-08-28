@@ -1,3 +1,4 @@
+
 // Defines this as a "Client Component".
 "use client";
 
@@ -80,7 +81,7 @@ const translations = {
     changesToPolicyTitle: 'Changes to This Policy',
     changesToPolicyText: 'We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.',
     contactUsTitle: 'Contact Us',
-    contactUsText: 'If you have any questions about this Privacy Policy, please contact us at: lucaspaesbatista@yahoo.com.br',
+    contactUsText: 'If you have any questions or feedback, please feel free to reach out to us. We would love to hear from you!',
     chat: 'Chat',
     connections: 'Connections',
     influencedBy: 'Influenced by',
@@ -96,6 +97,15 @@ const translations = {
     whatWereTheConsequences: 'What were the main consequences?',
     participants: 'Participants',
     keyParticipants: 'Key Participants',
+    termsOfService: 'Terms of Service',
+    termsIntroductionTitle: 'Introduction',
+    termsIntroductionText: 'Welcome to Eternal Minds. By accessing our website, you agree to be bound by these Terms of Service. Please read them carefully.',
+    termsUseOfServiceTitle: 'Use of Service',
+    termsUseOfServiceText: 'You agree to use our service for lawful purposes only. The AI-generated content is for informational and entertainment purposes and should not be considered historical fact. You are responsible for any interactions you have with the AI.',
+    termsDisclaimerTitle: 'Disclaimer of Warranties',
+    termsDisclaimerText: 'The service is provided "as is". We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties of merchantability, fitness for a particular purpose, or non-infringement of intellectual property.',
+    termsLimitationTitle: 'Limitation of Liability',
+    termsLimitationText: 'In no event shall Eternal Minds or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.',
   },
   pt: {
     title: 'Eternal Minds',
@@ -165,8 +175,8 @@ const translations = {
     thirdPartyServicesText: 'Usamos o Google AdSense para exibir anúncios em nosso site. O Google pode usar cookies para veicular anúncios com base nas visitas anteriores de um usuário ao nosso site ou a outros sites. Você pode optar por não receber publicidade personalizada visitando as Configurações de anúncios do Google.',
     changesToPolicyTitle: 'Alterações a Esta Política',
     changesToPolicyText: 'Podemos atualizar esta Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página.',
-    contactUsTitle: 'Entre em Contato',
-    contactUsText: 'Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco em: lucaspaesbatista@yahoo.com.br',
+    contactUsTitle: 'Contato',
+    contactUsText: 'Se você tiver alguma dúvida ou feedback, sinta-se à vontade para entrar em contato conosco. Adoraríamos ouvir de você!',
     chat: 'Chat',
     connections: 'Conexões',
     influencedBy: 'Influenciado por',
@@ -182,6 +192,15 @@ const translations = {
     whatWereTheConsequences: 'Quais foram as principais consequências?',
     participants: 'Participantes',
     keyParticipants: 'Principais Participantes',
+    termsOfService: 'Termos de Serviço',
+    termsIntroductionTitle: 'Introdução',
+    termsIntroductionText: 'Bem-vindo ao Eternal Minds. Ao acessar nosso site, você concorda em cumprir estes Termos de Serviço. Por favor, leia-os com atenção.',
+    termsUseOfServiceTitle: 'Uso do Serviço',
+    termsUseOfServiceText: 'Você concorda em usar nosso serviço apenas para fins lícitos. O conteúdo gerado por IA é para fins informativos e de entretenimento e não deve ser considerado um fato histórico. Você é responsável por quaisquer interações que tenha com a IA.',
+    termsDisclaimerTitle: 'Isenção de Garantias',
+    termsDisclaimerText: 'O serviço é fornecido "como está". Não oferecemos garantias, expressas ou implícitas, e por meio deste, isentamo-nos de todas as outras garantias, incluindo, sem limitação, garantias implícitas de comercialização, adequação a um propósito específico ou não violação de propriedade intelectual.',
+    termsLimitationTitle: 'Limitação de Responsabilidade',
+    termsLimitationText: 'Em nenhum caso o Eternal Minds ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro, ou devido a interrupção dos negócios) decorrentes do uso ou da incapacidade de usar os materiais em nosso site.',
   }
 };
 
