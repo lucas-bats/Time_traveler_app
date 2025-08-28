@@ -29,27 +29,24 @@ const characterActionSchema = z.object({
  * @param input The data for the character chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promise<ReadableStream> {
+export async function getAiResponse(input: ChatWithHistoricalFigureInput): Promise<{ response: string } | { error: string }> {
   // Validate the input against the schema.
   const parsedInput = characterActionSchema.safeParse(input);
 
   // If validation fails, return an error.
   if (!parsedInput.success) {
-    throw new Error("Invalid input.");
+    return { error: "Invalid input." };
   }
 
   try {
     // Call the Genkit flow for chatting with a historical figure.
-    const stream = await chatWithHistoricalFigure(parsedInput.data);
-    
-    // Return the raw stream. The client will handle decoding.
-    return stream;
-
+    const response = await chatWithHistoricalFigure(parsedInput.data);
+    return { response };
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
     const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
-    throw new Error(errorMessage);
+    return { error: errorMessage };
   }
 }
 
@@ -66,18 +63,18 @@ const eventActionSchema = z.object({
  * @param input The data for the event chat.
  * @returns An object with the AI's response or an error message.
  */
-export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }): Promise<ReadableStream> {
+export async function getEventAiResponse(input: { eventId: string; userMessage: string; language: string; }): Promise<{ response: string } | { error: string }> {
   // Validate the input.
   const parsedInput = eventActionSchema.safeParse(input);
 
   if (!parsedInput.success) {
-     throw new Error("Invalid input.");
+    return { error: "Invalid input." };
   }
 
   // Retrieve the event details using the provided ID.
   const event = getEventById(parsedInput.data.eventId);
   if (!event) {
-     throw new Error("Event not found.");
+    return { error: "Event not found." };
   }
 
   // Get the names of the participants for the AI prompt.
@@ -87,21 +84,18 @@ export async function getEventAiResponse(input: { eventId: string; userMessage: 
 
   try {
     // Call the Genkit flow for chatting with an event.
-    const stream = await chatWithEvent({
+    const response = await chatWithEvent({
       eventName: event.name,
       eventContext: event.context,
       participants: participants,
       userMessage: parsedInput.data.userMessage,
       language: parsedInput.data.language,
     });
-    
-    // Return the raw stream.
-    return stream;
-    
+    return { response };
   } catch (e: any) {
     console.error(e);
     // Handle potential errors from the AI flow.
     const errorMessage = e instanceof Error ? e.message : "An error occurred while communicating with the AI. Please try again.";
-    throw new Error(errorMessage);
+    return { error: errorMessage };
   }
 }

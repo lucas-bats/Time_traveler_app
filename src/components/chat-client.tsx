@@ -68,51 +68,37 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
       role: "user",
       content: messageContent,
     };
-  
-    const aiMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      role: "assistant",
-      content: "",
-    };
-
-    setMessages(prevMessages => [...prevMessages, userMessage, aiMessage]);
+    
+    setMessages(prevMessages => [...prevMessages, userMessage]);
     setIsLoading(true);
   
     try {
-      let stream;
+      let result;
       if (subject.type === 'character') {
-        stream = await getAiResponse({
+        result = await getAiResponse({
           historicalFigure: subject.name,
           userMessage: messageContent,
           language: locale,
         });
       } else {
-        stream = await getEventAiResponse({
+        result = await getEventAiResponse({
           eventId: id,
           userMessage: messageContent,
           language: locale,
         });
       }
-
-      const reader = (stream as ReadableStream<Uint8Array>).getReader();
-      const decoder = new TextDecoder();
       
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        
-        const chunk = decoder.decode(value, { stream: true });
-        setMessages(prevMessages => {
-          const lastMessage = prevMessages[prevMessages.length - 1];
-          if (lastMessage.role === 'assistant') {
-            return [
-              ...prevMessages.slice(0, -1),
-              { ...lastMessage, content: lastMessage.content + chunk }
-            ];
-          }
-          return prevMessages;
-        });
+      if ('error' in result) {
+        throw new Error(result.error);
       }
+      
+      const aiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: result.response,
+      };
+
+      setMessages(prevMessages => [...prevMessages, aiMessage]);
 
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t.somethingWentWrong;
@@ -121,8 +107,8 @@ export function ChatClient({ figureId, eventId }: ChatClientProps) {
         title: t.error,
         description: errorMessage,
       });
-      // Remove the empty user and AI messages if an error occurs
-      setMessages(prevMessages => prevMessages.slice(0, -2));
+      // Remove the user message if the AI fails to respond
+      setMessages(prevMessages => prevMessages.slice(0, -1));
     } finally {
       setIsLoading(false);
     }
