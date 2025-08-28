@@ -62,8 +62,8 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
   },
   // The implementation function of the flow.
   async input => {
-    // Call the prompt defined above with the flow's input.
-    const llmResponse = await prompt(input);
-    return llmResponse.stream();
+    // Call the prompt defined above with the flow's input to get a stream.
+    const {stream} = prompt(input);
+    return stream;
   }
 );

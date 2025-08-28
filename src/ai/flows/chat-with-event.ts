@@ -69,8 +69,8 @@ const chatWithEventFlow = ai.defineFlow(
   },
   // The implementation function of the flow.
   async input => {
-    // Calls the prompt with the provided input.
-    const llmResponse = await prompt(input);
-    return llmResponse.stream();
+    // Calls the prompt with the provided input to get a stream.
+    const {stream} = prompt(input);
+    return stream;
   }
 );
