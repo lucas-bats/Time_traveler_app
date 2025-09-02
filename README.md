@@ -4,6 +4,7 @@ Eternal Minds is an interactive web application that allows users to chat with h
 
 This project was built using Firebase Studio.
 
+
 ## Tech Stack
 
 This project is built with a modern, robust, and scalable technology stack:
