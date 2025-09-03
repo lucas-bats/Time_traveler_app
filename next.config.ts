@@ -5,20 +5,6 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
   /* Next.js configuration options go here */
   
-  // TypeScript settings.
-  typescript: {
-    // Ignores TypeScript build errors. Useful for rapid development,
-    // but should be used with caution in production.
-    ignoreBuildErrors: true,
-  },
-  
-  // ESLint settings.
-  eslint: {
-    // Ignores ESLint checks during the build process.
-    // Allows the build to proceed even if there are linter warnings or errors.
-    ignoreDuringBuilds: true,
-  },
-  
   // Next.js image optimization settings (`next/image`).
   images: {
     // Defines a list of allowed domains for loading external images.
