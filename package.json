@@ -11,6 +11,9 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },
+  "engines": {
+    "node": "22"
+  },
   "dependencies": {
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "@genkit-ai/googleai": "^1.14.1",
