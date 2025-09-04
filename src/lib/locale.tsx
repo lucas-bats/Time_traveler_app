@@ -262,7 +262,7 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <LocaleContext.Provider value={value}>
       {children}
-    </Locale-Context.Provider>
+    </LocaleContext.Provider>
   );
 };
 
