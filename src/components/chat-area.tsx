@@ -107,6 +107,10 @@ export function ChatArea({
   const placeholderText = isEvent
     ? `${t.askAbout} ${subjectName}...`
     : `${t.ask} ${subjectName}...`;
+    
+  const subjectArea = isCharacter
+    ? locale === 'pt' ? subject.field_pt : subject.field
+    : locale === 'pt' ? subject.area_pt : subject.area;
 
   return (
     <div className="flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-6 p-2 md:p-6 min-h-0">
@@ -123,7 +127,7 @@ export function ChatArea({
             />
             <div className="ml-4">
               <h2 className="font-headline text-xl text-primary">{subjectName}</h2>
-              <p className="text-sm text-muted-foreground">{locale === 'pt' && 'area_pt' in subject ? subject.area_pt : subject.area}</p>
+              <p className="text-sm text-muted-foreground">{subjectArea}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
