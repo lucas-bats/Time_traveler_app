@@ -1,4 +1,3 @@
-
 // Defines this as a "Client Component".
 "use client";
 
@@ -93,6 +92,7 @@ const translations = {
     noEventsFound: 'No Events Found',
     checkBackLater: 'Check back later for new historical events.',
     chatWithTheEvent: 'Chat with the Event',
+    askAbout: 'Ask about',
     whatWereTheCauses: 'What were the main causes?',
     whatWereTheConsequences: 'What were the main consequences?',
     participants: 'Participants',
@@ -106,6 +106,7 @@ const translations = {
     termsDisclaimerText: 'The service is provided "as is". We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties of merchantability, fitness for a particular purpose, or non-infringement of intellectual property.',
     termsLimitationTitle: 'Limitation of Liability',
     termsLimitationText: 'In no event shall Eternal Minds or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.',
+    details: 'Details',
   },
   pt: {
     title: 'Eternal Minds',
@@ -188,6 +189,7 @@ const translations = {
     noEventsFound: 'Nenhum Evento Encontrado',
     checkBackLater: 'Volte mais tarde para novos eventos históricos.',
     chatWithTheEvent: 'Conversar com o Evento',
+    askAbout: 'Pergunte sobre',
     whatWereTheCauses: 'Quais foram as principais causas?',
     whatWereTheConsequences: 'Quais foram as principais consequências?',
     participants: 'Participantes',
@@ -201,6 +203,7 @@ const translations = {
     termsDisclaimerText: 'O serviço é fornecido "como está". Não oferecemos garantias, expressas ou implícitas, e por meio deste, isentamo-nos de todas as outras garantias, incluindo, sem limitação, garantias implícitas de comercialização, adequação a um propósito específico ou não violação de propriedade intelectual.',
     termsLimitationTitle: 'Limitação de Responsabilidade',
     termsLimitationText: 'Em nenhum caso o Eternal Minds ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro, ou devido a interrupção dos negócios) decorrentes do uso ou da incapacidade de usar os materiais em nosso site.',
+    details: 'Detalhes',
   }
 };
 
@@ -259,7 +262,7 @@ export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <LocaleContext.Provider value={value}>
       {children}
-    </LocaleContext.Provider>
+    </Locale-Context.Provider>
   );
 };
 
