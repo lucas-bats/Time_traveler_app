@@ -56,14 +56,14 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
 
   // useMemo to calculate the list of available eras, correctly sorted.
   const eras = useMemo(() => {
-    const uniqueEras = [...new Set(characters.map((c) => (locale === 'pt' ? c.era_pt : c.era)))];
+    const uniqueEras = Array.from(new Set(characters.map((c) => (locale === 'pt' ? c.era_pt : c.era))));
     const order = locale === 'pt' ? eraOrderPt : eraOrder;
     uniqueEras.sort((a, b) => order.indexOf(a) - order.indexOf(b));
     return ["all", ...uniqueEras];
   }, [characters, locale]);
 
   // useMemo to calculate the list of available fields, in alphabetical order.
-  const fields = useMemo(() => ["all", ...new Set(characters.map((c) => (locale === 'pt' ? c.field_pt : c.field) ))].sort((a,b) => a.localeCompare(b)), [characters, locale]);
+  const fields = useMemo(() => ["all", ...Array.from(new Set(characters.map((c) => (locale === 'pt' ? c.field_pt : c.field) ))).sort((a,b) => a.localeCompare(b))], [characters, locale]);
   
   // Helper function to get the original (English) 'era' from the translated era.
   const getOriginalEra = (eraWithTimeframe: string) => {
