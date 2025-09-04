@@ -12,18 +12,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co', // Domain for placeholder images.
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'videos.openai.com', // Domain for videos (if applicable).
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'firebasestorage.googleapis.com', // Domain for images stored in Firebase Storage.
         port: '',
         pathname: '/**',
