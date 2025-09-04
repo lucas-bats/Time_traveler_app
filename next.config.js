@@ -1,8 +1,5 @@
-// Imports the NextConfig type to ensure the configuration object has the correct shape.
-import type {NextConfig} from 'next';
-
-// Defines the configuration object for Next.js.
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   /* Next.js configuration options go here */
   
   // Next.js image optimization settings (`next/image`).
@@ -20,5 +17,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Exports the configuration so Next.js can use it.
-export default nextConfig;
+module.exports = nextConfig;
