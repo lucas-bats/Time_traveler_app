@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Site footer component.

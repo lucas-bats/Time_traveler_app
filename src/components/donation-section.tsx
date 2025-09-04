@@ -4,7 +4,7 @@
 // Imports components from Next.js and React.
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 import { Heart, CreditCard } from "lucide-react";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";

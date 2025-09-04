@@ -2,7 +2,7 @@
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 
 export default function AboutPage() {
     const { t } = useLocale();

@@ -12,7 +12,7 @@ import { Send, Trash2, MessageSquare, Info } from "lucide-react";
 import Image from "next/image";
 import { QuillLoader } from "./quill-loader";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 import { FavoritesSidebar, FavoritesSidebarContent } from "./favorites-sidebar";
 import {
   AlertDialog,

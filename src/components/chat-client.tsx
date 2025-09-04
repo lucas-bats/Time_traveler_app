@@ -14,7 +14,7 @@ import { getAiResponse, getEventAiResponse } from "@/app/actions";
 // Imports custom hooks.
 import { useToast } from "@/hooks/use-toast";
 import useLocalStorage from "@/hooks/use-local-storage";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 
 // Defines the interface for the component's props.
 interface ChatClientProps {

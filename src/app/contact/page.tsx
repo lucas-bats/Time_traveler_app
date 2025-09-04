@@ -3,7 +3,7 @@
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

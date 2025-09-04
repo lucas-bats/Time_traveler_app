@@ -7,7 +7,7 @@ import "./globals.css";
 // Imports the cn utility function to merge Tailwind classes.
 import { cn } from "@/lib/utils";
 // Imports the context provider for locale (language) management.
-import { LocaleProvider } from "@/lib/locale.tsx";
+import { LocaleProvider } from "@/lib/locale";
 import { ThemeProvider } from "@/components/theme-provider";
 
 // Defines the application's metadata, such as title and description, for SEO.

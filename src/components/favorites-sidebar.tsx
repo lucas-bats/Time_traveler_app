@@ -2,7 +2,7 @@
 "use client";
 
 import { Star, Users } from "lucide-react";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { Message } from "./chat-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

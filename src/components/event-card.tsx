@@ -9,7 +9,7 @@ import type { Event } from "@/lib/events";
 // Imports an icon.
 import { ArrowRight } from "lucide-react";
 // Imports the localization hook for translations.
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 
 // Defines the interface for the component's props.
 interface EventCardProps {

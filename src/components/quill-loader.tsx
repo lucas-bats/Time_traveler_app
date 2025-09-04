@@ -2,7 +2,7 @@
 "use client";
 
 // Imports the localization hook to get the translated text.
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Loader component that simulates a "writing quill".

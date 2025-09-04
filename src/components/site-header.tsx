@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Home, Languages, Heart } from "lucide-react";
-import { useLocale } from "@/lib/locale.tsx";
+import { useLocale } from "@/lib/locale";
 import {
   DropdownMenu,
   DropdownMenuContent,
