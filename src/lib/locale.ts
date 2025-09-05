@@ -1,1 +1,1 @@
-export * from './locale.tsx';
+export * from './locale';
