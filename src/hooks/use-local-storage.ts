@@ -57,9 +57,9 @@ export default function useLocalStorage<T>(
 
   // Effect to listen for changes in localStorage from other tabs.
   useEffect(() => {
-    const handleStorageChange = (e: StorageEvent | CustomEvent) => {
-      // If the event is from 'storage', check if the key is the one we are observing.
-      if ((e as StorageEvent).key && (e as StorageEvent).key !== key) {
+    const handleStorageChange = (e: StorageEvent | Event) => {
+      // For 'storage' events, check if the key is the one we are observing.
+      if (e instanceof StorageEvent && e.key && e.key !== key) {
         return;
       }
       
