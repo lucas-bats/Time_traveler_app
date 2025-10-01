@@ -30,7 +30,7 @@ const MAX_QUOTE_LENGTH = 280;
 /**
  * Generates a data URL for the quote card image by rendering it off-screen.
  */
-async function generateQuoteImage(quote: string, author: string): Promise<string | undefined> {
+async function generateQuoteImage(quote: string, author: string, disclaimerText: string): Promise<string | undefined> {
     const cardContainer = document.createElement("div");
     cardContainer.style.position = "absolute";
     cardContainer.style.left = "-9999px"; // Position off-screen
@@ -38,36 +38,37 @@ async function generateQuoteImage(quote: string, author: string): Promise<string
     
     // Create a temporary element to render the QuoteCard into
     const tempElement = document.createElement("div");
-    tempElement.id = QUOTE_CARD_ID_CAPTURE;
+    cardContainer.appendChild(tempElement);
     
     // We need to use React's render method to get the component into the DOM
-    const { render } = await import("react-dom");
-
+    // Use require instead of import to avoid issues in some environments.
+    const ReactDOM = require("react-dom");
+    
     document.body.appendChild(cardContainer);
-    cardContainer.appendChild(tempElement);
     
     // Use React.createElement to create the QuoteCard instance
     const quoteCardElement = React.createElement(QuoteCard, {
       id: QUOTE_CARD_ID_CAPTURE,
       quote: quote,
       author: author,
+      disclaimerText: disclaimerText, // Pass the translated text directly
       // Add explicit classes to ensure styling is correct outside the modal context
-      className: "w-[500px] h-[300px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center"
+      className: "w-[500px] h-[300px]" 
     });
 
     // Render the component into the temporary element
-    render(quoteCardElement, tempElement);
+    ReactDOM.render(quoteCardElement, tempElement);
 
     // Allow a moment for rendering and font loading
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
-        const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
+        const elementToCapture = tempElement.firstElementChild;
         if (!elementToCapture) {
              console.error(`Element with id ${QUOTE_CARD_ID_CAPTURE} not found.`);
              return undefined;
         }
-        const canvas = await html2canvas(elementToCapture, {
+        const canvas = await html2canvas(elementToCapture as HTMLElement, {
             scale: 2,
             useCORS: true,
             backgroundColor: null,
@@ -78,6 +79,7 @@ async function generateQuoteImage(quote: string, author: string): Promise<string
         return undefined;
     } finally {
         // Clean up by removing the temporary container from the DOM
+        ReactDOM.unmountComponentAtNode(tempElement);
         document.body.removeChild(cardContainer);
     }
 }
@@ -91,6 +93,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
   const [editableQuote, setEditableQuote] = useState(quote);
   const { toast } = useToast();
   const { t } = useLocale();
+  const disclaimerText = t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
 
   useEffect(() => {
     if(isOpen) {
@@ -103,7 +106,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function downloadImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author);
+    const dataUrl = await generateQuoteImage(editableQuote, author, disclaimerText);
     if (!dataUrl) {
       toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
       setIsLoading(false);
@@ -122,7 +125,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author);
+    const dataUrl = await generateQuoteImage(editableQuote, author, disclaimerText);
     if (!dataUrl) {
        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
        setIsLoading(false);
@@ -177,7 +180,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                     {editableQuote.length} / {MAX_QUOTE_LENGTH}
                  </p>
             </div>
-            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg h-full">
+            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg min-h-[300px]">
                 <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
             </div>
         </div>

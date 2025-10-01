@@ -9,14 +9,16 @@ interface QuoteCardProps {
   quote: string;
   author: string;
   className?: string;
+  disclaimerText?: string;
 }
 
 /**
  * A component that renders a stylized card for a quote.
  * This is intended to be captured as an image for sharing.
  */
-export function QuoteCard({ id, quote, author, className }: QuoteCardProps) {
+export function QuoteCard({ id, quote, author, className, disclaimerText }: QuoteCardProps) {
   const { t } = useLocale();
+  const actualDisclaimer = disclaimerText || t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
 
   return (
     <div
@@ -29,7 +31,7 @@ export function QuoteCard({ id, quote, author, className }: QuoteCardProps) {
       <p className="text-xl italic mb-6 leading-relaxed text-center">“{quote}”</p>
       <p className="text-xl font-bold self-end">— {author}</p>
       <div className="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
-        {t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨')}
+        {actualDisclaimer}
       </div>
     </div>
   );
