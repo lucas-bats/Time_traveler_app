@@ -33,39 +33,32 @@ const MAX_QUOTE_LENGTH = 280;
 async function generateQuoteImage(quote: string, author: string, disclaimerText: string): Promise<string | undefined> {
     const cardContainer = document.createElement("div");
     cardContainer.style.position = "absolute";
-    cardContainer.style.left = "-9999px"; // Position off-screen
+    cardContainer.style.left = "-9999px";
     cardContainer.style.top = "0";
     
-    // Create a temporary element to render the QuoteCard into
     const tempElement = document.createElement("div");
     cardContainer.appendChild(tempElement);
     
-    // We need to use React's render method to get the component into the DOM
-    // Use require instead of import to avoid issues in some environments.
     const ReactDOM = require("react-dom");
     
     document.body.appendChild(cardContainer);
     
-    // Use React.createElement to create the QuoteCard instance
     const quoteCardElement = React.createElement(QuoteCard, {
       id: QUOTE_CARD_ID_CAPTURE,
       quote: quote,
       author: author,
-      disclaimerText: disclaimerText, // Pass the translated text directly
-      // Add explicit classes to ensure styling is correct outside the modal context
+      disclaimerText: disclaimerText,
       className: "w-[500px] h-[300px]" 
     });
 
-    // Render the component into the temporary element
     ReactDOM.render(quoteCardElement, tempElement);
 
-    // Allow a moment for rendering and font loading
     await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
         const elementToCapture = tempElement.firstElementChild;
         if (!elementToCapture) {
-             console.error(`Element with id ${QUOTE_CARD_ID_CAPTURE} not found.`);
+             console.error("Element to capture not found.");
              return undefined;
         }
         const canvas = await html2canvas(elementToCapture as HTMLElement, {
@@ -78,7 +71,6 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
         console.error("Error generating canvas:", error);
         return undefined;
     } finally {
-        // Clean up by removing the temporary container from the DOM
         ReactDOM.unmountComponentAtNode(tempElement);
         document.body.removeChild(cardContainer);
     }
@@ -181,7 +173,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  </p>
             </div>
             <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg min-h-[300px]">
-                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
+                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} disclaimerText={disclaimerText} />
             </div>
         </div>
 

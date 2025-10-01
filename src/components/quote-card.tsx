@@ -2,14 +2,13 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { useLocale } from "@/lib/locale";
 
 interface QuoteCardProps {
   id: string;
   quote: string;
   author: string;
   className?: string;
-  disclaimerText?: string;
+  disclaimerText: string;
 }
 
 /**
@@ -17,9 +16,6 @@ interface QuoteCardProps {
  * This is intended to be captured as an image for sharing.
  */
 export function QuoteCard({ id, quote, author, className, disclaimerText }: QuoteCardProps) {
-  const { t } = useLocale();
-  const actualDisclaimer = disclaimerText || t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
-
   return (
     <div
       id={id}
@@ -31,7 +27,7 @@ export function QuoteCard({ id, quote, author, className, disclaimerText }: Quot
       <p className="text-xl italic mb-6 leading-relaxed text-center">“{quote}”</p>
       <p className="text-xl font-bold self-end">— {author}</p>
       <div className="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
-        {actualDisclaimer}
+        {disclaimerText}
       </div>
     </div>
   );
