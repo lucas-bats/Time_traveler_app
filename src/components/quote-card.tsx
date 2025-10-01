@@ -26,7 +26,7 @@ export function QuoteCard({ id, quote, author, className }: QuoteCardProps) {
       <p className="text-xl italic mb-6 leading-relaxed text-center">“{quote}”</p>
       <p className="text-xl font-bold self-end">— {author}</p>
       <div className="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
-        Eternal Minds ✨
+        IA-gerado por Eternal Minds ✨
       </div>
     </div>
   );

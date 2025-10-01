@@ -46,7 +46,7 @@ async function generateQuoteImage(quote: string, author: string): Promise<string
             <p class="text-xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
             <p class="text-xl font-bold self-end">— ${author}</p>
             <div class="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
-                Eternal Minds ✨
+                IA-gerado por Eternal Minds ✨
             </div>
         </div>
     `;
@@ -152,7 +152,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  <Textarea 
                     value={editableQuote}
                     onChange={(e) => setEditableQuote(e.target.value)}
-                    className="flex-1 text-base"
+                    className="flex-1 text-base min-h-[150px]"
                     maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
                  />
                  <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
@@ -160,7 +160,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  </p>
             </div>
             <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg">
-                 <div className="transform scale-90">
+                 <div className="transform">
                     <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
                 </div>
             </div>
