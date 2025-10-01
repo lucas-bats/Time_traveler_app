@@ -126,9 +126,8 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
      setIsLoading(true);
-    let dataUrl;
     try {
-        dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
+        const dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
         if (!dataUrl) {
             toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
             return;
