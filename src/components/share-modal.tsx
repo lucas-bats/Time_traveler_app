@@ -43,7 +43,7 @@ async function generateQuoteImage(quote: string, author: string): Promise<string
     const tempCard = document.createElement('div');
     tempCard.innerHTML = `
         <div id="${QUOTE_CARD_ID}" class="w-[500px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center h-[300px]">
-            <p class="text-2xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
+            <p class="text-xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
             <p class="text-xl font-bold self-end">— ${author}</p>
             <div class="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
                 Eternal Minds ✨
@@ -139,7 +139,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-4xl">
         <DialogHeader>
           <DialogTitle>Share this Quote</DialogTitle>
           <DialogDescription>
@@ -147,20 +147,20 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
           </DialogDescription>
         </DialogHeader>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col h-full">
                  <Textarea 
                     value={editableQuote}
                     onChange={(e) => setEditableQuote(e.target.value)}
-                    className="h-48 text-base"
+                    className="flex-1 text-base"
                     maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
                  />
                  <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
                     {editableQuote.length} / {MAX_QUOTE_LENGTH}
                  </p>
             </div>
-            <div className="flex justify-center items-center">
-                 <div className="transform scale-75 -m-8">
+            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg">
+                 <div className="transform scale-90">
                     <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
                 </div>
             </div>
