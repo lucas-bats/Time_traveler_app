@@ -28,41 +28,28 @@ const QUOTE_CARD_ID = "quote-card-for-sharing";
 const MAX_QUOTE_LENGTH = 280;
 
 /**
- * Generates a data URL for the quote card image.
+ * Generates a data URL for the quote card image from a given element ID.
  */
-async function generateQuoteImage(quote: string, author: string): Promise<string | undefined> {
-    // Create a temporary element to render the card off-screen
-    const container = document.createElement('div');
-    container.style.position = 'absolute';
-    container.style.left = '-9999px';
+async function generateQuoteImage(elementId: string): Promise<string | undefined> {
+    const element = document.getElementById(elementId);
+    if (!element) {
+        console.error(`Element with id ${elementId} not found.`);
+        return undefined;
+    }
 
-    const element = document.createElement('div');
-    element.id = QUOTE_CARD_ID;
-    
-    // This is a trick to get around the fact that we can't easily pass props to a temporary component
-    const tempCard = document.createElement('div');
-    tempCard.innerHTML = `
-        <div id="${QUOTE_CARD_ID}" class="w-[500px] h-[300px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center">
-            <p class="text-xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
-            <p class="text-xl font-bold self-end">— ${author}</p>
-            <div class="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
-                IA-gerado por Eternal Minds ✨
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(tempCard);
-    
-    const canvas = await html2canvas(document.getElementById(QUOTE_CARD_ID)!, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: null,
-    });
-    
-    document.body.removeChild(tempCard);
-
-    return canvas.toDataURL("image/png");
+    try {
+        const canvas = await html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: null, 
+        });
+        return canvas.toDataURL("image/png");
+    } catch (error) {
+        console.error("Error generating canvas:", error);
+        return undefined;
+    }
 }
+
 
 /**
  * A modal component for sharing a quote as an image.
@@ -85,7 +72,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function downloadImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author);
+    const dataUrl = await generateQuoteImage(QUOTE_CARD_ID);
     if (!dataUrl) {
       toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
       setIsLoading(false);
@@ -104,7 +91,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author);
+    const dataUrl = await generateQuoteImage(QUOTE_CARD_ID);
     if (!dataUrl) {
        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
        setIsLoading(false);
@@ -154,15 +141,15 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  <Textarea 
                     value={editableQuote}
                     onChange={(e) => setEditableQuote(e.target.value)}
-                    className="flex-1 text-base min-h-[250px]"
+                    className="flex-1 text-base min-h-[300px]"
                     maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
                  />
                  <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
                     {editableQuote.length} / {MAX_QUOTE_LENGTH}
                  </p>
             </div>
-            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg">
-                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
+            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg h-full">
+                <QuoteCard id={QUOTE_CARD_ID} quote={editableQuote} author={author} />
             </div>
         </div>
 
