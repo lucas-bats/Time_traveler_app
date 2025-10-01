@@ -87,7 +87,6 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
   const [editableQuote, setEditableQuote] = useState(quote);
   const { toast } = useToast();
   const { t } = useLocale();
-  const disclaimerText = t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
 
   useEffect(() => {
     if(isOpen) {
@@ -100,18 +99,20 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function downloadImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author, disclaimerText);
-    if (!dataUrl) {
-      toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-      setIsLoading(false);
-      return;
-    }
+    try {
+      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
+      if (!dataUrl) {
+        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+        return;
+      }
 
-    const link = document.createElement("a");
-    link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-    link.href = dataUrl;
-    link.click();
-    setIsLoading(false);
+      const link = document.createElement("a");
+      link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+      link.href = dataUrl;
+      link.click();
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   /**
@@ -119,31 +120,41 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(editableQuote, author, disclaimerText);
-    if (!dataUrl) {
-       toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-       setIsLoading(false);
-      return;
-    }
-
     try {
-        const blob = await (await fetch(dataUrl)).blob();
-        const file = new File([blob], "quote.png", { type: "image/png" });
-        
-        const shareTitle = t.quoteBy.replace('{author}', author);
+      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
+      if (!dataUrl) {
+        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+        return;
+      }
 
-        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-            files: [file],
-            title: shareTitle,
-            text: `"${editableQuote}" - ${author}`,
-            });
-        } else {
-            downloadImage();
-        }
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], "quote.png", { type: "image/png" });
+      
+      const shareTitle = t.quoteBy.replace('{author}', author);
+
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+          files: [file],
+          title: shareTitle,
+          text: `"${editableQuote}" - ${author}`,
+          });
+      } else {
+          // Fallback to download if Web Share API is not supported or fails
+          const link = document.createElement("a");
+          link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+          link.href = dataUrl;
+          link.click();
+      }
     } catch (error) {
-        console.error("Sharing failed", error);
-        downloadImage();
+      console.error("Sharing failed", error);
+      // Attempt to download as a fallback on any sharing error
+      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
+      if (dataUrl) {
+        const link = document.createElement("a");
+        link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+        link.href = dataUrl;
+        link.click();
+      }
     } finally {
         setIsLoading(false);
     }
@@ -174,8 +185,13 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                     {editableQuote.length} / {MAX_QUOTE_LENGTH}
                  </p>
             </div>
-            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg min-h-[300px]">
-                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} disclaimerText={disclaimerText} />
+            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg min-h-[350px]">
+                 <QuoteCard 
+                    id="quote-card-preview" 
+                    quote={editableQuote} 
+                    author={author} 
+                    disclaimerText={t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨')}
+                 />
             </div>
         </div>
 
