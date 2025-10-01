@@ -24,29 +24,61 @@ interface ShareModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const QUOTE_CARD_ID = "quote-card-for-sharing";
+const QUOTE_CARD_ID_CAPTURE = "quote-card-for-capture";
 const MAX_QUOTE_LENGTH = 280;
 
 /**
- * Generates a data URL for the quote card image from a given element ID.
+ * Generates a data URL for the quote card image by rendering it off-screen.
  */
-async function generateQuoteImage(elementId: string): Promise<string | undefined> {
-    const element = document.getElementById(elementId);
-    if (!element) {
-        console.error(`Element with id ${elementId} not found.`);
-        return undefined;
-    }
+async function generateQuoteImage(quote: string, author: string): Promise<string | undefined> {
+    const cardContainer = document.createElement("div");
+    cardContainer.style.position = "absolute";
+    cardContainer.style.left = "-9999px"; // Position off-screen
+    cardContainer.style.top = "0";
+    
+    // Create a temporary element to render the QuoteCard into
+    const tempElement = document.createElement("div");
+    tempElement.id = QUOTE_CARD_ID_CAPTURE;
+    
+    // We need to use React's render method to get the component into the DOM
+    const { render } = await import("react-dom");
+
+    document.body.appendChild(cardContainer);
+    cardContainer.appendChild(tempElement);
+    
+    // Use React.createElement to create the QuoteCard instance
+    const quoteCardElement = React.createElement(QuoteCard, {
+      id: QUOTE_CARD_ID_CAPTURE,
+      quote: quote,
+      author: author,
+      // Add explicit classes to ensure styling is correct outside the modal context
+      className: "w-[500px] h-[300px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center"
+    });
+
+    // Render the component into the temporary element
+    render(quoteCardElement, tempElement);
+
+    // Allow a moment for rendering and font loading
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     try {
-        const canvas = await html2canvas(element, {
+        const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
+        if (!elementToCapture) {
+             console.error(`Element with id ${QUOTE_CARD_ID_CAPTURE} not found.`);
+             return undefined;
+        }
+        const canvas = await html2canvas(elementToCapture, {
             scale: 2,
             useCORS: true,
-            backgroundColor: null, 
+            backgroundColor: null,
         });
         return canvas.toDataURL("image/png");
     } catch (error) {
         console.error("Error generating canvas:", error);
         return undefined;
+    } finally {
+        // Clean up by removing the temporary container from the DOM
+        document.body.removeChild(cardContainer);
     }
 }
 
@@ -61,7 +93,6 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
   const { t } = useLocale();
 
   useEffect(() => {
-    // Reset the editable quote when the modal is opened with a new quote
     if(isOpen) {
         setEditableQuote(quote);
     }
@@ -72,7 +103,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function downloadImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(QUOTE_CARD_ID);
+    const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
       toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
       setIsLoading(false);
@@ -91,7 +122,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage(QUOTE_CARD_ID);
+    const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
        setIsLoading(false);
@@ -111,12 +142,10 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
             text: `"${editableQuote}" - ${author}`,
             });
         } else {
-            // Fallback for desktop or unsupported browsers
             downloadImage();
         }
     } catch (error) {
         console.error("Sharing failed", error);
-        // If sharing fails (e.g., user cancels), offer download as fallback
         downloadImage();
     } finally {
         setIsLoading(false);
@@ -142,14 +171,14 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                     value={editableQuote}
                     onChange={(e) => setEditableQuote(e.target.value)}
                     className="flex-1 text-base min-h-[300px]"
-                    maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
+                    maxLength={MAX_QUOTE_LENGTH + 20}
                  />
                  <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
                     {editableQuote.length} / {MAX_QUOTE_LENGTH}
                  </p>
             </div>
             <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg h-full">
-                <QuoteCard id={QUOTE_CARD_ID} quote={editableQuote} author={author} />
+                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
             </div>
         </div>
 
