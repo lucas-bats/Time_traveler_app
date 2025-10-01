@@ -32,50 +32,46 @@ const MAX_QUOTE_LENGTH = 280;
  * Generates a data URL for the quote card image by rendering it off-screen.
  */
 async function generateQuoteImage(quote: string, author: string, disclaimerText: string): Promise<string | undefined> {
-    const cardContainer = document.createElement("div");
-    cardContainer.style.position = "absolute";
-    cardContainer.style.left = "-9999px";
-    cardContainer.style.top = "0";
-    
-    const tempElement = document.createElement("div");
-    cardContainer.appendChild(tempElement);
-    
-    document.body.appendChild(cardContainer);
-    
-    const quoteCardElement = React.createElement(QuoteCard, {
-      id: QUOTE_CARD_ID_CAPTURE,
-      quote: quote,
-      author: author,
-      disclaimerText: disclaimerText,
-    });
+  const cardContainer = document.createElement("div");
+  cardContainer.style.position = "absolute";
+  cardContainer.style.left = "-9999px";
+  cardContainer.style.top = "0";
+  document.body.appendChild(cardContainer);
 
-    // Use ReactDOM.render to mount the component
-    await new Promise<void>(resolve => {
-        ReactDOM.render(quoteCardElement, tempElement, () => resolve());
-    });
+  const quoteCardElement = React.createElement(QuoteCard, {
+    id: QUOTE_CARD_ID_CAPTURE,
+    quote: quote,
+    author: author,
+    disclaimerText: disclaimerText,
+  });
 
-    // Small delay to ensure styles are applied
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    try {
-        const elementToCapture = tempElement.firstElementChild;
+  return new Promise((resolve) => {
+    // Use ReactDOM.render to mount the component, with a callback for when it's done
+    ReactDOM.render(quoteCardElement, cardContainer, async () => {
+      // Small delay to ensure styles are applied
+      await new Promise(r => setTimeout(r, 300));
+      try {
+        const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
         if (!elementToCapture) {
-             console.error("Element to capture not found.");
-             return undefined;
+          console.error("Element to capture not found.");
+          resolve(undefined);
+          return;
         }
-        const canvas = await html2canvas(elementToCapture as HTMLElement, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: null,
+        const canvas = await html2canvas(elementToCapture, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: null,
         });
-        return canvas.toDataURL("image/png");
-    } catch (error) {
+        resolve(canvas.toDataURL("image/png"));
+      } catch (error) {
         console.error("Error generating canvas:", error);
-        return undefined;
-    } finally {
-        ReactDOM.unmountComponentAtNode(tempElement);
+        resolve(undefined);
+      } finally {
+        ReactDOM.unmountComponentAtNode(cardContainer);
         document.body.removeChild(cardContainer);
-    }
+      }
+    });
+  });
 }
 
 
@@ -94,22 +90,26 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
     }
   }, [isOpen, quote])
 
+  const disclaimer = t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
+
   /**
    * Handles downloading the generated image.
    */
   async function downloadImage() {
     setIsLoading(true);
     try {
-      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
+      const dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
       if (!dataUrl) {
         toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
         return;
       }
-
       const link = document.createElement("a");
       link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
       link.href = dataUrl;
       link.click();
+    } catch (error) {
+      console.error("Download failed", error);
+      toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
     } finally {
       setIsLoading(false);
     }
@@ -120,41 +120,43 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
+    let dataUrl;
     try {
-      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
-      if (!dataUrl) {
-        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-        return;
-      }
+        dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
+        if (!dataUrl) {
+            toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+            setIsLoading(false);
+            return;
+        }
+        
+        const blob = await(await fetch(dataUrl)).blob();
+        const file = new File([blob], "quote.png", { type: "image/png" });
+        const shareTitle = t.quoteBy.replace('{author}', author);
 
-      const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], "quote.png", { type: "image/png" });
-      
-      const shareTitle = t.quoteBy.replace('{author}', author);
-
-      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-          files: [file],
-          title: shareTitle,
-          text: `"${editableQuote}" - ${author}`,
-          });
-      } else {
-          // Fallback to download if Web Share API is not supported or fails
-          const link = document.createElement("a");
-          link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-          link.href = dataUrl;
-          link.click();
-      }
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+                files: [file],
+                title: shareTitle,
+                text: `"${editableQuote}" - ${author}`,
+            });
+        } else {
+            // Fallback to download if Web Share API is not supported
+            const link = document.createElement("a");
+            link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+            link.href = dataUrl;
+            link.click();
+        }
     } catch (error) {
-      console.error("Sharing failed", error);
-      // Attempt to download as a fallback on any sharing error
-      const dataUrl = await generateQuoteImage(editableQuote, author, t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨'));
-      if (dataUrl) {
-        const link = document.createElement("a");
-        link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-        link.href = dataUrl;
-        link.click();
-      }
+        console.error("Sharing failed", error);
+        // Fallback to download on any sharing error
+        if (dataUrl) {
+            const link = document.createElement("a");
+            link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+            link.href = dataUrl;
+            link.click();
+        } else {
+            toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+        }
     } finally {
         setIsLoading(false);
     }
@@ -190,7 +192,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                     id="quote-card-preview" 
                     quote={editableQuote} 
                     author={author} 
-                    disclaimerText={t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨')}
+                    disclaimerText={disclaimer}
                  />
             </div>
         </div>
