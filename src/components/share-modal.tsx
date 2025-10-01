@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import {
   Dialog,
@@ -15,6 +15,7 @@ import { QuoteCard } from "./quote-card";
 import { Download, Share2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/lib/locale";
+import { Textarea } from "./ui/textarea";
 
 interface ShareModalProps {
   quote: string;
@@ -24,24 +25,43 @@ interface ShareModalProps {
 }
 
 const QUOTE_CARD_ID = "quote-card-for-sharing";
+const MAX_QUOTE_LENGTH = 280;
 
 /**
  * Generates a data URL for the quote card image.
  */
-async function generateQuoteImage(): Promise<string | undefined> {
-  const element = document.getElementById(QUOTE_CARD_ID);
-  if (!element) return;
+async function generateQuoteImage(quote: string, author: string): Promise<string | undefined> {
+    // Create a temporary element to render the card off-screen
+    const container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.left = '-9999px';
 
-  // Temporarily make it visible to capture
-  element.style.display = 'block';
-  const canvas = await html2canvas(element, { 
-      scale: 2, 
-      useCORS: true,
-      backgroundColor: null // Use transparent background
-  });
-  element.style.display = 'none'; // Hide it again
+    const element = document.createElement('div');
+    element.id = QUOTE_CARD_ID;
+    
+    // This is a trick to get around the fact that we can't easily pass props to a temporary component
+    const tempCard = document.createElement('div');
+    tempCard.innerHTML = `
+        <div id="${QUOTE_CARD_ID}" class="w-[500px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center h-[300px]">
+            <p class="text-2xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
+            <p class="text-xl font-bold self-end">— ${author}</p>
+            <div class="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
+                Eternal Minds ✨
+            </div>
+        </div>
+    `;
 
-  return canvas.toDataURL("image/png");
+    document.body.appendChild(tempCard);
+    
+    const canvas = await html2canvas(document.getElementById(QUOTE_CARD_ID)!, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null,
+    });
+    
+    document.body.removeChild(tempCard);
+
+    return canvas.toDataURL("image/png");
 }
 
 /**
@@ -49,15 +69,23 @@ async function generateQuoteImage(): Promise<string | undefined> {
  */
 export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [editableQuote, setEditableQuote] = useState(quote);
   const { toast } = useToast();
   const { t } = useLocale();
+
+  useEffect(() => {
+    // Reset the editable quote when the modal is opened with a new quote
+    if(isOpen) {
+        setEditableQuote(quote);
+    }
+  }, [isOpen, quote])
 
   /**
    * Handles downloading the generated image.
    */
   async function downloadImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage();
+    const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
       toast({ variant: "destructive", title: t.error, description: t.somethingWentWrong });
       setIsLoading(false);
@@ -76,7 +104,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    */
   async function shareImage() {
     setIsLoading(true);
-    const dataUrl = await generateQuoteImage();
+    const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
        toast({ variant: "destructive", title: t.error, description: t.somethingWentWrong });
        setIsLoading(false);
@@ -91,7 +119,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
             await navigator.share({
             files: [file],
             title: `Quote from ${author} - Eternal Minds`,
-            text: `"${quote}" - ${author}`,
+            text: `"${editableQuote}" - ${author}`,
             });
         } else {
             // Fallback for desktop or unsupported browsers
@@ -107,35 +135,45 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
   }
   
   const canShare = typeof navigator !== 'undefined' && !!navigator.share;
+  const isOverLimit = editableQuote.length > MAX_QUOTE_LENGTH;
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Share this Quote</DialogTitle>
           <DialogDescription>
-            Share this inspirational quote with your friends.
+            Edit the quote below, then share it with your friends.
           </DialogDescription>
         </DialogHeader>
         
-        {/* Hidden card used for generating the image */}
-        <QuoteCard id={QUOTE_CARD_ID} quote={quote} author={author} className="!hidden" />
-
-        {/* Preview of the card */}
-        <div className="flex justify-center my-4">
-             <div className="transform scale-75 -m-12">
-                <QuoteCard id="quote-card-preview" quote={quote} author={author} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div>
+                 <Textarea 
+                    value={editableQuote}
+                    onChange={(e) => setEditableQuote(e.target.value)}
+                    className="h-48 text-base"
+                    maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
+                 />
+                 <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
+                    {editableQuote.length} / {MAX_QUOTE_LENGTH}
+                 </p>
+            </div>
+            <div className="flex justify-center items-center">
+                 <div className="transform scale-75 -m-8">
+                    <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
+                </div>
             </div>
         </div>
 
-        <DialogFooter className="sm:justify-center">
+        <DialogFooter className="sm:justify-center mt-4">
             {canShare ? (
-                <Button onClick={shareImage} disabled={isLoading} className="w-full sm:w-auto">
+                <Button onClick={shareImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
                     {isLoading ? <Loader2 className="animate-spin" /> : <Share2 />}
                     <span className="ml-2">Share</span>
                 </Button>
             ) : (
-                <Button onClick={downloadImage} disabled={isLoading} className="w-full sm:w-auto">
+                <Button onClick={downloadImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
                     {isLoading ? <Loader2 className="animate-spin" /> : <Download />}
                     <span className="ml-2">Download Image</span>
                 </Button>
