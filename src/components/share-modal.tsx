@@ -42,7 +42,7 @@ async function generateQuoteImage(quote: string, author: string): Promise<string
     // This is a trick to get around the fact that we can't easily pass props to a temporary component
     const tempCard = document.createElement('div');
     tempCard.innerHTML = `
-        <div id="${QUOTE_CARD_ID}" class="w-[500px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center h-[300px]">
+        <div id="${QUOTE_CARD_ID}" class="w-[500px] h-[300px] p-8 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col justify-center items-center">
             <p class="text-xl italic mb-6 leading-relaxed text-center">“${quote}”</p>
             <p class="text-xl font-bold self-end">— ${author}</p>
             <div class="absolute bottom-4 text-sm opacity-70 text-primary-foreground/80">
@@ -87,7 +87,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
     setIsLoading(true);
     const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
-      toast({ variant: "destructive", title: t.error, description: t.somethingWentWrong });
+      toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
       setIsLoading(false);
       return;
     }
@@ -106,7 +106,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
     setIsLoading(true);
     const dataUrl = await generateQuoteImage(editableQuote, author);
     if (!dataUrl) {
-       toast({ variant: "destructive", title: t.error, description: t.somethingWentWrong });
+       toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
        setIsLoading(false);
       return;
     }
@@ -114,11 +114,13 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
     try {
         const blob = await (await fetch(dataUrl)).blob();
         const file = new File([blob], "quote.png", { type: "image/png" });
+        
+        const shareTitle = t.quoteBy.replace('{author}', author);
 
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
             files: [file],
-            title: `Quote from ${author} - Eternal Minds`,
+            title: shareTitle,
             text: `"${editableQuote}" - ${author}`,
             });
         } else {
@@ -141,9 +143,9 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl">
         <DialogHeader>
-          <DialogTitle>Share this Quote</DialogTitle>
+          <DialogTitle>{t.shareQuoteTitle}</DialogTitle>
           <DialogDescription>
-            Edit the quote below, then share it with your friends.
+            {t.shareQuoteDescription}
           </DialogDescription>
         </DialogHeader>
         
@@ -152,7 +154,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  <Textarea 
                     value={editableQuote}
                     onChange={(e) => setEditableQuote(e.target.value)}
-                    className="flex-1 text-base min-h-[150px]"
+                    className="flex-1 text-base min-h-[250px]"
                     maxLength={MAX_QUOTE_LENGTH + 20} // Allow some overflow before hard cut
                  />
                  <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
@@ -160,9 +162,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
                  </p>
             </div>
             <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg">
-                 <div className="transform">
-                    <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
-                </div>
+                <QuoteCard id="quote-card-preview" quote={editableQuote} author={author} />
             </div>
         </div>
 
@@ -170,12 +170,12 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
             {canShare ? (
                 <Button onClick={shareImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
                     {isLoading ? <Loader2 className="animate-spin" /> : <Share2 />}
-                    <span className="ml-2">Share</span>
+                    <span className="ml-2">{t.shareAction}</span>
                 </Button>
             ) : (
                 <Button onClick={downloadImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
                     {isLoading ? <Loader2 className="animate-spin" /> : <Download />}
-                    <span className="ml-2">Download Image</span>
+                    <span className="ml-2">{t.downloadAction}</span>
                 </Button>
             )}
         </DialogFooter>
