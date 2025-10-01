@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import html2canvas from "html2canvas";
 import {
   Dialog,
@@ -39,8 +40,6 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
     const tempElement = document.createElement("div");
     cardContainer.appendChild(tempElement);
     
-    const ReactDOM = require("react-dom");
-    
     document.body.appendChild(cardContainer);
     
     const quoteCardElement = React.createElement(QuoteCard, {
@@ -48,11 +47,14 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
       quote: quote,
       author: author,
       disclaimerText: disclaimerText,
-      className: "w-[500px] h-[300px]" 
     });
 
-    ReactDOM.render(quoteCardElement, tempElement);
+    // Use ReactDOM.render to mount the component
+    await new Promise<void>(resolve => {
+        ReactDOM.render(quoteCardElement, tempElement, () => resolve());
+    });
 
+    // Small delay to ensure styles are applied
     await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
@@ -177,7 +179,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
             </div>
         </div>
 
-        <DialogFooter className="sm:justify-center mt-4">
+        <DialogFooter>
             {canShare ? (
                 <Button onClick={shareImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
                     {isLoading ? <Loader2 className="animate-spin" /> : <Share2 />}
