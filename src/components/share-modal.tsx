@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import html2canvas from "html2canvas";
 import {
   Dialog,
@@ -29,49 +29,55 @@ const QUOTE_CARD_ID_CAPTURE = "quote-card-for-capture";
 const MAX_QUOTE_LENGTH = 280;
 
 /**
- * Generates a data URL for the quote card image by rendering it off-screen.
+ * Generates a data URL for the quote card image by rendering it off-screen using the modern createRoot API.
  */
 async function generateQuoteImage(quote: string, author: string, disclaimerText: string): Promise<string | undefined> {
   const cardContainer = document.createElement("div");
+  // Position it off-screen
   cardContainer.style.position = "absolute";
   cardContainer.style.left = "-9999px";
-  cardContainer.style.top = "0";
+  cardContainer.style.top = "-9999px";
   document.body.appendChild(cardContainer);
 
-  const quoteCardElement = React.createElement(QuoteCard, {
-    id: QUOTE_CARD_ID_CAPTURE,
-    quote: quote,
-    author: author,
-    disclaimerText: disclaimerText,
-  });
+  const root = createRoot(cardContainer);
 
-  return new Promise((resolve) => {
-    // Use ReactDOM.render to mount the component, with a callback for when it's done
-    ReactDOM.render(quoteCardElement, cardContainer, async () => {
-      // Small delay to ensure styles are applied
-      await new Promise(r => setTimeout(r, 300));
-      try {
-        const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
-        if (!elementToCapture) {
-          console.error("Element to capture not found.");
-          resolve(undefined);
-          return;
-        }
-        const canvas = await html2canvas(elementToCapture, {
-          scale: 2,
-          useCORS: true,
-          backgroundColor: null,
-        });
-        resolve(canvas.toDataURL("image/png"));
-      } catch (error) {
-        console.error("Error generating canvas:", error);
-        resolve(undefined);
-      } finally {
-        ReactDOM.unmountComponentAtNode(cardContainer);
-        document.body.removeChild(cardContainer);
-      }
+  try {
+    // Render the component and wait for it to be committed to the DOM
+    await new Promise<void>((resolve) => {
+      root.render(
+        <React.StrictMode>
+          <QuoteCard
+            id={QUOTE_CARD_ID_CAPTURE}
+            quote={quote}
+            author={author}
+            disclaimerText={disclaimerText}
+          />
+        </React.StrictMode>
+      );
+      // Use a short timeout to allow the browser to paint the component
+      setTimeout(resolve, 50);
     });
-  });
+
+    const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
+    if (!elementToCapture) {
+      console.error("Element to capture not found.");
+      return undefined;
+    }
+
+    const canvas = await html2canvas(elementToCapture, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null,
+    });
+    return canvas.toDataURL("image/png");
+  } catch (error) {
+    console.error("Error generating canvas:", error);
+    return undefined;
+  } finally {
+    // Unmount the component and remove the container
+    root.unmount();
+    document.body.removeChild(cardContainer);
+  }
 }
 
 
@@ -119,13 +125,12 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
    * Handles sharing the image using the Web Share API.
    */
   async function shareImage() {
-    setIsLoading(true);
+     setIsLoading(true);
     let dataUrl;
     try {
         dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
         if (!dataUrl) {
             toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-            setIsLoading(false);
             return;
         }
         
@@ -141,22 +146,15 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
             });
         } else {
             // Fallback to download if Web Share API is not supported
-            const link = document.createElement("a");
-            link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-            link.href = dataUrl;
-            link.click();
+            await downloadImage();
         }
     } catch (error) {
-        console.error("Sharing failed", error);
-        // Fallback to download on any sharing error
-        if (dataUrl) {
-            const link = document.createElement("a");
-            link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-            link.href = dataUrl;
-            link.click();
-        } else {
-            toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+        // Don't toast on abort errors from the share dialog
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return;
         }
+        console.error("Sharing failed", error);
+        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
     } finally {
         setIsLoading(false);
     }
@@ -200,13 +198,13 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
         <DialogFooter>
             {canShare ? (
                 <Button onClick={shareImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
-                    {isLoading ? <Loader2 className="animate-spin" /> : <Share2 />}
-                    <span className="ml-2">{t.shareAction}</span>
+                    {isLoading ? <Loader2 className="animate-spin" /> : <Share2 className="mr-2" />}
+                    {t.shareAction}
                 </Button>
             ) : (
                 <Button onClick={downloadImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
-                    {isLoading ? <Loader2 className="animate-spin" /> : <Download />}
-                    <span className="ml-2">{t.downloadAction}</span>
+                    {isLoading ? <Loader2 className="animate-spin" /> : <Download className="mr-2" />}
+                    {t.downloadAction}
                 </Button>
             )}
         </DialogFooter>
