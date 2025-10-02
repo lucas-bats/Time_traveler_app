@@ -52,7 +52,7 @@ export const religionsData: Religion[] = [
     "description": "One of the oldest monotheistic religions, founded on the principles of the Torah and the covenant between God and the Jewish people. It has deeply influenced Western civilization.",
     "description_pt": "Uma das mais antigas religiões monoteístas, fundamentada nos princípios da Torá e na aliança entre Deus e o povo judeu. Influenciou profundamente a civilização ocidental.",
     "characters": ["abraham", "moses", "king_david", "maimonides"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fjudaism.png?alt=media&token=a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FPergaminho%20da%20Tor%C3%A1%20Iluminado_simple_compose_01k6jk9wmye1c8h4scdbbg18ag.png?alt=media&token=fce79461-427a-42b9-afbf-96bb92401a29"
   },
   {
     "id": "hinduism",
