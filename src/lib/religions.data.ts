@@ -65,6 +65,6 @@ export const religionsData: Religion[] = [
     "description": "A diverse and ancient religion with a vast array of traditions, scriptures, and philosophies. It is characterized by concepts such as dharma, karma, and moksha.",
     "description_pt": "Uma religião diversa e antiga com uma vasta gama de tradições, escrituras e filosofias. É caracterizada por conceitos como dharma, karma e moksha.",
     "characters": ["krishna", "shiva", "adi_shankara"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fhinduism.png?alt=media&token=b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FTemplo%20Indiano%20ao%20P%C3%B4r%20do%20Sol_simple_compose_01k6jk3853etcs9gn6q2c9szjm.png?alt=media&token=97710c8f-66b6-461f-93ba-a84bb0a34518"
   }
 ];
