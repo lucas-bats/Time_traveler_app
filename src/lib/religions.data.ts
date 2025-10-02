@@ -13,7 +13,7 @@ export const religionsData: Religion[] = [
     "description": "Monotheistic religion based on the life and teachings of Jesus of Nazareth. It spread throughout the Roman Empire and became the world's largest religion.",
     "description_pt": "Religião monoteísta baseada na vida e nos ensinamentos de Jesus de Nazaré. Expandiu-se pelo Império Romano e tornou-se a maior religião do mundo.",
     "characters": ["jesus_cristo", "santo_tomas_aquino", "martinho_lutero", "joan-of-arc"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fcristianismo.jpg?alt=media&token=c1a2b3c4-d5e6-f7g8-h9i0-j1k2l3m4n5o6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FCruz%20em%20Luz%20Dourada_simple_compose_01k6jjs94jenvv2rksr7x36ebg.png?alt=media&token=5f4fadec-8caf-4449-8650-6eae20df8817"
   },
   {
     "id": "islamism",
