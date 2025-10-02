@@ -1,4 +1,3 @@
-// Defines this as a "Client Component".
 "use client";
 
 import { Star, Users, Share2 } from "lucide-react";
@@ -31,15 +30,16 @@ export function FavoritesSidebarContent({ subject, messages, participants }: Fav
   const favoritedMessages = messages.filter((msg) => msg.favorited);
 
   const [shareModalOpen, setShareModalOpen] = useState(false);
-  const [selectedQuote, setSelectedQuote] = useState<{ quote: string; author: string } | null>(null);
+  const [selectedQuote, setSelectedQuote] = useState<{ quote: string; author: string, authorImage?: string } | null>(null);
 
-  const handleShareClick = (quote: string, author: string) => {
-    setSelectedQuote({ quote, author });
+  const handleShareClick = (quote: string, author: string, authorImage?: string) => {
+    setSelectedQuote({ quote, author, authorImage });
     setShareModalOpen(true);
   };
 
   const isEvent = subject.type === 'event';
   const subjectName = locale === 'pt' && 'name_pt' in subject ? subject.name_pt : subject.name;
+  const subjectImage = subject.image;
   const defaultTab = isEvent ? "participants" : "favorites";
 
   return (
@@ -83,7 +83,7 @@ export function FavoritesSidebarContent({ subject, messages, participants }: Fav
                         variant="ghost" 
                         size="icon" 
                         className="h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity"
-                        onClick={() => handleShareClick(msg.content, subjectName)}
+                        onClick={() => handleShareClick(msg.content, subjectName, subjectImage)}
                         >
                           <Share2 className="h-4 w-4" />
                        </Button>
@@ -107,6 +107,7 @@ export function FavoritesSidebarContent({ subject, messages, participants }: Fav
             onOpenChange={setShareModalOpen}
             quote={selectedQuote.quote}
             author={selectedQuote.author}
+            authorImage={selectedQuote.authorImage}
         />
       )}
     </>

@@ -21,6 +21,7 @@ import { Textarea } from "./ui/textarea";
 interface ShareModalProps {
   quote: string;
   author: string;
+  authorImage?: string;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -31,7 +32,7 @@ const MAX_QUOTE_LENGTH = 280;
 /**
  * Generates a data URL for the quote card image by rendering it off-screen using the modern createRoot API.
  */
-async function generateQuoteImage(quote: string, author: string, disclaimerText: string): Promise<string | undefined> {
+async function generateQuoteImage(quote: string, author: string, authorImage: string | undefined, disclaimerText: string): Promise<string | undefined> {
   const cardContainer = document.createElement("div");
   // Position it off-screen
   cardContainer.style.position = "absolute";
@@ -50,12 +51,13 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
             id={QUOTE_CARD_ID_CAPTURE}
             quote={quote}
             author={author}
+            authorImage={authorImage}
             disclaimerText={disclaimerText}
           />
         </React.StrictMode>
       );
       // Use a short timeout to allow the browser to paint the component
-      setTimeout(resolve, 50);
+      setTimeout(resolve, 100);
     });
 
     const elementToCapture = document.getElementById(QUOTE_CARD_ID_CAPTURE);
@@ -68,6 +70,7 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
       scale: 2,
       useCORS: true,
       backgroundColor: null,
+      allowTaint: true,
     });
     return canvas.toDataURL("image/png");
   } catch (error) {
@@ -84,7 +87,7 @@ async function generateQuoteImage(quote: string, author: string, disclaimerText:
 /**
  * A modal component for sharing a quote as an image.
  */
-export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalProps) {
+export function ShareModal({ quote, author, authorImage, isOpen, onOpenChange }: ShareModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [editableQuote, setEditableQuote] = useState(quote);
   const { toast } = useToast();
@@ -98,64 +101,39 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
 
   const disclaimer = t.aiGeneratedBy.replace('{appName}', 'Eternal Minds ✨');
 
-  /**
-   * Handles downloading the generated image.
-   */
-  async function downloadImage() {
+  async function handleAction(action: 'share' | 'download') {
     setIsLoading(true);
     try {
-      const dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
+      const dataUrl = await generateQuoteImage(editableQuote, author, authorImage, disclaimer);
       if (!dataUrl) {
         toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
         return;
       }
-      const link = document.createElement("a");
-      link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
-      link.href = dataUrl;
-      link.click();
+      
+      const blob = await(await fetch(dataUrl)).blob();
+      const file = new File([blob], "quote.png", { type: "image/png" });
+
+      if (action === 'share' && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        const shareTitle = t.quoteBy.replace('{author}', author);
+        await navigator.share({
+            files: [file],
+            title: shareTitle,
+            text: `"${editableQuote}" - ${author}`,
+        });
+      } else {
+        // Fallback to download
+        const link = document.createElement("a");
+        link.download = `eternal-minds-quote-${author.toLowerCase().replace(/ /g, "_")}.png`;
+        link.href = dataUrl;
+        link.click();
+      }
     } catch (error) {
-      console.error("Download failed", error);
-      toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+      if (!(error instanceof DOMException && error.name === 'AbortError')) {
+        console.error("Sharing/Downloading failed", error);
+        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
+      }
     } finally {
       setIsLoading(false);
-    }
-  }
-
-  /**
-   * Handles sharing the image using the Web Share API.
-   */
-  async function shareImage() {
-     setIsLoading(true);
-    try {
-        const dataUrl = await generateQuoteImage(editableQuote, author, disclaimer);
-        if (!dataUrl) {
-            toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-            return;
-        }
-        
-        const blob = await(await fetch(dataUrl)).blob();
-        const file = new File([blob], "quote.png", { type: "image/png" });
-        const shareTitle = t.quoteBy.replace('{author}', author);
-
-        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({
-                files: [file],
-                title: shareTitle,
-                text: `"${editableQuote}" - ${author}`,
-            });
-        } else {
-            // Fallback to download if Web Share API is not supported
-            await downloadImage();
-        }
-    } catch (error) {
-        // Don't toast on abort errors from the share dialog
-        if (error instanceof DOMException && error.name === 'AbortError') {
-          return;
-        }
-        console.error("Sharing failed", error);
-        toast({ variant: "destructive", title: t.error, description: t.generatingImageError });
-    } finally {
-        setIsLoading(false);
     }
   }
   
@@ -164,7 +142,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t.shareQuoteTitle}</DialogTitle>
           <DialogDescription>
@@ -186,13 +164,13 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
 
         <DialogFooter>
             {canShare ? (
-                <Button onClick={shareImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
-                    {isLoading ? <Loader2 className="animate-spin" /> : <Share2 className="mr-2" />}
+                <Button onClick={() => handleAction('share')} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
+                    {isLoading ? <Loader2 className="animate-spin" /> : <Share2 className="mr-2 h-4 w-4" />}
                     {t.shareAction}
                 </Button>
             ) : (
-                <Button onClick={downloadImage} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
-                    {isLoading ? <Loader2 className="animate-spin" /> : <Download className="mr-2" />}
+                <Button onClick={() => handleAction('download')} disabled={isLoading || isOverLimit} className="w-full sm:w-auto">
+                    {isLoading ? <Loader2 className="animate-spin" /> : <Download className="mr-2 h-4 w-4" />}
                     {t.downloadAction}
                 </Button>
             )}
