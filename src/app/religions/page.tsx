@@ -62,7 +62,7 @@ export default function ReligionsPage() {
                                 {t.religions}
                             </h1>
                             <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                                {t.subtitle}
+                                {t.religionsSubtitle}
                             </p>
                         </div>
                     </div>
