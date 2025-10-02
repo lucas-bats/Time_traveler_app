@@ -1,3 +1,4 @@
+
 import type { Religion } from "./religions";
 
 export const religionsData: Religion[] = [
@@ -25,7 +26,7 @@ export const religionsData: Religion[] = [
     "description": "Founded by the prophet Muhammad, Islam is based on the Quran and tradition. It has become one of the most influential religions, with diverse schools and traditions.",
     "description_pt": "Fundado pelo profeta Maomé, o Islã é baseado no Alcorão e na tradição. Tornou-se uma das religiões mais influentes, com diversas escolas e tradições.",
     "characters": ["maome", "avicena", "ibn_khaldun", "alhazen", "saladin"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fislamismo.jpg?alt=media&token=d1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FMesquita%20Sob%20C%C3%A9u%20Estrelado_simple_compose_01k6jjqttxe4rrq9adtkxjxf6k.png?alt=media&token=3c5e088c-4552-45ca-a15a-8774878348a6"
   },
   {
     "id": "buddhism",
