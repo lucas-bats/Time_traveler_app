@@ -39,7 +39,7 @@ export const religionsData: Religion[] = [
     "description": "Founded by Siddhartha Gautama (Buddha), Buddhism expanded throughout Asia and profoundly influenced philosophy, ethics, and spirituality.",
     "description_pt": "Fundado por Siddhartha Gautama (Buda), o Budismo se expandiu pela Ásia e influenciou profundamente a filosofia, a ética e a espiritualidade.",
     "characters": ["buda", "nagarjuna", "dalai_lama"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fbudismo.jpg?alt=media&token=e1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FBuda%20Dourado%20ao%20Amanhecer_simple_compose_01k6jk2jxwew69z8qb9dt66q04.png?alt=media&token=2e65d0a4-8917-4825-9a0f-ba7355e9a2f6"
   },
   {
     "id": "judaism",
