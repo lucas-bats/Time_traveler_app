@@ -164,7 +164,7 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{t.shareQuoteTitle}</DialogTitle>
           <DialogDescription>
@@ -172,26 +172,16 @@ export function ShareModal({ quote, author, isOpen, onOpenChange }: ShareModalPr
           </DialogDescription>
         </DialogHeader>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="flex flex-col h-full">
-                 <Textarea 
-                    value={editableQuote}
-                    onChange={(e) => setEditableQuote(e.target.value)}
-                    className="flex-1 text-base min-h-[300px]"
-                    maxLength={MAX_QUOTE_LENGTH + 20}
-                 />
-                 <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
-                    {editableQuote.length} / {MAX_QUOTE_LENGTH}
-                 </p>
-            </div>
-            <div className="flex justify-center items-center p-4 bg-muted/30 rounded-lg min-h-[350px]">
-                 <QuoteCard 
-                    id="quote-card-preview" 
-                    quote={editableQuote} 
-                    author={author} 
-                    disclaimerText={disclaimer}
-                 />
-            </div>
+        <div className="flex flex-col">
+             <Textarea 
+                value={editableQuote}
+                onChange={(e) => setEditableQuote(e.target.value)}
+                className="text-base min-h-[200px]"
+                maxLength={MAX_QUOTE_LENGTH + 20}
+             />
+             <p className={`text-sm mt-2 text-right ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
+                {editableQuote.length} / {MAX_QUOTE_LENGTH}
+             </p>
         </div>
 
         <DialogFooter>
