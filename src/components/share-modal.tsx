@@ -150,7 +150,7 @@ export function ShareModal({ quote, author, authorImage, isOpen, onOpenChange }:
           </DialogDescription>
         </DialogHeader>
         
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
              <Textarea 
                 value={editableQuote}
                 onChange={(e) => setEditableQuote(e.target.value)}

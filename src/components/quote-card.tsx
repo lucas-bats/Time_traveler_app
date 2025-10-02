@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface QuoteCardProps {
@@ -22,24 +21,26 @@ export function QuoteCard({ id, quote, author, authorImage, className, disclaime
     <div
       id={id}
       className={cn(
-        "w-[500px] h-auto p-8 pt-8 pb-12 bg-gradient-to-br from-primary via-primary to-secondary rounded-2xl shadow-xl text-primary-foreground font-body flex flex-col relative",
+        "relative w-[500px] h-auto p-8 rounded-2xl shadow-xl font-body flex flex-col justify-center items-center overflow-hidden",
         className
       )}
+      style={{
+        backgroundImage: `url('${authorImage}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
     >
-       <div className="flex-grow flex flex-col items-center justify-center w-full">
-        {authorImage && (
-           <Image
-              src={authorImage}
-              alt={author}
-              width={80}
-              height={80}
-              className="w-20 h-20 rounded-full object-contain mb-6 border-2 border-primary-foreground/50 bg-black/5"
-           />
-        )}
-        <p className="text-xl italic mb-6 leading-relaxed text-center">“{quote}”</p>
-        <p className="text-lg font-bold self-end w-full text-right pr-4">— {author}</p>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col justify-center items-center text-white w-full">
+        <p className="text-xl italic mb-6 leading-relaxed text-center text-white/90">“{quote}”</p>
+        <p className="text-lg font-bold self-end w-full text-right pr-4 text-white">— {author}</p>
       </div>
-      <div className="absolute bottom-3 text-xs opacity-70 text-primary-foreground/80 w-full text-center">
+
+      {/* Disclaimer */}
+      <div className="absolute bottom-3 text-xs z-10 text-white/60 w-full text-center">
         {disclaimerText}
       </div>
     </div>
