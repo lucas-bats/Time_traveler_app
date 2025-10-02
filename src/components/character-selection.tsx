@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getReligions } from "@/lib/religions";
 
 // Defines the interface for the component's props.
 interface CharacterSelectionProps {
@@ -53,6 +54,10 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   const [era, setEra] = useState("all");
   // State for the selected field filter.
   const [field, setField] = useState("all");
+  // State for the selected religion filter.
+  const [religion, setReligion] = useState("all");
+
+  const religions = useMemo(() => ["all", ...getReligions()], []);
 
   // useMemo to calculate the list of available eras, correctly sorted.
   const eras = useMemo(() => {
@@ -87,9 +92,10 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
     return characters.filter((character) => {
       const matchesEra = originalEra === "all" || character.era === originalEra;
       const matchesField = originalField === "all" || character.field === originalField;
-      return matchesEra && matchesField;
+      const matchesReligion = religion === "all" || character.religion === religion;
+      return matchesEra && matchesField && matchesReligion;
     });
-  }, [characters, era, field]);
+  }, [characters, era, field, religion]);
 
   // Function to get the display name of the era, including the time period.
   const getDisplayName = (e: string) => {
@@ -130,6 +136,25 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
                     {f === 'all' ? t.allFields : f}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col items-start gap-2 w-full md:w-auto">
+            <label htmlFor="religion-filter" className="text-sm font-semibold text-primary">{t.filterByReligion}</label>
+            <Select value={religion} onValueChange={setReligion}>
+              <SelectTrigger id="religion-filter" className="w-full md:w-[240px]">
+                <SelectValue placeholder={t.allReligions} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t.allReligions}</SelectItem>
+                {religions.map((r) => {
+                  if (r === 'all') return null;
+                  return (
+                    <SelectItem key={r.id} value={r.id}>
+                      {locale === 'pt' ? r.name_pt : r.name}
+                    </SelectItem>
+                  )
+                })}
               </SelectContent>
             </Select>
           </div>

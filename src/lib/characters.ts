@@ -15,6 +15,7 @@ export interface Character {
   field: string; // Field of expertise in English.
   field_pt: string; // Field of expertise in Portuguese.
   country: string; // Country of origin.
+  religion?: string; // Optional religion ID
 }
 
 /**

@@ -4,7 +4,7 @@
 // Imports components from Next.js and the UI library.
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Home, Languages, Heart } from "lucide-react";
+import { Home, Languages, Heart, BookUser, History, Sprout } from "lucide-react";
 import { useLocale } from "@/lib/locale";
 import {
   DropdownMenu,
@@ -43,16 +43,36 @@ export function SiteHeader() {
               {t.title}
             </span>
           </Link>
+           <nav className="hidden md:flex items-center space-x-1">
+                <Button variant="ghost" asChild>
+                    <Link href="/">
+                        <BookUser className="h-5 w-5 md:mr-2" />
+                        <span className="hidden md:inline">{t.characters}</span>
+                    </Link>
+                </Button>
+                 <Button variant="ghost" asChild>
+                    <Link href="/religions">
+                        <Sprout className="h-5 w-5 md:mr-2" />
+                        <span className="hidden md:inline">{t.religions}</span>
+                    </Link>
+                </Button>
+            </nav>
         </div>
          {/* Main navigation with buttons, aligned to the right. */}
         <nav className="flex items-center space-x-1">
           {/* Button link to Home. */}
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" asChild className="md:hidden">
             <Link href="/">
-              <Home className="h-5 w-5 md:mr-2" />
-              <span className="hidden md:inline">{t.home}</span>
+              <Home className="h-5 w-5" />
+               <span className="sr-only">{t.home}</span>
             </Link>
           </Button>
+           <Button variant="ghost" asChild className="md:hidden">
+                <Link href="/religions">
+                    <Sprout className="h-5 w-5" />
+                    <span className="sr-only">{t.religions}</span>
+                </Link>
+            </Button>
           {/* Button link to the donation section. */}
           <Button variant="ghost" size="icon" asChild>
               <Link href="/#donation-section">

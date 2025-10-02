@@ -100,7 +100,7 @@ export const charactersData: Character[] = [
     "country": "Germany"
   },
   {
-    "id": "avicenna",
+    "id": "avicena",
     "name": "Avicena / Ibn Sina",
     "description": "A Persian polymath who is regarded as one of the most significant physicians, astronomers, thinkers and writers of the Islamic Golden Age.",
     "description_pt": "Um polímata persa que é considerado um dos mais significativos médicos, astrônomos, pensadores e escritores da Idade de Ouro Islâmica.",
@@ -110,7 +110,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "Art & Science",
     "field_pt": "Arte & Ciência",
-    "country": "Persia"
+    "country": "Persia",
+    "religion": "islamism"
   },
   {
     "id": "roger-bacon",
@@ -136,10 +137,11 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "Science",
     "field_pt": "Ciência",
-    "country": "Persia"
+    "country": "Persia",
+    "religion": "islamism"
   },
   {
-    "id": "thomas-aquinas",
+    "id": "santo_tomas_aquino",
     "name": "Santo Tomás de Aquino",
     "description": "An Italian Dominican friar, philosopher, Catholic priest, and Doctor of the Church. An immensely influential philosopher, theologian, and jurist in the tradition of scholasticism.",
     "description_pt": "Um frade dominicano italiano, filósofo, padre católico e Doutor da Igreja. Um filósofo, teólogo e jurista imensamente influente na tradição da escolástica.",
@@ -149,7 +151,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "Philosophy",
     "field_pt": "Filosofia",
-    "country": "Italy"
+    "country": "Italy",
+    "religion": "christianity"
   },
   {
     "id": "maimonides",
@@ -204,7 +207,7 @@ export const charactersData: Character[] = [
     "country": "England"
   },
   {
-    "id": "ibn-khaldun",
+    "id": "ibn_khaldun",
     "name": "Ibn Khaldun",
     "description": "An Arab sociologist, philosopher, and historian who is widely acknowledged to be one of the greatest social scientists of the Middle Ages.",
     "description_pt": "Um sociólogo, filósofo e historiador árabe que é amplamente reconhecido como um dos maiores cientistas sociais da Idade Média.",
@@ -214,7 +217,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "History",
     "field_pt": "História",
-    "country": "Tunisia"
+    "country": "Tunisia",
+    "religion": "islamism"
   },
   {
     "id": "nikola-tesla",
@@ -1073,5 +1077,89 @@ export const charactersData: Character[] = [
     "field": "Politics",
     "field_pt": "Política",
     "country": "France"
+  },
+  {
+    "id": "jesus_cristo",
+    "name": "Jesus Cristo",
+    "description": "The central figure of Christianity, believed by Christians to be the Son of God and the Messiah prophesied in the Old Testament.",
+    "description_pt": "A figura central do Cristianismo, acreditado pelos cristãos como o Filho de Deus e o Messias profetizado no Antigo Testamento.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fjesus.png?alt=media&token=d1f2a1a0-7b5c-4d5e-9f6a-1b3c2d0e1f4a",
+    "aiHint": "Jesus Christ",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Middle East",
+    "religion": "christianity"
+  },
+  {
+    "id": "martinho_lutero",
+    "name": "Martinho Lutero",
+    "description": "A German professor of theology, composer, priest, monk, and a seminal figure in the Protestant Reformation. He is best known for his Ninety-five Theses.",
+    "description_pt": "Um professor alemão de teologia, compositor, padre, monge e uma figura seminal na Reforma Protestante. Ele é mais conhecido por suas Noventa e cinco Teses.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fluther.png?alt=media&token=8d2e1b0a-9c8f-4a3b-8d7e-6f5c4d3e2b1a",
+    "aiHint": "Martin Luther",
+    "era": "Renaissance",
+    "era_pt": "Renascentista",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Germany",
+    "religion": "christianity"
+  },
+  {
+    "id": "maome",
+    "name": "Maomé",
+    "description": "The founder of Islam and proclaimed by Muslims as a prophet of God. He is viewed as the final prophet of God in most mainstream branches of Islam.",
+    "description_pt": "O fundador do Islã e proclamado pelos muçulmanos como um profeta de Deus. Ele é visto como o profeta final de Deus na maioria dos ramos principais do Islã.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fmuhammad.png?alt=media&token=a0b8c7d6-5e4f-4a9b-8c7d-6f5a4b3c2d1e",
+    "aiHint": "Prophet Muhammad",
+    "era": "Medieval",
+    "era_pt": "Medieval",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Arabian Peninsula",
+    "religion": "islamism"
+  },
+  {
+    "id": "buda",
+    "name": "Buda (Siddhartha Gautama)",
+    "description": "A philosopher, mendicant, meditator, spiritual teacher, and religious leader who lived in Ancient India. He is revered as the founder of the world religion of Buddhism.",
+    "description_pt": "Um filósofo, mendicante, meditador, professor espiritual e líder religioso que viveu na Índia Antiga. Ele é reverenciado como o fundador da religião mundial do Budismo.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fbuddha.png?alt=media&token=e1f2a1a0-7b5c-4d5e-9f6a-1b3c2d0e1f4a",
+    "aiHint": "Buddha Gautama",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "India",
+    "religion": "buddhism"
+  },
+  {
+    "id": "nagarjuna",
+    "name": "Nagarjuna",
+    "description": "An Indian Mahāyāna Buddhist thinker, scholar-saint and philosopher. He is widely considered one of the most important Buddhist philosophers.",
+    "description_pt": "Um pensador, estudioso-santo e filósofo budista Mahāyāna indiano. Ele é amplamente considerado um dos mais importantes filósofos budistas.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fnagarjuna.png?alt=media&token=b9c8d7e6-5f4a-4b9c-8d7e-6f5a4b3c2d1e",
+    "aiHint": "Nagarjuna philosopher",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Philosophy",
+    "field_pt": "Filosofia",
+    "country": "India",
+    "religion": "buddhism"
+  },
+  {
+    "id": "dalai_lama",
+    "name": "Dalai Lama (14th)",
+    "description": "The current Dalai Lama, Tenzin Gyatso, is the spiritual leader of the Tibetan people. He is a Nobel Peace Prize laureate and a global figure of peace and compassion.",
+    "description_pt": "O atual Dalai Lama, Tenzin Gyatso, é o líder espiritual do povo tibetano. Ele é um laureado com o Prêmio Nobel da Paz e uma figura global de paz e compaixão.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fdalai-lama.png?alt=media&token=c8d7e6f5-4a9b-4c8d-7e6f-5a4b3c2d1e0f",
+    "aiHint": "Dalai Lama",
+    "era": "Contemporary",
+    "era_pt": "Contemporânea",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Tibet",
+    "religion": "buddhism"
   }
 ]
