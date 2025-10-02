@@ -28,7 +28,7 @@ export function QuoteCard({ id, quote, author, authorImage, className, disclaime
        <div className="flex-grow flex flex-col items-center justify-center w-full">
         {authorImage && (
            <div
-              style={{ backgroundImage: `url(${authorImage})` }}
+              style={{ backgroundImage: `url('${authorImage}')` }}
               className="w-20 h-20 rounded-full mb-6 border-2 border-primary-foreground/50 bg-cover bg-center"
               role="img"
               aria-label={author}
