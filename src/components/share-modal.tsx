@@ -53,6 +53,7 @@ async function generateQuoteImage(quote: string, author: string, authorImage: st
             author={author}
             authorImage={authorImage}
             disclaimerText={disclaimerText}
+            className="w-[500px] h-[300px]"
           />
         </React.StrictMode>
       );
