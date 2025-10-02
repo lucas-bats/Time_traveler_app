@@ -58,7 +58,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "History",
     "field_pt": "História",
-    "country": "France"
+    "country": "France",
+    "religion": "christianity"
   },
   {
     "id": "charlemagne",
@@ -84,7 +85,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "Politics",
     "field_pt": "Política",
-    "country": "Middle East"
+    "country": "Middle East",
+    "religion": "islamism"
   },
   {
     "id": "hildegard-of-bingen",
@@ -165,7 +167,8 @@ export const charactersData: Character[] = [
     "era_pt": "Medieval",
     "field": "Philosophy",
     "field_pt": "Filosofia",
-    "country": "Spain/Jewish"
+    "country": "Spain/Jewish",
+    "religion": "judaism"
   },
   {
     "id": "dante-alighieri",
@@ -1161,5 +1164,89 @@ export const charactersData: Character[] = [
     "field_pt": "Religião",
     "country": "Tibet",
     "religion": "buddhism"
+  },
+  {
+    "id": "abraham",
+    "name": "Abraão",
+    "description": "The common patriarch of the Abrahamic religions, including Judaism, Christianity, and Islam. He is a central figure known for his covenant with God.",
+    "description_pt": "O patriarca comum das religiões abraâmicas, incluindo o Judaísmo, Cristianismo e Islamismo. Ele é uma figura central conhecida por sua aliança com Deus.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fabraham.png?alt=media&token=f0e9d8c7-6b5a-4c9b-8d7e-6f5a4b3c2d1e",
+    "aiHint": "Abraham patriarch",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Middle East",
+    "religion": "judaism"
+  },
+  {
+    "id": "moses",
+    "name": "Moisés",
+    "description": "A prophet in the Abrahamic religions. According to the Hebrew Bible, he was a former Egyptian prince who led the Israelites out of Egypt and across the Red Sea, after which they wandered in the desert for 40 years.",
+    "description_pt": "Um profeta nas religiões abraâmicas. De acordo com a Bíblia Hebraica, ele foi um ex-príncipe egípcio que liderou os israelitas para fora do Egito e através do Mar Vermelho, após o que eles vagaram no deserto por 40 anos.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fmoses.png?alt=media&token=e9d8c7b6-5a4c-4b9c-8d7e-6f5a4b3c2d1e",
+    "aiHint": "Moses prophet",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Middle East",
+    "religion": "judaism"
+  },
+  {
+    "id": "king_david",
+    "name": "Rei Davi",
+    "description": "A king of Israel and Judah. In the biblical narrative, David is a young shepherd who gains fame first as a musician and later by defeating the giant Goliath. He is regarded as a righteous and effective king in battle and civil administration.",
+    "description_pt": "Um rei de Israel e Judá. Na narrativa bíblica, Davi é um jovem pastor que ganha fama primeiro como músico e depois ao derrotar o gigante Golias. Ele é considerado um rei justo e eficaz na batalha e na administração civil.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fdavid.png?alt=media&token=d8c7b6a5-4c9b-4c8d-7e6f-5a4b3c2d1e0f",
+    "aiHint": "King David",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "Middle East",
+    "religion": "judaism"
+  },
+  {
+    "id": "krishna",
+    "name": "Krishna",
+    "description": "A major deity in Hinduism. He is worshipped as the eighth avatar of the god Vishnu and also as the supreme God in his own right. He is the god of protection, compassion, tenderness, and love.",
+    "description_pt": "Uma importante divindade no Hinduísmo. Ele é adorado como o oitavo avatar do deus Vishnu e também como o Deus supremo por direito próprio. Ele é o deus da proteção, compaixão, ternura e amor.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fkrishna.png?alt=media&token=c7b6a54c-9b8d-4c8d-7e6f-5a4b3c2d1e0f",
+    "aiHint": "Krishna deity",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "India",
+    "religion": "hinduism"
+  },
+  {
+    "id": "shiva",
+    "name": "Shiva",
+    "description": "One of the principal deities of Hinduism. He is the supreme being within Shaivism, one of the major traditions within contemporary Hinduism. Shiva is known as 'The Destroyer' within the Trimurti, the Hindu trinity that includes Brahma and Vishnu.",
+    "description_pt": "Uma das principais divindades do Hinduísmo. Ele é o ser supremo no Shaivismo, uma das principais tradições do Hinduísmo contemporâneo. Shiva é conhecido como 'O Destruidor' dentro da Trimurti, a trindade hindu que inclui Brahma e Vishnu.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fshiva.png?alt=media&token=b6a54c9b-8d7e-4c8d-7e6f-5a4b3c2d1e0f",
+    "aiHint": "Shiva deity",
+    "era": "Antiquity",
+    "era_pt": "Antiguidade",
+    "field": "Religion",
+    "field_pt": "Religião",
+    "country": "India",
+    "religion": "hinduism"
+  },
+  {
+    "id": "adi_shankara",
+    "name": "Adi Shankara",
+    "description": "An Indian philosopher and theologian who consolidated the doctrine of Advaita Vedanta. He is credited with unifying and establishing the main currents of thought in Hinduism.",
+    "description_pt": "Um filósofo e teólogo indiano que consolidou a doutrina do Advaita Vedanta. Ele é creditado por unificar e estabelecer as principais correntes de pensamento no Hinduísmo.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/religions-portraits%2Fshankara.png?alt=media&token=a54c9b8d-7e6f-4c8d-7e6f-5a4b3c2d1e0f",
+    "aiHint": "Adi Shankara",
+    "era": "Medieval",
+    "era_pt": "Medieval",
+    "field": "Philosophy",
+    "field_pt": "Filosofia",
+    "country": "India",
+    "religion": "hinduism"
   }
 ]
