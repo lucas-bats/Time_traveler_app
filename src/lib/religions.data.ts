@@ -1,6 +1,10 @@
-
 import type { Religion } from "./religions";
 
+/**
+ * @fileOverview This file contains the raw data array for all historical religions
+ * available in the application. Each object represents a religion and includes
+ * its details, such as ID, name, description, key figures, and image URL.
+ */
 export const religionsData: Religion[] = [
   {
     "id": "christianity",

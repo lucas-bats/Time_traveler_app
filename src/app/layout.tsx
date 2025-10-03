@@ -32,7 +32,7 @@ export default function RootLayout({
     // Defines the <html> tag with the language and suppresses hydration warnings.
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Pre-connects to Google's font servers to optimize loading. */}
+        {/* Preconnects to Google's font servers to optimize loading. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Imports the Literata and Playfair Display fonts from Google Fonts. */}
