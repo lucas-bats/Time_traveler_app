@@ -1,5 +1,7 @@
 # Settings for the App Hosting backend.
 # See https://firebase.google.com/docs/app-hosting/configure-backend
+build:
+  builder: nodejs
 runConfig:
   cpu: 1
   memoryMiB: 512
