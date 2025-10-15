@@ -12,6 +12,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 // Defines the application's metadata, such as title and description, for SEO.
 export const metadata: Metadata = {
+  metadataBase: new URL('https://eternalminds.fun'),
   title: "Eternal Minds",
   description: "Chat with historical figures, powered by AI.",
 };
