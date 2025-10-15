@@ -5,7 +5,7 @@ import { getReligions } from '@/lib/religions';
  
 const URL = 'https://eternalminds.fun';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const characters = getCharacters();
   const characterUrls = characters.map((character) => ({
