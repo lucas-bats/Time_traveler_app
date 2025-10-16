@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getReligions } from "@/lib/religions";
+import { getReligions, type Religion } from "@/lib/religions";
 
 // Defines the interface for the component's props.
 interface CharacterSelectionProps {
@@ -57,7 +57,7 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
   // State for the selected religion filter.
   const [religion, setReligion] = useState("all");
 
-  const religions = useMemo(() => ["all", ...getReligions()], []);
+  const religions = useMemo(() => getReligions(), []);
 
   // useMemo to calculate the list of available eras, correctly sorted.
   const eras = useMemo(() => {
@@ -147,14 +147,11 @@ export function CharacterSelection({ characters }: CharacterSelectionProps) {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">{t.allReligions}</SelectItem>
-                {religions.map((r) => {
-                  if (r === 'all') return null;
-                  return (
-                    <SelectItem key={r.id} value={r.id}>
-                      {locale === 'pt' ? r.name_pt : r.name}
-                    </SelectItem>
-                  )
-                })}
+                {religions.map((r) => (
+                  <SelectItem key={r.id} value={r.id}>
+                    {locale === 'pt' ? r.name_pt : r.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
