@@ -14,6 +14,10 @@ export default function ReligionDetailPage() {
   const { t, locale } = useLocale();
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
   
+  if (!id) {
+    notFound();
+  }
+
   const religion = getReligionById(id);
 
   if (!religion) {
