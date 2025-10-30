@@ -67,7 +67,7 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
     inputSchema: ChatWithHistoricalFigureInputSchema,
     outputSchema: ChatWithHistoricalFigureOutputSchema,
   },
-  async input => {
+  async (input: ChatWithHistoricalFigureInput) => {
     // Implements retry logic for robustness.
     let attempts = 0;
     const maxAttempts = 3;
