@@ -12,11 +12,6 @@ export const ai = genkit({
   // List of plugins to be used by Genkit.
   plugins: [
     // The Google AI plugin is registered to allow access to Gemini models.
-    googleAI()
+    googleAI(),
   ],
-  // Sets the default model to be used in generation operations,
-  // unless a different model is specified in the call.
-  // model: 'googleai/gemini-pro',
-  logLevel: 'debug',
-  enableTracingAndMetrics: true,
 });
