@@ -1,5 +1,5 @@
 // Import necessary functions from the Genkit library.
-import {genkit, configureGenkit} from 'genkit';
+import {genkit} from 'genkit';
 // Import the Google AI plugin for Genkit, which allows using Gemini models.
 import {googleAI} from '@genkit-ai/googleai';
 
@@ -8,7 +8,7 @@ import {googleAI} from '@genkit-ai/googleai';
  * This `ai` object will be used throughout the application to define and run
  * AI flows, prompts, and other Genkit functionalities.
  */
-configureGenkit({
+export const ai = genkit({
   // List of plugins to be used by Genkit.
   plugins: [
     // The Google AI plugin is registered to allow access to Gemini models.
@@ -20,8 +20,3 @@ configureGenkit({
   logLevel: 'debug',
   enableTracingAndMetrics: true,
 });
-
-export const ai = {
-  defineFlow: genkit.defineFlow,
-  definePrompt: genkit.definePrompt,
-};
