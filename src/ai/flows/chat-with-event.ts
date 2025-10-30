@@ -76,7 +76,7 @@ const chatWithEventFlow = ai.defineFlow(
     inputSchema: ChatWithEventInputSchema,
     outputSchema: ChatWithEventOutputSchema,
   },
-  async input => {
+  async (input: ChatWithEventInput) => {
     // Implements retry logic for robustness.
     let attempts = 0;
     const maxAttempts = 3;
