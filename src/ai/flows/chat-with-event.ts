@@ -1,7 +1,7 @@
 'use server';
 /**
  * @fileOverview Defines an AI agent that allows users to chat with a historical event,
- * receiving responses from the perspective of its key participants.
+ * receiving responses from the perspectives of its key participants.
  *
  * @exports chatWithEvent - The main server action that executes the chat flow.
  * @exports ChatWithEventInput - The Zod schema type for the chat input.
@@ -9,7 +9,7 @@
  */
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
+import {googleAI} from '@genkit-ai/google-genai';
 
 
 /**
