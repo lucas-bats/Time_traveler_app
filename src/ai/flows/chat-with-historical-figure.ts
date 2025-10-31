@@ -77,7 +77,7 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
     while (attempts < maxAttempts) {
       attempts++;
       // Call the prompt defined above with the flow's input.
-      const { output } = await prompt(input, { model: googleAI.model('gemini-pro')});
+      const { output } = await prompt(input, { model: googleAI.model('gemini-flash-latest')});
 
       // If the prompt returns a valid response, return the output.
       if (output?.response) {
