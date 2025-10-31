@@ -86,7 +86,7 @@ const chatWithEventFlow = ai.defineFlow(
     while (attempts < maxAttempts) {
       attempts++;
       // Calls the prompt with the provided input.
-      const { output } = await prompt(input, { model: googleAI.model('gemini-1.5-flash')});
+      const { output } = await prompt(input, { model: googleAI.model('gemini-pro')});
 
       // If a valid response is received, return it.
       if (output?.response) {
