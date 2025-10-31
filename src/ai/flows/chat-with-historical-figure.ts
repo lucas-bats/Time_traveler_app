@@ -10,6 +10,8 @@
  */
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/googleai';
+
 
 /**
  * Zod schema for the input of the historical figure chat flow.
@@ -75,7 +77,7 @@ const chatWithHistoricalFigureFlow = ai.defineFlow(
     while (attempts < maxAttempts) {
       attempts++;
       // Call the prompt defined above with the flow's input.
-      const { output } = await prompt(input);
+      const { output } = await prompt(input, { model: googleAI.model('gemini-1.5-flash-latest')});
 
       // If the prompt returns a valid response, return the output.
       if (output?.response) {

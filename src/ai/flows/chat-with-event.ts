@@ -9,6 +9,8 @@
  */
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import {googleAI} from '@genkit-ai/googleai';
+
 
 /**
  * Zod schema for the input of the event chat flow.
@@ -84,7 +86,7 @@ const chatWithEventFlow = ai.defineFlow(
     while (attempts < maxAttempts) {
       attempts++;
       // Calls the prompt with the provided input.
-      const { output } = await prompt(input);
+      const { output } = await prompt(input, { model: googleAI.model('gemini-1.5-flash-latest')});
 
       // If a valid response is received, return it.
       if (output?.response) {
