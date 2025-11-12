@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// Triggering a redeploy to fix server startup issue.
 const nextConfig = {
   /* Next.js configuration options go here */
   
