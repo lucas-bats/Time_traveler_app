@@ -1,1 +1,1 @@
-{"hosting":{"rewrites":[{"source":"**","apphosting":{"backendId":"studio"}}]}}
+{"hosting":{"site":"time-traveler-talks","rewrites":[{"source":"**","apphosting":{"backendId":"studio"}}]}}
