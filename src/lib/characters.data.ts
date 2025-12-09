@@ -1240,7 +1240,7 @@ export const charactersData: Character[] = [
     "name": "Adi Shankara",
     "description": "An Indian philosopher and theologian who consolidated the doctrine of Advaita Vedanta. He is credited with unifying and establishing the main currents of thought in Hinduism.",
     "description_pt": "Um filósofo e teólogo indiano que consolidou a doutrina do Advaita Vedanta. Ele é creditado por unificar e estabelecer as principais correntes de pensamento no Hinduísmo.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FAdi%20Shankara's%20Portrait_simple_compose_01k6jynk8gfgjb8kqjqx9gnbg5.png?alt=media&token=13f708c9-1c02-4150-8850-de28ee97e572",
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/portraits%2FAdi%20Shankara's%20Portrait_simple_compose_01k6jynk8gfgjb8kqjqx9gnbg5.png?alt=media&token=4c265b32-ed35-4577-901f-d550bd40f8bb",
     "aiHint": "Adi Shankara",
     "era": "Medieval",
     "era_pt": "Medieval",
