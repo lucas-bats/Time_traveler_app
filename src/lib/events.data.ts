@@ -21,7 +21,7 @@ export const eventsData: Event[] = [
     "participants": ["louis-xvi", "marie-antoinette", "robespierre", "napoleon-bonaparte"],
     "context": "The French Revolution was a complex event involving the overthrow of the monarchy, the establishment of a republic, and periods of violent political turmoil, finally culminating in a dictatorship under Napoleon.",
     "context_pt": "A Revolução Francesa foi um evento complexo que envolveu a derrubada da monarquia, o estabelecimento de uma república e períodos de violenta turbulência política, culminando finalmente em uma ditadura sob Napoleão.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FFrench%20Revolutionaries%20Unite_simple_compose_01k391gnyff8yvv82p86xwbr1m.png?alt=media&token=bd8b3745-a2af-4901-a5b9-dbbcacfcc873"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FFrench%20Revolutionaries%20Unite_simple_compose_01k391gnyff8yvv82p86xwbr1m.png?alt=media&token=9015e824-d4af-4442-8f63-b6d23e9b4fc2"
   },
   {
     "id": "renaissance",
@@ -37,7 +37,7 @@ export const eventsData: Event[] = [
     "participants": ["leonardo-da-vinci", "michelangelo", "niccolo-machiavelli", "galileo-galilei"],
     "context": "The Renaissance was a fervent period of European cultural, artistic, political and economic “rebirth” following the Middle Ages. It saw a flourishing of literature, science, art, religion, and politics.",
     "context_pt": "O Renascimento foi um período fervoroso de “renascimento” cultural, artístico, político e econômico europeu após a Idade Média. Viu um florescimento da literatura, ciência, arte, religião e política.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FRenaissance%20Scholars%20Gathering_simple_compose_01k391hgxqfnsbnms1bxnkpaxs.png?alt=media&token=1e79742b-83ba-442b-8eec-91bcc4f7650f"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FRenaissance%20Scholars%20Gathering_simple_compose_01k391hgxqfnsbnms1bxnkpaxs.png?alt=media&token=adc8d805-bf43-47a8-b951-1005e4083408"
   },
   {
     "id": "independencia_brasil",
@@ -58,7 +58,7 @@ export const eventsData: Event[] = [
     ],
     "context": "In the early 19th century, tensions between the colony and the metropole grew. The movement culminated in 1822, when Dom Pedro I proclaimed independence, breaking with Portugal and consolidating Brazil as a sovereign nation.",
     "context_pt": "No início do século XIX, as tensões entre a colônia e a metrópole cresceram. O movimento culminou em 1822, quando Dom Pedro I proclamou a independência, rompendo com Portugal e consolidando o Brasil como uma nação soberana.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FBrazil's%20Independence%202%201822_simple_compose_01k392chk7fxxadfvk16mqmgpe.PNG?alt=media&token=626ac21f-f4e2-4942-b79b-0d3ae4d7d0a7"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FBrazil's%20Independence%202%201822_simple_compose_01k392chk7fxxadfvk16mqmgpe.PNG?alt=media&token=ee31f66b-76ca-4cb0-a6a0-67f7e46dd375"
   },
   {
     "id": "primeira_guerra_mundial",
@@ -81,7 +81,7 @@ export const eventsData: Event[] = [
     ],
     "context": "With imperialist rivalries, military alliances, and nationalist tensions, World War I transformed world politics and led to the fall of empires such as the Austro-Hungarian, Ottoman, German, and Russian.",
     "context_pt": "Com rivalidades imperialistas, alianças militares e tensões nacionalistas, a Primeira Guerra Mundial transformou a política mundial e levou à queda de impérios como o Austro-Húngaro, Otomano, Alemão e Russo.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWI%20Scene_simple_compose_01k392j3xnfktracf4g0rrngps.png?alt=media&token=2b99e404-27a0-401f-87e8-a669b902b810"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWI%20Scene_simple_compose_01k392j3xnfktracf4g0rrngps.png?alt=media&token=f833c0c6-c85e-4c37-8c71-0837e878d3cf"
   },
   {
     "id": "segunda_guerra_mundial",
@@ -102,6 +102,6 @@ export const eventsData: Event[] = [
     ],
     "context": "With roots in the Treaty of Versailles and the rise of totalitarian regimes, World War II resulted in millions of deaths, the Holocaust, the use of nuclear weapons, and the beginning of the Cold War.",
     "context_pt": "Com raízes no Tratado de Versalhes e na ascensão dos regimes totalitários, a Segunda Guerra Mundial resultou em milhões de mortes, o Holocausto, o uso de armas nucleares e o início da Guerra Fria.",
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWII%20Guerra%20e%20Insensatez_remix_01k392vfr0e22a97q8yqrc2exf.png?alt=media&token=e9fb493f-8720-4d67-9aa7-7d3eaed46a63"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Eventos%2FWWII%20Guerra%20e%20Insensatez_remix_01k392vfr0e22a97q8yqrc2exf.png?alt=media&token=2f992295-0c64-4c89-ba8e-ddeee1ec7f01"
   }
 ]

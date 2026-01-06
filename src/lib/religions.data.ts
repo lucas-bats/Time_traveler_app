@@ -17,7 +17,7 @@ export const religionsData: Religion[] = [
     "description": "Monotheistic religion based on the life and teachings of Jesus of Nazareth. It spread throughout the Roman Empire and became the world's largest religion.",
     "description_pt": "Religião monoteísta baseada na vida e nos ensinamentos de Jesus de Nazaré. Expandiu-se pelo Império Romano e tornou-se a maior religião do mundo.",
     "characters": ["jesus_cristo", "santo_tomas_aquino", "martinho_lutero", "joan-of-arc"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FCruz%20em%20Luz%20Dourada_simple_compose_01k6jjs94jenvv2rksr7x36ebg.png?alt=media&token=5f4fadec-8caf-4449-8650-6eae20df8817"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FCruz%20em%20Luz%20Dourada_simple_compose_01k6jjs94jenvv2rksr7x36ebg.png?alt=media&token=750ec57c-bbca-44ae-b4eb-37df832173d3"
   },
   {
     "id": "islamism",
@@ -30,7 +30,7 @@ export const religionsData: Religion[] = [
     "description": "Founded by the prophet Muhammad, Islam is based on the Quran and tradition. It has become one of the most influential religions, with diverse schools and traditions.",
     "description_pt": "Fundado pelo profeta Maomé, o Islã é baseado no Alcorão e na tradição. Tornou-se uma das religiões mais influentes, com diversas escolas e tradições.",
     "characters": ["maome", "avicena", "ibn_khaldun", "alhazen", "saladin"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FMesquita%20Sob%20C%C3%A9u%20Estrelado_simple_compose_01k6jjqttxe4rrq9adtkxjxf6k.png?alt=media&token=3c5e088c-4552-45ca-a15a-8774878348a6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FMesquita%20Sob%20C%C3%A9u%20Estrelado_simple_compose_01k6jjqttxe4rrq9adtkxjxf6k.png?alt=media&token=8d46ce60-2987-43fc-84ed-4664c25f5594"
   },
   {
     "id": "buddhism",
@@ -43,7 +43,7 @@ export const religionsData: Religion[] = [
     "description": "Founded by Siddhartha Gautama (Buddha), Buddhism expanded throughout Asia and profoundly influenced philosophy, ethics, and spirituality.",
     "description_pt": "Fundado por Siddhartha Gautama (Buda), o Budismo se expandiu pela Ásia e influenciou profundamente a filosofia, a ética e a espiritualidade.",
     "characters": ["buda", "nagarjuna", "dalai_lama"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FBuda%20Dourado%20ao%20Amanhecer_simple_compose_01k6jk2jxwew69z8qb9dt66q04.png?alt=media&token=2e65d0a4-8917-4825-9a0f-ba7355e9a2f6"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FBuda%20Dourado%20ao%20Amanhecer_simple_compose_01k6jk2jxwew69z8qb9dt66q04.png?alt=media&token=8e5a1d50-9d00-4e4f-840b-eb729a5b5d97"
   },
   {
     "id": "judaism",
@@ -56,7 +56,7 @@ export const religionsData: Religion[] = [
     "description": "One of the oldest monotheistic religions, founded on the principles of the Torah and the covenant between God and the Jewish people. It has deeply influenced Western civilization.",
     "description_pt": "Uma das mais antigas religiões monoteístas, fundamentada nos princípios da Torá e na aliança entre Deus e o povo judeu. Influenciou profundamente a civilização ocidental.",
     "characters": ["abraham", "moses", "king_david", "maimonides"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FPergaminho%20da%20Tor%C3%A1%20Iluminado_simple_compose_01k6jk9wmye1c8h4scdbbg18ag.png?alt=media&token=fce79461-427a-42b9-afbf-96bb92401a29"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FPergaminho%20da%20Tor%C3%A1%20Iluminado_simple_compose_01k6jk9wmye1c8h4scdbbg18ag.png?alt=media&token=4b3479d4-76c5-4cd6-b6be-5d93abad07a0"
   },
   {
     "id": "hinduism",
@@ -69,6 +69,6 @@ export const religionsData: Religion[] = [
     "description": "A diverse and ancient religion with a vast array of traditions, scriptures, and philosophies. It is characterized by concepts such as dharma, karma, and moksha.",
     "description_pt": "Uma religião diversa e antiga com uma vasta gama de tradições, escrituras e filosofias. É caracterizada por conceitos como dharma, karma e moksha.",
     "characters": ["krishna", "shiva", "adi_shankara"],
-    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FTemplo%20Indiano%20ao%20P%C3%B4r%20do%20Sol_simple_compose_01k6jk3853etcs9gn6q2c9szjm.png?alt=media&token=97710c8f-66b6-461f-93ba-a84bb0a34518"
+    "image": "https://firebasestorage.googleapis.com/v0/b/time-traveler-talks.firebasestorage.app/o/Religi%C3%B5es%2FTemplo%20Indiano%20ao%20P%C3%B4r%20do%20Sol_simple_compose_01k6jk3853etcs9gn6q2c9szjm.png?alt=media&token=000f0872-fd18-42df-91c0-005ecec52036"
   }
 ];
